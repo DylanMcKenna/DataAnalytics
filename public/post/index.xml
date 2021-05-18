@@ -22,7 +22,8 @@
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
       <guid>/2021/05/18/data-visualization-using-ggplot2/</guid>
-      <description></description>
+      <description>Palmer Penguins Data AnalysisWe summarize the Palmer Penguins data using ggplot2 and tidyverse.
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.3 v purrr 0.3.4## v tibble 3.1.1 v dplyr 1.0.6## v tidyr 1.1.3 v stringr 1.4.0## v readr 1.4.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()</description>
     </item>
     
   </channel>

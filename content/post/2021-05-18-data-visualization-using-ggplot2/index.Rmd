@@ -8,9 +8,11 @@ tags: []
 ---
 
 ## Palmer Penguins Data Analysis
+We summarize the Palmer Penguins data using ggplot2 and tidyverse.
+
 ```{r warning=FALSE, echo=FALSE}
 library(palmerpenguins)
-library(tidyv)
+library(tidyverse)
 ggplot(penguins, 
        aes(x = bill_depth_mm, y = bill_length_mm,
        colour = species)) +
