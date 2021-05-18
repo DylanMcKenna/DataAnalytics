@@ -10,7 +10,7 @@ tags: []
 ## Palmer Penguins Data Analysis
 We summarize the Palmer Penguins data using ggplot2 and tidyverse.
 
-```{r warning=FALSE, echo=FALSE}
+```{r warning=FALSE, echo=FALSE, message=FALSE}
 library(palmerpenguins)
 library(tidyverse)
 ggplot(penguins, 
