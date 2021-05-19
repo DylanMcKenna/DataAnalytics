@@ -18,10 +18,13 @@ ggplot(penguins,
        colour = species)) +
   geom_point() +
   labs(title = "Bill depth and length",
-       subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo                     Penguins",
+       subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
        x = "Bill depth (mm)", 
        y = "Bill length (mm)",
-       colour = "Species")
+       colour = "Species",
+       caption = "Source: Palmer Station LTER / palmerpenguins package") +
+  scale_colour_viridis_d()
+
 
 ```
 
