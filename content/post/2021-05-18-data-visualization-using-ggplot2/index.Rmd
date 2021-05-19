@@ -22,6 +22,7 @@ ggplot(penguins,
        x = "Bill depth (mm)", 
        y = "Bill length (mm)",
        colour = "Species",
+       shape = "Island",
        caption = "Source: Palmer Station LTER / palmerpenguins package") +
   scale_colour_viridis_d()
 
