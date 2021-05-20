@@ -30,6 +30,8 @@ ggplot(penguins,
 
 ```
 
+We add facets to the dat
+
 ```{r warning=FALSE}
 library(palmerpenguins)
 library(tidyverse)
