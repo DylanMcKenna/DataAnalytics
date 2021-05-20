@@ -24,8 +24,18 @@ ggplot(penguins,
        colour = "Species",
        shape = "Island",
        caption = "Source: Palmer Station LTER / palmerpenguins package") +
+  facet_grid("species" ~ "island") +
   scale_colour_viridis_d()
 
 
+```
+
+```{r warning=FALSE}
+library(palmerpenguins)
+library(tidyverse)
+ggplot(penguins, 
+       aes(x = bill_depth_mm, y = bill_length_mm)) + 
+  geom_point() +
+  facet_grid("species" ~ "island")
 ```
 
