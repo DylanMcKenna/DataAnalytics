@@ -14,12 +14,12 @@ tags: []
 <h2>Palmer Penguins Data Analysis</h2>
 <p>We summarize the Palmer Penguins data using ggplot2 and tidyverse.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>We add facets to the dat</p>
+<p>We add facets to the data</p>
 <pre class="r"><code>library(palmerpenguins)
 library(tidyverse)
 ggplot(penguins, 
        aes(x = bill_depth_mm, y = bill_length_mm)) + 
   geom_point() +
-  facet_grid(&quot;species&quot; ~ &quot;island&quot;)</code></pre>
+  facet_grid( species ~ island )</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
