@@ -13,8 +13,9 @@ We visualize the Lending Club data using ggplot2.
 
 A glimpse at Lending Club data.
 
-```{r warning=FALSE}
+```{r warning=FALSE, include=FALSE}
 library(openintro)
+library(tidyverse)
 glimpse(loans_full_schema)
 
 ```
@@ -31,6 +32,8 @@ glimpse(loans)
 We can check the number of loans for various amounts.
 
 ```{r}
+
+library(tidyverse)
 ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 1000)
 ```
