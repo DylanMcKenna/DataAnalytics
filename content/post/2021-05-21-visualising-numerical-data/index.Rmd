@@ -1,5 +1,5 @@
 ---
-title: Visualising Numerical Data
+title: Visualising Numerical Data using ggplot2
 author: Dylan McKenna
 date: '2021-05-21'
 slug: visualising-numerical-data
@@ -73,6 +73,8 @@ ggplot(loans, aes(x = loan_amount, fill = homeownership)) +
   facet_wrap(~ homeownership, nrow = 3)
 ```
 
+#Density Plots
+
 We could use a density plot.
 ```{r}
 ggplot(loans, aes(x = loan_amount)) +
@@ -113,5 +115,66 @@ ggplot(loans, aes(x = loan_amount,
     title = "Amounts of Lending Club loans", 
     fill = "Homeownership"
   )
+```
+
+#Box Plots
+We can also use box plots.
+
+```{r}
+ggplot(loans, aes(x = interest_rate)) +
+  geom_boxplot()
+```
+
+Box plots can be used to show obvious outliers.
+```{r}
+ggplot(loans, aes(x = annual_income)) +
+  geom_boxplot()
+```
+
+We can customize our box plots.
+
+```{r}
+ggplot(loans, aes(x = interest_rate)) +
+  geom_boxplot() +
+  labs(
+    x = "Interest rate (%)",
+    y = NULL,
+    title = "Interest rates of Lending Club loans"
+  ) +
+  theme(
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank()
+  )
+```
+
+We can add a categorical variable.
+
+```{r}
+ggplot(loans, aes(x = interest_rate,
+                  y = grade)) +
+  geom_boxplot() +
+  labs(
+    x = "Interest rate (%)",
+    y = "Grade",
+    title = "Interest rates of Lending Club loans",
+    subtitle = "by grade of loan"
+  )
+```
+
+#Scatterplot
+
+We can use a basic scatterplot.
+
+```{r warning=FALSE}
+ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
+  geom_point()
+```
+
+We can change the marker shape. In the following example, the dots become hexagons.
+
+```{r}
+ggplot(loans %>% filter(debt_to_income < 100), 
+       aes(x = debt_to_income, y = interest_rate)) +
+  geom_hex()
 ```
 
