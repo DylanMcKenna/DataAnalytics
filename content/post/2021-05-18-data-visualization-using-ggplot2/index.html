@@ -23,6 +23,16 @@ ggplot(penguins,
   geom_point() +
   facet_grid( species ~ island )</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(
+  penguins, 
+  aes(x = bill_depth_mm, 
+      y = bill_length_mm, 
+      color = species)) +
+  geom_point() +
+  facet_grid(species ~ sex) +
+  scale_color_viridis_d() +
+  guides(color = FALSE)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>We can use shapes to display data.</p>
 <pre class="r"><code>library(palmerpenguins)
 library(tidyverse)
@@ -33,7 +43,7 @@ ggplot(penguins,
            shape = species)) +
   geom_point() +
   scale_colour_viridis_d()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>We can use size to represent another variable. However, for overlapping data this can be difficult to understand.</p>
 <pre class="r"><code>ggplot(penguins,
        aes(x = bill_depth_mm, 
@@ -43,7 +53,7 @@ ggplot(penguins,
            size = body_mass_g)) +
   geom_point() +
   scale_colour_viridis_d()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We can include another variable using transparency. Also, to better represent overlapping data, we can use transparency (alpha) to see the data points.</p>
 <pre class="r"><code>ggplot(penguins,
        aes(x = bill_depth_mm, 
@@ -54,10 +64,10 @@ ggplot(penguins,
            alpha = flipper_length_mm)) +
   geom_point() +
   scale_colour_viridis_d()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>We can include a facet wrap.</p>
 <pre class="r"><code>ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm)) + 
   geom_point() +
   facet_wrap(~ species)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>

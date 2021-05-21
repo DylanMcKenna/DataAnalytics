@@ -1,0 +1,117 @@
+---
+title: Visualising Numerical Data
+author: Dylan McKenna
+date: '2021-05-21'
+slug: visualising-numerical-data
+categories:
+  - ggplot2
+tags: []
+---
+
+A glimpse at Lending Club data.
+
+```{r warning=FALSE}
+library(openintro)
+glimpse(loans_full_schema)
+
+```
+
+```{r error=FALSE}
+loans <- loans_full_schema %>%
+  select(loan_amount, interest_rate, term, grade, 
+         state, annual_income, homeownership, debt_to_income)
+glimpse(loans)
+```
+
+#Histograms
+We can check the number of loans for various amounts.
+
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 1000)
+```
+We can try a larger bin width if desired.
+
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 5000)
+```
+
+We can customize our histogram.
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 5000) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  )
+```
+
+We can fill using a categorical variable.
+```{r}
+ggplot(loans, aes(x = loan_amount, 
+                  fill = homeownership)) +
+  geom_histogram(binwidth = 5000,
+                 alpha = 0.5) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  )
+```
+
+We can facet with a categorical variable.
+```{r}
+ggplot(loans, aes(x = loan_amount, fill = homeownership)) + 
+  geom_histogram(binwidth = 5000) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  ) +
+  facet_wrap(~ homeownership, nrow = 3)
+```
+
+We could use a density plot.
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density()
+
+```
+For density plots, the bandwidth can be adjusted.
+
+The bandwith here is 0.5.
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 0.5)
+```
+The bandwidth here is 2.
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 2)
+```
+We can also customize the density plots.
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 2) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Density",
+    title = "Amounts of Lending Club loans"
+  )
+```
+We can add a categorical variable to our density plot.
+```{r}
+ggplot(loans, aes(x = loan_amount, 
+                  fill = homeownership)) +
+  geom_density(adjust = 2, 
+               alpha = 0.5) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Density",
+    title = "Amounts of Lending Club loans", 
+    fill = "Homeownership"
+  )
+```
+
