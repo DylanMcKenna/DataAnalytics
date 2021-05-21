@@ -10,6 +10,8 @@ tags: []
 ## Palmer Penguins Data Analysis
 We summarize the Palmer Penguins data using ggplot2 and tidyverse.
 
+The use of facets and colour to present data.
+
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 library(palmerpenguins)
 library(tidyverse)
@@ -30,7 +32,8 @@ ggplot(penguins,
 
 ```
 
-We add facets to the data
+
+We can use facets without colour to present data.
 
 ```{r warning=FALSE}
 library(palmerpenguins)
