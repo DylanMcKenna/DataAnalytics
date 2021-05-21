@@ -33,7 +33,7 @@ ggplot(penguins,
 ```
 
 
-We can use facets without colour to present data.
+Also, we can use facets without colour to present data with no legend.
 
 ```{r warning=FALSE}
 library(palmerpenguins)
@@ -42,5 +42,52 @@ ggplot(penguins,
        aes(x = bill_depth_mm, y = bill_length_mm)) + 
   geom_point() +
   facet_grid( species ~ island )
+```
+
+
+We can use shapes to display data.
+```{r warning = FALSE}
+library(palmerpenguins)
+library(tidyverse)
+ggplot(penguins,
+       aes(x = bill_depth_mm, 
+           y = bill_length_mm,
+           colour = species,
+           shape = species)) +
+  geom_point() +
+  scale_colour_viridis_d()
+```
+
+
+We can use size to represent another variable. However, for overlapping data this can be difficult to understand. 
+```{r warning=FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm, 
+           y = bill_length_mm,
+           colour = species,
+           shape = species,
+           size = body_mass_g)) +
+  geom_point() +
+  scale_colour_viridis_d()
+```
+
+We can include another variable using transparency. Also, to better represent overlapping data, we can use transparency (alpha) to see the data points.
+```{r warning=FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm, 
+           y = bill_length_mm,
+           colour = species,
+           shape = species,
+           size = body_mass_g,
+           alpha = flipper_length_mm)) +
+  geom_point() +
+  scale_colour_viridis_d()
+```
+
+We can include a facet wrap.
+```{r warning=FALSE}
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm)) + 
+  geom_point() +
+  facet_wrap(~ species)
 ```
 

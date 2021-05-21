@@ -22,6 +22,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -74,7 +79,48 @@
 <div id="palmer-penguins-data-analysis" class="section level2">
 <h2>Palmer Penguins Data Analysis</h2>
 <p>We summarize the Palmer Penguins data using ggplot2 and tidyverse.</p>
+<p>The use of facets and colour to present data.</p>
 <p><img src="/2021/05/18/data-visualization-using-ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Also, we can use facets without colour to present data.</p>
+<pre class="r"><code>library(palmerpenguins)
+library(tidyverse)
+ggplot(penguins, 
+       aes(x = bill_depth_mm, y = bill_length_mm)) + 
+  geom_point() +
+  facet_grid( species ~ island )</code></pre>
+<p><img src="/2021/05/18/data-visualization-using-ggplot2/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>We can use shapes to display data.</p>
+<pre class="r"><code>library(palmerpenguins)
+library(tidyverse)
+ggplot(penguins,
+       aes(x = bill_depth_mm, 
+           y = bill_length_mm,
+           colour = species,
+           shape = species)) +
+  geom_point() +
+  scale_colour_viridis_d()</code></pre>
+<p><img src="/2021/05/18/data-visualization-using-ggplot2/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We can use size to represent another variable. However, for overlapping data this can be difficult to understand.</p>
+<pre class="r"><code>ggplot(penguins,
+       aes(x = bill_depth_mm, 
+           y = bill_length_mm,
+           colour = species,
+           shape = species,
+           size = body_mass_g)) +
+  geom_point() +
+  scale_colour_viridis_d()</code></pre>
+<p><img src="/2021/05/18/data-visualization-using-ggplot2/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>We can include another variable using transparency. Also, to better represent overlapping data, we can use transparency (alpha) to see the data points.</p>
+<pre class="r"><code>ggplot(penguins,
+       aes(x = bill_depth_mm, 
+           y = bill_length_mm,
+           colour = species,
+           shape = species,
+           size = body_mass_g,
+           alpha = flipper_length_mm)) +
+  geom_point() +
+  scale_colour_viridis_d()</code></pre>
+<p><img src="/2021/05/18/data-visualization-using-ggplot2/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 
     </div>
@@ -98,6 +144,18 @@
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 

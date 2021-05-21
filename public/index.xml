@@ -22,8 +22,11 @@
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
       <guid>/2021/05/18/data-visualization-using-ggplot2/</guid>
-      <description>Palmer Penguins Data AnalysisWe summarize the Palmer Penguins data using ggplot2 and tidyverse.
-</description>
+      <description>Palmer Penguins Data AnalysisWe summarize the Palmer Penguins data using ggplot2 and tidyverse.
+The use of facets and colour to present data.
+Also, we can use facets without colour to present data.
+library(palmerpenguins)library(tidyverse)ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm)) + geom_point() +facet_grid( species ~ island )We can use shapes to display data.
+library(palmerpenguins)library(tidyverse)ggplot(penguins,aes(x = bill_depth_mm, y = bill_length_mm,colour = species,shape = species)) +geom_point() +scale_colour_viridis_d()We can use size to represent another variable.</description>
     </item>
     
     <item>
