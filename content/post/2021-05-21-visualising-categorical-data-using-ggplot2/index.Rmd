@@ -12,12 +12,17 @@ tags: []
 We can use bar plots, segmented bar plots, violin plots, and ridge plots.
 
 
+
 ## Bar Plot
+The use of bar plots presents the data.
+
+
 ```{r}
 ggplot(loans, aes(x = homeownership)) +
   geom_bar()
 
 ```
+
 
 ```{r}
 ggplot(loans, aes(x = homeownership, 
@@ -25,12 +30,16 @@ ggplot(loans, aes(x = homeownership,
   geom_bar()
 ```
 
+
 ## Segmented Bar Plots
+We can use segmented bar plots.
+
 
 ```{r}
 ggplot(loans, aes(x = homeownership, fill = grade)) +
   geom_bar(position = "fill")
 ```
+
 
 ```{r}
 ggplot(loans, aes(y = homeownership,
@@ -47,12 +56,15 @@ ggplot(loans, aes(y = homeownership,
 
 ## Violin Plots
 
+We can use violin plots.
+
 ```{r}
 ggplot(loans, aes(x = homeownership, y = loan_amount)) +
   geom_violin()
 ```
 
 ## Ridge Plots
+We can use ridge plots.
 
 ```{r warning=FALSE, error=FALSE}
 library(ggridges)

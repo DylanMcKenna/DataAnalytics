@@ -34,6 +34,7 @@ We can check the number of loans for various amounts.
 ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 1000)
 ```
+
 We can try a larger bin width if desired.
 
 ```{r}
@@ -85,6 +86,7 @@ ggplot(loans, aes(x = loan_amount)) +
   geom_density()
 
 ```
+
 For density plots, the bandwidth can be adjusted.
 
 The bandwith here is 0.5.
@@ -92,11 +94,13 @@ The bandwith here is 0.5.
 ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 0.5)
 ```
+
 The bandwidth here is 2.
 ```{r}
 ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 2)
 ```
+
 We can also customize the density plots.
 ```{r}
 ggplot(loans, aes(x = loan_amount)) +
@@ -107,6 +111,7 @@ ggplot(loans, aes(x = loan_amount)) +
     title = "Amounts of Lending Club loans"
   )
 ```
+
 We can add a categorical variable to our density plot.
 ```{r}
 ggplot(loans, aes(x = loan_amount, 
