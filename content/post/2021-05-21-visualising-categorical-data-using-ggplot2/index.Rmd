@@ -19,3 +19,45 @@ ggplot(loans, aes(x = homeownership)) +
 
 ```
 
+```{r}
+ggplot(loans, aes(x = homeownership, 
+                  fill = grade)) +
+  geom_bar()
+```
+
+## Segmented Bar Plots
+
+```{r}
+ggplot(loans, aes(x = homeownership, fill = grade)) +
+  geom_bar(position = "fill")
+```
+
+```{r}
+ggplot(loans, aes(y = homeownership,
+                  fill = grade)) +
+  geom_bar(position = "fill") +
+  labs(
+    x = "Proportion",
+    y = "Homeownership",
+    fill = "Grade",
+    title = "Grades of Lending Club loans",
+    subtitle = "and homeownership of lendee"
+  )
+```
+
+## Violin Plots
+
+```{r}
+ggplot(loans, aes(x = homeownership, y = loan_amount)) +
+  geom_violin()
+```
+
+## Ridge Plots
+
+```{r warning=FALSE, error=FALSE}
+library(ggridges)
+ggplot(loans, aes(x = loan_amount, y = grade, fill = grade, color = grade)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
+
