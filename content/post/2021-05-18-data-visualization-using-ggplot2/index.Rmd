@@ -43,6 +43,17 @@ ggplot(penguins,
   geom_point() +
   facet_grid( species ~ island )
 ```
+```{r warning=FALSE}
+ggplot(
+  penguins, 
+  aes(x = bill_depth_mm, 
+      y = bill_length_mm, 
+      color = species)) +
+  geom_point() +
+  facet_grid(species ~ sex) +
+  scale_color_viridis_d() +
+  guides(color = FALSE)
+```
 
 
 We can use shapes to display data.
