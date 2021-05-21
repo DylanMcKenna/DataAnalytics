@@ -2,7 +2,7 @@
 title: Visualising Numerical Data using ggplot2
 author: Dylan McKenna
 date: '2021-05-21'
-slug: visualising-numerical-data
+slug: visualising-numerical-data-using-ggplot2
 categories:
   - ggplot2
 tags: []
