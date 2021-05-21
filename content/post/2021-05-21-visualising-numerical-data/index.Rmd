@@ -9,6 +9,8 @@ tags: []
 ---
 
 #Lending Club Data Visualisation
+We visualize the Lending Club data using ggplot2.
+
 A glimpse at Lending Club data.
 
 ```{r warning=FALSE}
