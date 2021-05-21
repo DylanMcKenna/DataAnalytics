@@ -1,14 +1,79 @@
----
-title: Visualising Numerical Data using ggplot2
-author: DylanMcKenna
-date: '2021-05-21'
-slug: visualising-numerical
-categories:
-  - ggplot2
-tags: []
----
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
 
-<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+<title>Visualising Numerical Data using ggplot2 - Dylan McKenna - Fundamentals of Analytics</title>
+<meta property="og:title" content="Visualising Numerical Data using ggplot2 - Dylan McKenna - Fundamentals of Analytics">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/DylanMcKenna">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Visualising Numerical Data using ggplot2</h1>
+
+    
+    <span class="article-date">2021-05-21</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/05/21/visualising-numerical/index_files/header-attrs/header-attrs.js"></script>
 
 
 <div id="lending-club-data-visualisation" class="section level2">
@@ -35,11 +100,11 @@ glimpse(loans)</code></pre>
 <pre class="r"><code>library(tidyverse)
 ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 1000)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>We can try a larger bin width if desired.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 5000)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>We can customize our histogram.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 5000) +
@@ -48,7 +113,7 @@ ggplot(loans, aes(x = loan_amount)) +
     y = &quot;Frequency&quot;,
     title = &quot;Amounts of Lending Club loans&quot;
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We can fill using a categorical variable.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount, 
                   fill = homeownership)) +
@@ -59,7 +124,7 @@ ggplot(loans, aes(x = loan_amount)) +
     y = &quot;Frequency&quot;,
     title = &quot;Amounts of Lending Club loans&quot;
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>We can facet with a categorical variable.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount, fill = homeownership)) + 
   geom_histogram(binwidth = 5000) +
@@ -69,23 +134,23 @@ ggplot(loans, aes(x = loan_amount)) +
     title = &quot;Amounts of Lending Club loans&quot;
   ) +
   facet_wrap(~ homeownership, nrow = 3)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="density-plots" class="section level3">
 <h3>Density Plots</h3>
 <p>We could use a density plot.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount)) +
   geom_density()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>For density plots, the bandwidth can be adjusted.</p>
 <p>The bandwith here is 0.5.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 0.5)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>The bandwidth here is 2.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 2)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>We can also customize the density plots.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 2) +
@@ -94,7 +159,7 @@ ggplot(loans, aes(x = loan_amount)) +
     y = &quot;Density&quot;,
     title = &quot;Amounts of Lending Club loans&quot;
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>We can add a categorical variable to our density plot.</p>
 <pre class="r"><code>ggplot(loans, aes(x = loan_amount, 
                   fill = homeownership)) +
@@ -106,18 +171,18 @@ ggplot(loans, aes(x = loan_amount)) +
     title = &quot;Amounts of Lending Club loans&quot;, 
     fill = &quot;Homeownership&quot;
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="box-plots" class="section level3">
 <h3>Box Plots</h3>
 <p>We can also use box plots.</p>
 <pre class="r"><code>ggplot(loans, aes(x = interest_rate)) +
   geom_boxplot()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Box plots can be used to show obvious outliers.</p>
 <pre class="r"><code>ggplot(loans, aes(x = annual_income)) +
   geom_boxplot()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>We can customize our box plots.</p>
 <pre class="r"><code>ggplot(loans, aes(x = interest_rate)) +
   geom_boxplot() +
@@ -130,7 +195,7 @@ ggplot(loans, aes(x = loan_amount)) +
     axis.ticks.y = element_blank(),
     axis.text.y = element_blank()
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>We can add a categorical variable.</p>
 <pre class="r"><code>ggplot(loans, aes(x = interest_rate,
                   y = grade)) +
@@ -141,18 +206,62 @@ ggplot(loans, aes(x = loan_amount)) +
     title = &quot;Interest rates of Lending Club loans&quot;,
     subtitle = &quot;by grade of loan&quot;
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="scatterplot" class="section level3">
 <h3>Scatterplot</h3>
 <p>We can use a basic scatterplot.</p>
 <pre class="r"><code>ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
   geom_point()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>We can change the marker shape. In the following example, the dots become hexagons.</p>
 <pre class="r"><code>ggplot(loans %&gt;% filter(debt_to_income &lt; 100), 
        aes(x = debt_to_income, y = interest_rate)) +
   geom_hex()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/2021/05/21/visualising-numerical/index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 </div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
