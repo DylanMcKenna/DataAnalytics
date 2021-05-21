@@ -18,6 +18,8 @@ The use of bar plots presents the data.
 
 
 ```{r}
+library(openintro)
+library(tidyverse)
 ggplot(loans, aes(x = homeownership)) +
   geom_bar()
 
