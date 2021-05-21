@@ -8,7 +8,7 @@ categories:
 tags: []
 ---
 
-#Lending Club Data Visualisation
+# Lending Club Data Visualisation
 We visualize the Lending Club data using ggplot2.
 
 A glimpse at Lending Club data.
@@ -26,7 +26,7 @@ loans <- loans_full_schema %>%
 glimpse(loans)
 ```
 
-#Histograms
+## Histograms
 We can check the number of loans for various amounts.
 
 ```{r}
@@ -76,7 +76,7 @@ ggplot(loans, aes(x = loan_amount, fill = homeownership)) +
   facet_wrap(~ homeownership, nrow = 3)
 ```
 
-#Density Plots
+## Density Plots
 
 We could use a density plot.
 ```{r}
@@ -120,7 +120,7 @@ ggplot(loans, aes(x = loan_amount,
   )
 ```
 
-#Box Plots
+## Box Plots
 We can also use box plots.
 
 ```{r}
@@ -164,7 +164,7 @@ ggplot(loans, aes(x = interest_rate,
   )
 ```
 
-#Scatterplot
+## Scatterplot
 
 We can use a basic scatterplot.
 
