@@ -16,6 +16,7 @@ We can use bar plots, segmented bar plots, violin plots, and ridge plots to pres
 
 
 ### Bar Plot
+
 The use of bar plots presents the data.
 
 
@@ -39,6 +40,7 @@ ggplot(loans, aes(x = homeownership,
 
 
 ### Segmented Bar Plots
+
 We can use segmented bar plots.
 
 
@@ -75,6 +77,7 @@ ggplot(loans, aes(x = homeownership, y = loan_amount)) +
 ```
 
 ### Ridge Plots
+
 We can use ridge plots.
 
 ```{r warning=FALSE, error=FALSE}
