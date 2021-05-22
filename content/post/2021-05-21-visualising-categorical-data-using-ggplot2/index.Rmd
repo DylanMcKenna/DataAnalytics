@@ -8,12 +8,13 @@ tags: []
 ---
 
 
-# Lending Club - visualising categorical data
-We can use bar plots, segmented bar plots, violin plots, and ridge plots.
+## Lending Club - visualising categorical data
+
+We can use bar plots, segmented bar plots, violin plots, and ridge plots to present our categorical data.
 
 
 
-## Bar Plot
+### Bar Plot
 The use of bar plots presents the data.
 
 
@@ -35,17 +36,21 @@ ggplot(loans, aes(x = homeownership,
 ```
 
 
-## Segmented Bar Plots
+### Segmented Bar Plots
 We can use segmented bar plots.
 
 
 ```{r}
+library(openintro)
+library(tidyverse)
 ggplot(loans, aes(x = homeownership, fill = grade)) +
   geom_bar(position = "fill")
 ```
 
 
 ```{r}
+library(openintro)
+library(tidyverse)
 ggplot(loans, aes(y = homeownership,
                   fill = grade)) +
   geom_bar(position = "fill") +
@@ -58,7 +63,7 @@ ggplot(loans, aes(y = homeownership,
   )
 ```
 
-## Violin Plots
+### Violin Plots
 
 We can use violin plots.
 
@@ -67,12 +72,13 @@ ggplot(loans, aes(x = homeownership, y = loan_amount)) +
   geom_violin()
 ```
 
-## Ridge Plots
+### Ridge Plots
 We can use ridge plots.
 
 ```{r warning=FALSE, error=FALSE}
 library(ggridges)
-
+library(ggplot2)
+library(openintro)
 ggplot(loans, aes(x = loan_amount, y = grade, fill = grade, color = grade)) + 
   geom_density_ridges(alpha = 0.5)
 ```
