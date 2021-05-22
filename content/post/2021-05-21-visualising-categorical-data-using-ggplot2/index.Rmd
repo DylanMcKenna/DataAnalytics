@@ -8,6 +8,7 @@ tags: []
 ---
 
 
+
 ## Lending Club - visualising categorical data
 
 We can use bar plots, segmented bar plots, violin plots, and ridge plots to present our categorical data.
@@ -21,6 +22,7 @@ The use of bar plots presents the data.
 ```{r}
 library(openintro)
 library(tidyverse)
+loans <- loans_full_schema
 ggplot(loans, aes(x = homeownership)) +
   geom_bar()
 
