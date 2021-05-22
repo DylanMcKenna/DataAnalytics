@@ -13,6 +13,13 @@ tags: []
 
 We can use bar plots, segmented bar plots, violin plots, and ridge plots to present our categorical data.
 
+```{r warning=FALSE, include=FALSE}
+library(openintro)
+library(tidyverse)
+loans <- loans_full_schema
+
+```
+
 
 
 ### Bar Plot
@@ -23,7 +30,6 @@ The use of bar plots presents the data.
 ```{r}
 library(openintro)
 library(tidyverse)
-loans <- loans_full_schema
 ggplot(loans, aes(x = homeownership)) +
   geom_bar()
 
