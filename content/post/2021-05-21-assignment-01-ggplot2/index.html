@@ -1,6 +1,6 @@
 ---
-title: Assignment 01 - GGPLOT2
-author: DylanMcKenna
+title: "Assignment 01 - GGPLOT2"
+author: "DylanMcKenna"
 date: '2021-05-21'
 slug: assignment-01-ggplot2
 categories: []
@@ -10,18 +10,70 @@ tags: []
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 
-<div id="at-least-two-level-two-headers-and-at-least-one-bulleted-list-with-at-least-two-items-2-points" class="section level1">
-<h1>at least two level two headers ## and at least one bulleted list with at least two items * (2 points)</h1>
+<div id="this-assignment-was-completed-using-the-data-set-mlb_players_18" class="section level1">
+<h1>This assignment was completed using the data set: mlb_players_18</h1>
+<p>This data contains the offensive statistics of Major League Baseball (MLB) players during the 2018 season.</p>
+<div id="this-section-contain-the-categorical-data." class="section level2">
+<h2>This section contain the categorical data.</h2>
+<p>Show number of homeruns by team and by position.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Show number of homeruns by position.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="at-least-two-categorical-data-visualization.-the-code-that-created-it-must-not-be-displayed.-2-points" class="section level1">
-<h1>at least two categorical data visualization. The code that created it must not be displayed. (2 points)</h1>
+<div id="this-section-contains-the-numerical-data." class="section level2">
+<h2>This section contains the numerical data.</h2>
+<p>The following charts present data for all position players and designated hitters that had 150 or more at-bats.</p>
+<p>A player that had at least 150 at-bats would have played in enough games to get consistent playing time.</p>
+<p>Home runs have an important impact on a game. Although, some players that swing for home runs can run a risk of striking out more frequently.</p>
+<pre class="r"><code># Create subset of position players and designated hitters with more than 150 at-bats
+
+pos_players &lt;- subset(mlb_stats, !position %in% c(&quot;P&quot;) &amp; AB &gt;= 150)
+
+# Create Plot of Homerun vs Strike out
+
+ggplot(pos_players, aes(x = strike_outs, y = HR)) +
+      geom_point(alpha = 0.4) +
+  labs(
+    x = &quot;Strikeouts&quot;,
+    y = &quot;Home Runs&quot;,
+    title = &quot;Risk and Reward of Swinging Big&quot;) +
+  theme_classic()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Some players’ strategy is to see more pitches. By seeing more pitches, the batter has an increased opportunity to earn a walk with the risk of striking out.</p>
+<pre class="r"><code># Create Plot of Walks vs Strike out
+
+ggplot(pos_players, aes(x = strike_outs, y = walks)) +
+      geom_point(alpha = 0.4) +
+  labs(
+    x = &quot;Strikeouts&quot;,
+    y = &quot;Walks&quot;,
+    title = &quot;Risk and Reward of Seeing More Pitches&quot;) +
+  theme_classic()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Do more hits increase the potential for RBI’s?</p>
+<p>Looking at the following chart, it appears that the more hits a player earns, the more RBI’s a player earns.</p>
+<pre class="r"><code># Show hits related to RBIs
+
+ggplot(pos_players, aes(x = H, y = RBI)) +
+      geom_point(alpha = 0.4) +
+    labs(
+    x = &quot;Hits&quot;,
+    y = &quot;RBI&quot;,
+    title = &quot;Drive In Those Runs&quot;) + 
+  theme_classic()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Another area to explore is the impact of stealing bases on scoring more runs.</p>
+<pre class="r"><code># Show Runs related to Stolen Bases
+
+ggplot(pos_players, aes(x = stolen_bases, y = R)) +
+      geom_point(alpha = 0.4) +
+    labs(
+    x = &quot;Stolen Bases&quot;,
+    y = &quot;Runs&quot;,
+    title = &quot;Risk and Reward of Stealing Bases&quot;) + 
+  theme_classic()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>An issue that I have found creating this blog is figuring out why sometimes the information uploads to netlify and sometimes it does not.</p>
+<p>I find it interesting how we can present data with so few inputs.</p>
 </div>
-<div id="at-least-two-numerical-data-visualization.-the-code-that-created-it-must-be-displayed.-2-points" class="section level1">
-<h1>at least two numerical data visualization. The code that created it must be displayed. (2 points)</h1>
-</div>
-<div id="a-narrative-discussing-what-you-find-interesting-along-with-any-issues-you-might-have-had-creating-this-blog" class="section level1">
-<h1>a narrative discussing what you find interesting along with any issues you might have had creating this blog</h1>
-</div>
-<div id="this-assignment-was-completed-using-the-data-set" class="section level1">
-<h1>This assignment was completed using the data set:</h1>
 </div>

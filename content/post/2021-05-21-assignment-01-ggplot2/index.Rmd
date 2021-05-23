@@ -1,6 +1,6 @@
 ---
-title: Assignment 01 - GGPLOT2
-author: DylanMcKenna
+title: "Assignment 01 - GGPLOT2"
+author: "DylanMcKenna"
 date: '2021-05-21'
 slug: assignment-01-ggplot2
 categories: []
@@ -13,13 +13,13 @@ tags: []
 This data contains the offensive statistics of Major League Baseball (MLB) players during the 2018 season.
 
 
-```{r error=FALSE, echo=FALSE}
-
+```{r error=FALSE, echo=FALSE, include=FALSE}
+library(openintro)
+library(tidyverse)
 
 data("mlb_players_18")
 head(mlb_players_18)
-library(openintro)
-library(tidyverse)
+
 str(mlb_players_18)
 
 ```
