@@ -15,16 +15,19 @@ This data contains the offensive statistics of Major League Baseball (MLB) playe
 
 ```{r error=FALSE, include=FALSE}
 mlb_stats <- mlb_players_18
+
 data("mlb_stats")
 head(mlb_stats)
 library(openintro)
 library(tidyverse)
-str(mlb_stats)
+str(mlb_stts)
 
 ```
 
 
-## Show number of homeruns by team and by position.
+## This section contain the categorical data.
+
+Show number of homeruns by team and by position.
 
 
 ```{r echo=FALSE}
@@ -42,7 +45,7 @@ ggplot(mlb_stats, aes(y = team, x = HR)) +
          
 ```
 
-
+Show number of homeruns by position.
 
 ```{r echo=FALSE}
 # Show the homeruns per position
@@ -57,7 +60,7 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
   theme_classic()
 ```
 
-## GREATER THAN 200 ABs: Show homeruns vs strike outs, strike outs vs walks, at-bats vs
+## This section contains the numerical data.
 
 The following charts present data for all position players and designated hitters that had 150 or more at-bats.
 
