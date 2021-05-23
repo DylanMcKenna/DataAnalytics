@@ -8,7 +8,7 @@ tags: []
 ---
 
 
-# at least two level two headers ## and at least one bulleted list with at least two items * (2 points)
+# at least two level two headers and at least one bulleted list with at least two items * (2 points)
 
 # at least two categorical data visualization. The code that created it must not be displayed. (2 points)
 
@@ -69,12 +69,21 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
 
 ## GREATER THAN 200 ABs: Show homeruns vs strike outs, strike outs vs walks, at-bats vs
 
+The following charts present data for all position players and designated hitters that had 150 or more at-bats.
 
 ```{r}
 # Create subset of position players and designated hitters with more than 150 at-bats
-
 pos_players <- subset(mlb_stats, !position %in% c("P") & AB >= 150)
 
+# Create Plot of Homerun vs Strike out
+ggplot(mlb_stats, aes(x = strike_outs, y = HR)) +
+      geom_point(alpha = 0.4) +
+  labs(
+    x = "Strikeouts",
+    y = "Home Runs",
+    title = "Risk and Reward of Swinging Big"
+  )
+  theme_classic()
 ```
 
 
