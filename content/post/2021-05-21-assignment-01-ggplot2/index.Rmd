@@ -13,14 +13,14 @@ tags: []
 This data contains the offensive statistics of Major League Baseball (MLB) players during the 2018 season.
 
 
-```{r error=FALSE, include=FALSE}
-mlb_stats <- mlb_players_18
+```{r error=FALSE, echo=FALSE}
 
-data("mlb_stats")
-head(mlb_stats)
+
+data("mlb_players_18")
+head(mlb_players_18)
 library(openintro)
 library(tidyverse)
-str(mlb_stts)
+str(mlb_players_18)
 
 ```
 
@@ -31,6 +31,9 @@ Show number of homeruns by team and by position.
 
 
 ```{r echo=FALSE}
+library(openintro)
+library(tidyverse)
+mlb_stats <- mlb_players_18
 
 # Show the homeruns per team
 
@@ -48,7 +51,12 @@ ggplot(mlb_stats, aes(y = team, x = HR)) +
 
 Show number of homeruns by position.
 
+
 ```{r echo=FALSE}
+
+library(openintro)
+library(tidyverse)
+
 # Show the homeruns per position
 
 
@@ -59,6 +67,7 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
     y = "Position",
     title = "Home Runs by Each Position") +
   theme_classic()
+
 ```
 
 
@@ -66,8 +75,12 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
 
 The following charts present data for all position players and designated hitters that had 150 or more at-bats.
 
+A player that had at least 150 at-bats would have played in enough games to get consistent playing time.
+
+Home runs have an important impact on a game. Although, some players that swing for home runs can run a risk of striking out more frequently.
 
 ```{r}
+
 # Create subset of position players and designated hitters with more than 150 at-bats
 
 pos_players <- subset(mlb_stats, !position %in% c("P") & AB >= 150)
@@ -81,8 +94,10 @@ ggplot(pos_players, aes(x = strike_outs, y = HR)) +
     y = "Home Runs",
     title = "Risk and Reward of Swinging Big") +
   theme_classic()
+
 ```
 
+Some players' strategy is to see more pitches. By seeing more pitches, the batter has an increased opportunity to earn a walk with the risk of striking out.
 
  
 ```{r}
@@ -96,7 +111,12 @@ ggplot(pos_players, aes(x = strike_outs, y = walks)) +
     y = "Walks",
     title = "Risk and Reward of Seeing More Pitches") +
   theme_classic()
+
 ```
+
+Do more hits increase the potential for RBI's?
+
+Looking at the following chart, it appears that the more hits a player earns, the more RBI's a player earns.
 
 
 ```{r}
@@ -110,7 +130,10 @@ ggplot(pos_players, aes(x = H, y = RBI)) +
     y = "RBI",
     title = "Drive In Those Runs") + 
   theme_classic()
+
 ```
+
+Another area to explore is the impact of stealing bases on scoring more runs. 
 
 
 ```{r}
@@ -124,5 +147,10 @@ ggplot(pos_players, aes(x = stolen_bases, y = R)) +
     y = "Runs",
     title = "Risk and Reward of Stealing Bases") + 
   theme_classic()
+
 ```
 
+
+An issue that I have found creating this blog is figuring out why sometimes the information uploads to netlify and sometimes it does not.  
+
+I find it interesting how we can present data with so few inputs.
