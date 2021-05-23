@@ -45,6 +45,7 @@ ggplot(mlb_stats, aes(y = team, x = HR)) +
          
 ```
 
+
 Show number of homeruns by position.
 
 ```{r echo=FALSE}
@@ -60,6 +61,7 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
   theme_classic()
 ```
 
+
 ## This section contains the numerical data.
 
 The following charts present data for all position players and designated hitters that had 150 or more at-bats.
@@ -67,9 +69,11 @@ The following charts present data for all position players and designated hitter
 
 ```{r}
 # Create subset of position players and designated hitters with more than 150 at-bats
+
 pos_players <- subset(mlb_stats, !position %in% c("P") & AB >= 150)
 
 # Create Plot of Homerun vs Strike out
+
 ggplot(pos_players, aes(x = strike_outs, y = HR)) +
       geom_point(alpha = 0.4) +
   labs(
