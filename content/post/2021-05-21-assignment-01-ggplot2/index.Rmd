@@ -8,35 +8,27 @@ tags: []
 ---
 
 
-# at least two level two headers and at least one bulleted list with at least two items * (2 points)
-
-# at least two categorical data visualization. The code that created it must not be displayed. (2 points)
-
-# at least two numerical data visualization. The code that created it must be displayed. (2 points) 
-
-# a narrative discussing what you find interesting along with any issues you might have had creating this blog
-
-
 #  This assignment was completed using the data set: mlb_players_18
 
 This data contains the offensive statistics of Major League Baseball (MLB) players during the 2018 season.
 
 
 ```{r error=FALSE, include=FALSE}
-
-data("mlb_players_18")
-head(mlb_players_18)
+mlb_stats <- mlb_players_18
+data("mlb_stats")
+head(mlb_stats)
 library(openintro)
 library(tidyverse)
-str(mlb_players_18)
-mlb_stats <- mlb_players_18
+str(mlb_stats)
+
 ```
 
 
 ## Show number of homeruns by team and by position.
 
 
-```{r}
+```{r echo=FALSE}
+
 # Show the homeruns per team
 
 
@@ -45,15 +37,14 @@ ggplot(mlb_stats, aes(y = team, x = HR)) +
   labs(
     x = "Home Runs",
     y = "MLB Team",
-    title = "Home Runs by Each Team"
-  )
+    title = "Home Runs by Each Team") +
   theme_classic()
          
 ```
 
 
 
-```{r}
+```{r echo=FALSE}
 # Show the homeruns per position
 
 
@@ -62,8 +53,7 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
   labs(
     x = "Home Runs",
     y = "Position",
-    title = "Home Runs by Each Position"
-  )
+    title = "Home Runs by Each Position") +
   theme_classic()
 ```
 
@@ -71,22 +61,61 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
 
 The following charts present data for all position players and designated hitters that had 150 or more at-bats.
 
+
 ```{r}
 # Create subset of position players and designated hitters with more than 150 at-bats
 pos_players <- subset(mlb_stats, !position %in% c("P") & AB >= 150)
 
 # Create Plot of Homerun vs Strike out
-ggplot(mlb_stats, aes(x = strike_outs, y = HR)) +
+ggplot(pos_players, aes(x = strike_outs, y = HR)) +
       geom_point(alpha = 0.4) +
   labs(
     x = "Strikeouts",
     y = "Home Runs",
-    title = "Risk and Reward of Swinging Big"
-  )
+    title = "Risk and Reward of Swinging Big") +
   theme_classic()
 ```
 
 
  
+```{r}
 
+# Create Plot of Walks vs Strike out
+
+ggplot(pos_players, aes(x = strike_outs, y = walks)) +
+      geom_point(alpha = 0.4) +
+  labs(
+    x = "Strikeouts",
+    y = "Walks",
+    title = "Risk and Reward of Seeing More Pitches") +
+  theme_classic()
+```
+
+
+```{r}
+
+# Show hits related to RBIs
+
+ggplot(pos_players, aes(x = H, y = RBI)) +
+      geom_point(alpha = 0.4) +
+    labs(
+    x = "Hits",
+    y = "RBI",
+    title = "Drive In Those Runs") + 
+  theme_classic()
+```
+
+
+```{r}
+
+# Show Runs related to Stolen Bases
+
+ggplot(pos_players, aes(x = stolen_bases, y = R)) +
+      geom_point(alpha = 0.4) +
+    labs(
+    x = "Stolen Bases",
+    y = "Runs",
+    title = "Risk and Reward of Stealing Bases") + 
+  theme_classic()
+```
 
