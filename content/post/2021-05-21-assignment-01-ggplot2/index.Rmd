@@ -7,9 +7,13 @@ categories: []
 tags: []
 ---
 
+
 # at least two level two headers ## and at least one bulleted list with at least two items * (2 points)
+
 # at least two categorical data visualization. The code that created it must not be displayed. (2 points)
+
 # at least two numerical data visualization. The code that created it must be displayed. (2 points) 
+
 # a narrative discussing what you find interesting along with any issues you might have had creating this blog
 
 
@@ -48,6 +52,7 @@ ggplot(mlb_stats, aes(y = team, x = HR)) +
 ```
 
 
+
 ```{r}
 # Show the homeruns per position
 
@@ -62,16 +67,17 @@ ggplot(mlb_stats, aes(y = position, x = HR)) +
   theme_classic()
 ```
 
+## GREATER THAN 200 ABs: Show homeruns vs strike outs, strike outs vs walks, at-bats vs
+
 
 ```{r}
-library(openintro)
-pos_players <- subset(mlb_players_18, !position %in% c("P", "DH") & AB >= 100)
-head(pos_players,10)
+# Create subset of position players and designated hitters with more than 150 at-bats
+
+pos_players <- subset(mlb_stats, !position %in% c("P") & AB >= 150)
 
 ```
 
 
-
-## Show homeruns by team, by position.
+ 
 
 
