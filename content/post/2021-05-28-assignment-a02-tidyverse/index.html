@@ -87,7 +87,12 @@ ls(fielding_full)</code></pre>
 ## [11] &quot;nameFirst&quot;    &quot;nameLast&quot;     &quot;PB&quot;           &quot;playerID&quot;     &quot;PO&quot;          
 ## [16] &quot;POS&quot;          &quot;SB&quot;           &quot;stint&quot;        &quot;teamID&quot;       &quot;throws&quot;      
 ## [21] &quot;WP&quot;           &quot;yearID&quot;       &quot;ZR&quot;</code></pre>
+</div>
+<div id="change-column-names" class="section level2">
+<h2>Change column names</h2>
 <pre class="r"><code># Change the names of columns
+
+
 fielding_full &lt;- fielding_full %&gt;%
   rename( 
     Year = yearID, 
@@ -143,11 +148,34 @@ batting_full</code></pre>
 ## [11] &quot;G&quot;            &quot;GS&quot;           &quot;InnOuts&quot;      &quot;PO&quot;           &quot;A&quot;           
 ## [16] &quot;E&quot;            &quot;DP&quot;           &quot;PB&quot;           &quot;WP&quot;           &quot;SB&quot;          
 ## [21] &quot;CS&quot;           &quot;ZR&quot;           &quot;throws&quot;</code></pre>
-<pre class="r"><code>batting_new &lt;- batting_new_AL &lt;- batting_full %&gt;%
+</div>
+<div id="missing-values" class="section level2">
+<h2>Missing Values</h2>
+<p>Replace all NA values with 0.</p>
+<p>This is the only use for a ‘Missing Values’ action. The data is in a good format for working.</p>
+<pre class="r"><code>batting_new &lt;- batting_full %&gt;%
   filter(Year %in% (2000:2015))
 
-
-# Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
+batting_new %&gt;%
+  replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0))</code></pre>
+<pre><code>## # A tibble: 22,084 x 28
+##    playerID nameFirst nameLast bats  birthCountry  Year stint Team  League     G
+##    &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+##  1 abbotje~ Jeff      Abbott   R     USA           2000     1 CHA   AL        80
+##  2 abbotku~ Kurt      Abbott   R     USA           2000     1 NYN   NL        79
+##  3 abbotpa~ Paul      Abbott   R     USA           2000     1 SEA   AL        35
+##  4 abreubo~ Bobby     Abreu    L     Venezuela     2000     1 PHI   NL       154
+##  5 aceveju~ Juan      Acevedo  R     Mexico        2000     1 MIL   NL        62
+##  6 adamste~ Terry     Adams    R     USA           2000     1 LAN   NL        66
+##  7 agbaybe~ Benny     Agbayani R     USA           2000     1 NYN   NL       119
+##  8 aguilri~ Rick      Aguilera R     USA           2000     1 CHN   NL        54
+##  9 alcanis~ Israel    Alcanta~ R     D.R.          2000     1 BOS   AL        21
+## 10 aldresc~ Scott     Aldred   L     USA           2000     1 PHI   NL        23
+## # ... with 22,074 more rows, and 18 more variables: Avg. &lt;dbl&gt;, AB &lt;dbl&gt;,
+## #   R &lt;dbl&gt;, H &lt;dbl&gt;, 2B &lt;dbl&gt;, 3B &lt;dbl&gt;, HR &lt;dbl&gt;, RBI &lt;dbl&gt;, SB &lt;dbl&gt;,
+## #   CS &lt;dbl&gt;, BB &lt;dbl&gt;, SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;dbl&gt;,
+## #   GIDP &lt;dbl&gt;, throws &lt;chr&gt;</code></pre>
+<pre class="r"><code># Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
 fielding_new_AL &lt;- fielding_full %&gt;%
   filter(Year %in% (2000:2015), League == &quot;AL&quot;)
 
@@ -180,115 +208,100 @@ teambattingNL &lt;- batting_new_NL %&gt;%
 
 yearbattingNL &lt;- batting_new_NL %&gt;%
   group_by(Year) %&gt;%
-  summarise(Total_HR = sum(HR))
-
-teambattingAL</code></pre>
-<pre><code>## # A tibble: 16 x 2
-##    Team  Total_HR
-##    &lt;chr&gt;    &lt;dbl&gt;
-##  1 ANA        858
-##  2 BAL       2811
-##  3 BOS       2985
-##  4 CHA       3135
-##  5 CLE       2752
-##  6 DET       2691
-##  7 HOU        541
-##  8 KCA       2097
-##  9 LAA       1753
-## 10 MIN       2282
-## 11 NYA       3338
-## 12 OAK       2665
-## 13 SEA       2414
-## 14 TBA       2567
-## 15 TEX       3186
-## 16 TOR       3031</code></pre>
-<pre class="r"><code>yearbattingAL</code></pre>
-<pre><code>## # A tibble: 16 x 2
-##     Year Total_HR
-##    &lt;dbl&gt;    &lt;dbl&gt;
-##  1  2000     2688
-##  2  2001     2506
-##  3  2002     2464
-##  4  2003     2499
-##  5  2004     2605
-##  6  2005     2437
-##  7  2006     2546
-##  8  2007     2252
-##  9  2008     2270
-## 10  2009     2560
-## 11  2010     2209
-## 12  2011     2271
-## 13  2012     2500
-## 14  2013     2504
-## 15  2014     2161
-## 16  2015     2634</code></pre>
-<pre class="r"><code>teambattingNL</code></pre>
-<pre><code>## # A tibble: 18 x 2
-##    Team  Total_HR
-##    &lt;chr&gt;    &lt;dbl&gt;
-##  1 ARI       2612
-##  2 ATL       2656
-##  3 CHN       2774
-##  4 CIN       2905
-##  5 COL       2787
-##  6 FLO       1956
-##  7 HOU       2162
-##  8 LAN       2424
-##  9 MIA        474
-## 10 MIL       2843
-## 11 MON        766
-## 12 NYN       2440
-## 13 PHI       2760
-## 14 PIT       2342
-## 15 SDN       2225
-## 16 SFN       2421
-## 17 SLN       2686
-## 18 WAS       1664</code></pre>
-<pre class="r"><code>yearbattingNL</code></pre>
-<pre><code>## # A tibble: 16 x 2
-##     Year Total_HR
-##    &lt;dbl&gt;    &lt;dbl&gt;
-##  1  2000     3005
-##  2  2001     2952
-##  3  2002     2595
-##  4  2003     2708
-##  5  2004     2846
-##  6  2005     2580
-##  7  2006     2840
-##  8  2007     2705
-##  9  2008     2608
-## 10  2009     2482
-## 11  2010     2404
-## 12  2011     2281
-## 13  2012     2434
-## 14  2013     2157
-## 15  2014     2025
-## 16  2015     2275</code></pre>
-<p>Vectors - number of games between 121 and 162
-Arrange(descending(most hits to least))</p>
+  summarise(Total_HR = sum(HR))</code></pre>
+</div>
+<div id="vector" class="section level2">
+<h2>Vector</h2>
 <p>Top 10 players with most hits between 2000 and 2015</p>
 <pre class="r"><code>battingrange &lt;- batting_new %&gt;%
-  select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %&gt;%
+    select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %&gt;%
+  arrange(desc(H))
+
+battingrange &lt;- battingrange %&gt;%
+  mutate(Name = paste(nameFirst, nameLast, sep = &quot; &quot;)) %&gt;%
+  relocate(Name)
+
+battingrange &lt;- battingrange %&gt;%
+  slice(1:10) %&gt;%
+    select(Name, Team, Year, G, AB, H, Avg., HR, BB, SO) %&gt;%
   arrange(desc(H))
   
-head(battingrange, 10)</code></pre>
+  
+  
+ggplot(battingrange, aes(x = Name, y = H, fill = Year)) +
+  geom_col()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Number of games between 121 and 162</p>
+<pre class="r"><code>batting_games &lt;- filter(batting_new, between( G , 121, 162)) %&gt;%
+  select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %&gt;%
+  arrange(desc(G))
+
+
+
+batting_games %&gt;% 
+  count(Team)</code></pre>
+<pre><code>## # A tibble: 33 x 2
+##    Team      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 ANA      35
+##  2 ARI      82
+##  3 ATL     100
+##  4 BAL      95
+##  5 BOS      97
+##  6 CHA     111
+##  7 CHN      86
+##  8 CIN      74
+##  9 CLE      84
+## 10 COL      87
+## # ... with 23 more rows</code></pre>
+<pre class="r"><code>head(batting_games, 10)</code></pre>
 <pre><code>## # A tibble: 10 x 11
 ##    nameFirst nameLast Team   Year     G    AB     H  Avg.    HR    BB    SO
 ##    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Ichiro    Suzuki   SEA    2004   161   704   262 0.372     8    49    63
-##  2 Ichiro    Suzuki   SEA    2001   157   692   242 0.350     8    30    53
-##  3 Darin     Erstad   ANA    2000   157   676   240 0.355    25    64    82
-##  4 Ichiro    Suzuki   SEA    2007   161   678   238 0.351     6    49    77
-##  5 Ichiro    Suzuki   SEA    2009   146   639   225 0.352    11    32    71
-##  6 Jose      Altuve   HOU    2014   158   660   225 0.341     7    36    53
-##  7 Ichiro    Suzuki   SEA    2006   161   695   224 0.322     9    49    71
-##  8 Juan      Pierre   FLO    2004   162   678   221 0.326     3    45    35
-##  9 Michael   Young    TEX    2005   159   668   221 0.331    24    58    91
-## 10 Michael   Young    TEX    2006   162   691   217 0.314    14    48    96</code></pre>
-<p>number of games between 121 and 162</p>
+##  1 Jose      Cruz     TOR    2000   162   603   146 0.242    31    71   129
+##  2 Carlos    Delgado  TOR    2000   162   569   196 0.344    41   123   104
+##  3 Luis      Gonzalez ARI    2000   162   618   192 0.311    31    78    85
+##  4 Shawn     Green    LAN    2000   162   610   164 0.269    24    90   121
+##  5 Neifi     Perez    COL    2000   162   651   187 0.287    10    30    63
+##  6 Bobby     Abreu    PHI    2001   162   588   170 0.289    31   106   137
+##  7 Orlando   Cabrera  MON    2001   162   626   173 0.276    14    43    54
+##  8 Carlos    Delgado  TOR    2001   162   574   160 0.279    39   111   136
+##  9 Luis      Gonzalez ARI    2001   162   609   198 0.325    57   100    83
+## 10 Terrence  Long     OAK    2001   162   629   178 0.283    12    52   103</code></pre>
+<pre class="r"><code>## ggplot using Teams and count for players that played full seasons, use color as year</code></pre>
 </div>
-<div id="at-least-two-functions-each-of-pivoting-and-missing-values-tidyr.-2-points" class="section level2">
-<h2>at least two functions each of Pivoting and Missing Values (tidyr). (2 points)</h2>
+<div id="pivoting" class="section level2">
+<h2>Pivoting</h2>
+<p>For this data, I did not find a useful way to pivot the data. The data is already organized in the way I would use it.</p>
+<pre class="r"><code>batting_games %&gt;%
+  pivot_wider(names_from = Team, values_from = c(AB, H))</code></pre>
+<pre><code>## # A tibble: 2,796 x 74
+##    nameFirst nameLast  Year     G  Avg.    HR    BB    SO AB_TOR AB_ARI AB_LAN
+##    &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Jose      Cruz      2000   162 0.242    31    71   129    603     NA     NA
+##  2 Carlos    Delgado   2000   162 0.344    41   123   104    569     NA     NA
+##  3 Luis      Gonzalez  2000   162 0.311    31    78    85     NA    618     NA
+##  4 Shawn     Green     2000   162 0.269    24    90   121     NA     NA    610
+##  5 Neifi     Perez     2000   162 0.287    10    30    63     NA     NA     NA
+##  6 Bobby     Abreu     2001   162 0.289    31   106   137     NA     NA     NA
+##  7 Orlando   Cabrera   2001   162 0.276    14    43    54     NA     NA     NA
+##  8 Carlos    Delgado   2001   162 0.279    39   111   136    574     NA     NA
+##  9 Luis      Gonzalez  2001   162 0.325    57   100    83     NA    609     NA
+## 10 Terrence  Long      2001   162 0.283    12    52   103     NA     NA     NA
+## # ... with 2,786 more rows, and 63 more variables: AB_COL &lt;dbl&gt;, AB_PHI &lt;dbl&gt;,
+## #   AB_MON &lt;dbl&gt;, AB_OAK &lt;dbl&gt;, AB_TEX &lt;dbl&gt;, AB_KCA &lt;dbl&gt;, AB_CIN &lt;dbl&gt;,
+## #   AB_FLO &lt;dbl&gt;, AB_TBA &lt;dbl&gt;, AB_MIL &lt;dbl&gt;, AB_NYA &lt;dbl&gt;, AB_BAL &lt;dbl&gt;,
+## #   AB_PIT &lt;dbl&gt;, AB_SEA &lt;dbl&gt;, AB_ATL &lt;dbl&gt;, AB_CHN &lt;dbl&gt;, AB_CLE &lt;dbl&gt;,
+## #   AB_HOU &lt;dbl&gt;, AB_WAS &lt;dbl&gt;, AB_SDN &lt;dbl&gt;, AB_DET &lt;dbl&gt;, AB_SFN &lt;dbl&gt;,
+## #   AB_ANA &lt;dbl&gt;, AB_SLN &lt;dbl&gt;, AB_NYN &lt;dbl&gt;, AB_CHA &lt;dbl&gt;, AB_MIN &lt;dbl&gt;,
+## #   AB_MIA &lt;dbl&gt;, AB_BOS &lt;dbl&gt;, AB_LAA &lt;dbl&gt;, H_TOR &lt;dbl&gt;, H_ARI &lt;dbl&gt;,
+## #   H_LAN &lt;dbl&gt;, H_COL &lt;dbl&gt;, H_PHI &lt;dbl&gt;, H_MON &lt;dbl&gt;, H_OAK &lt;dbl&gt;,
+## #   H_TEX &lt;dbl&gt;, H_KCA &lt;dbl&gt;, H_CIN &lt;dbl&gt;, H_FLO &lt;dbl&gt;, H_TBA &lt;dbl&gt;,
+## #   H_MIL &lt;dbl&gt;, H_NYA &lt;dbl&gt;, H_BAL &lt;dbl&gt;, H_PIT &lt;dbl&gt;, H_SEA &lt;dbl&gt;,
+## #   H_ATL &lt;dbl&gt;, H_CHN &lt;dbl&gt;, H_CLE &lt;dbl&gt;, H_HOU &lt;dbl&gt;, H_WAS &lt;dbl&gt;,
+## #   H_SDN &lt;dbl&gt;, H_DET &lt;dbl&gt;, H_SFN &lt;dbl&gt;, H_ANA &lt;dbl&gt;, H_SLN &lt;dbl&gt;,
+## #   H_NYN &lt;dbl&gt;, H_CHA &lt;dbl&gt;, H_MIN &lt;dbl&gt;, H_MIA &lt;dbl&gt;, H_BOS &lt;dbl&gt;,
+## #   H_LAA &lt;dbl&gt;</code></pre>
 </div>
 <div id="at-narrative-discussing-what-you-find-interesting-along-with-any-issues-you-might-have-had-creating-this-blog-2-points" class="section level2">
 <h2>at narrative discussing what you find interesting along with any issues you might have had creating this blog (2 points)</h2>

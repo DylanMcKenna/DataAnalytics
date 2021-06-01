@@ -68,8 +68,11 @@ fielding_full <- left_join(fielding, master_name, join = "playerID")
 ls(fielding_full)
 ```
 
+## Change column names
 ```{r warning=FALSE}
 # Change the names of columns
+
+
 fielding_full <- fielding_full %>%
   rename( 
     Year = yearID, 
@@ -111,13 +114,19 @@ colnames(fielding_full)
 
 ```
 
+## Missing Values
 
+Replace all NA values with 0.
+
+This is the only use for a 'Missing Values' action. The data is in a good format for working.
 
 ```{r}
 
-batting_new <- batting_new_AL <- batting_full %>%
+batting_new <- batting_full %>%
   filter(Year %in% (2000:2015))
 
+batting_new %>%
+  replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0))
 
 # Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
 fielding_new_AL <- fielding_full %>%
@@ -161,34 +170,66 @@ yearbattingNL <- batting_new_NL %>%
   group_by(Year) %>%
   summarise(Total_HR = sum(HR))
 
-teambattingAL
-yearbattingAL
-teambattingNL
-yearbattingNL
+
 ```
 
-Vectors - number of games between 121 and 162
-Arrange(descending(most hits to least))
+## Vector
 
 Top 10 players with most hits between 2000 and 2015
 ```{r}
 battingrange <- batting_new %>%
-  select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
+    select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
+  arrange(desc(H))
+
+battingrange <- battingrange %>%
+  mutate(Name = paste(nameFirst, nameLast, sep = " ")) %>%
+  relocate(Name)
+
+battingrange <- battingrange %>%
+  slice(1:10) %>%
+    select(Name, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
   arrange(desc(H))
   
-head(battingrange, 10)
+  
+  
+ggplot(battingrange, aes(x = Name, y = H, color = Year, fill = Team)) +
+  geom_col()
 
 ```
 
-number of games between 121 and 162
+
+Number of games between 121 and 162
 
 ```{r}
 
+
+batting_games <- filter(batting_new, between( G , 121, 162)) %>%
+  select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
+  arrange(desc(G))
+
+
+
+batting_games %>% 
+  count(Team)
+
+head(batting_games, 10)
+
+## ggplot using Teams and count for players that played full seasons, use color as year
+ggplot(batting_games, aes(y = Team)) +
+  geom_bar(width=1, position = position_dodge(width=1.5)) +
+  xlab("Number of Players")
+  
 ```
 
 
-## at least two functions each of Pivoting and Missing Values (tidyr). (2 points)
+##  Pivoting
 
+For this data, I did not find a useful way to pivot the data. The data is already organized in the way I would use it.
+
+```{r}
+batting_games %>%
+  pivot_wider(names_from = Team, values_from = c(AB, H))
+```
 
 
 
