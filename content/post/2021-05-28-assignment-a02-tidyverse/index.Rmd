@@ -27,21 +27,23 @@ batting <- read_csv("Batting.csv")
 
 fielding <- read_csv("Fielding.csv")
 
-  
+master_name <- master %>%
+  select(playerID, nameFirst, nameLast, bats, throws, birthCountry)
 ```
 
 ```{r}
 
 batting <- batting %>%
-  mutate( GIDP = as.double(GIDP))
+  mutate( GIDP = as.double(GIDP),
+      Avg. = H / AB)
 
 head(batting)
 
 fielding <- fielding %>%
   mutate( lgID = as.character(lgID))
 
-head(master)
-tail(fielding)
+head(master_name, 10)
+head(fielding, 10)
 
 ```
 
@@ -52,18 +54,142 @@ Combine master into batting and into fielding.
 
 ```{r}
 # Join master list into the batting list to show the players name.
-batting_full <- left_join(batting, master)
-player_data <- batting_full %>%
-  full_join(fielding, by = "playerID")
+batting_full <- left_join(batting, master_name, join = "playerID")
 
-tail(batting_full)
-tail(player_data)
-tail(player_data, 100)
+# Join master list into the fielding list to show players name.
+fielding_full <- left_join(fielding, master_name, join = "playerID")
+
+#player_data <- batting_full %>%
+#  full_join(fielding, by = "playerID")
+
+#tail(batting_full, 10 )
+#tail(fielding_full, 10)
+
+ls(fielding_full)
+```
+
+```{r warning=FALSE}
+# Change the names of columns
+fielding_full <- fielding_full %>%
+  rename( 
+    Year = yearID, 
+    Team = teamID,
+    League = lgID)
+
+
+batting_full <- batting_full %>%
+  rename( 
+    Year = yearID, 
+    Team = teamID,
+    League = lgID
+    
+    )
+
+
+```
+
+```{r}
+
+
+
+
+
+# Create an Batting Average variable
+batting_full <- batting_full %>%
+  mutate(Avg. = H / AB)
+
+fielding_full <- relocate(fielding_full, playerID, nameFirst, nameLast, bats, birthCountry)
+
+batting_full <- relocate(batting_full,  playerID, nameFirst, nameLast, bats, birthCountry )
+
+batting_full <- relocate(batting_full, Avg., .after = G)
+
+batting_full
+
+colnames(batting_full)
+colnames(fielding_full)
+
+```
+
+
+
+```{r}
+
+batting_new <- batting_new_AL <- batting_full %>%
+  filter(Year %in% (2000:2015))
+
+
+# Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
+fielding_new_AL <- fielding_full %>%
+  filter(Year %in% (2000:2015), League == "AL")
+
+fielding_new_NL <- fielding_full %>%
+  filter(Year %in% (2000:2015), League == "NL")
+
+batting_new_AL <- batting_full %>%
+  filter(Year %in% (2000:2015), League == "AL")
+
+batting_new_NL <- batting_full %>%
+  filter(Year %in% (2000:2015), League == "NL")
+
+
+
+
 ```
 
 
 ## at least two functions each of Grouping and Vector functions (2 points)
+Group by Year and by Team
+
+```{r}
+#Group_by
+
+teambattingAL <- batting_new_AL %>%
+  group_by(Team) %>%
+  summarise(Total_HR = sum(HR))
+
+yearbattingAL <- batting_new_AL %>%
+  group_by(Year) %>%
+  summarise(Total_HR = sum(HR))
+
+
+teambattingNL <- batting_new_NL %>%
+  group_by(Team) %>%
+  summarise(Total_HR = sum(HR))
+
+yearbattingNL <- batting_new_NL %>%
+  group_by(Year) %>%
+  summarise(Total_HR = sum(HR))
+
+teambattingAL
+yearbattingAL
+teambattingNL
+yearbattingNL
+```
+
+Vectors - number of games between 121 and 162
+Arrange(descending(most hits to least))
+
+Top 10 players with most hits between 2000 and 2015
+```{r}
+battingrange <- batting_new %>%
+  select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
+  arrange(desc(H))
+  
+head(battingrange, 10)
+
+```
+
+number of games between 121 and 162
+
+```{r}
+
+```
+
 
 ## at least two functions each of Pivoting and Missing Values (tidyr). (2 points)
+
+
+
 
 ## at narrative discussing what you find interesting along with any issues you might have had creating this blog (2 points)
