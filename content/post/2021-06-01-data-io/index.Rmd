@@ -1,0 +1,137 @@
+---
+title: "DATA IO"
+author: "DylanMcKenna"
+date: '2021-06-01'
+slug: data-io
+categories: []
+tags: []
+---
+
+
+## Import Nobel.csv
+
+```{r echo=FALSE}
+library(tidyverse)
+nobel <- read_csv("nobel.csv")
+
+head(nobel)
+```
+
+## Write a csv file 
+
+```{r}
+
+df <- tribble(
+  ~x, ~y,
+  1,  "a",
+  2,  "b",
+  3,  "c"
+)
+write_csv(df, file = "df.csv")
+```
+
+## Dealing with bad variable names
+
+R does not like the spaces between words.
+
+```{r}
+
+edibnb_badnames <- read_csv("edibnb-badnames.csv")
+names(edibnb_badnames)
+
+edibnb_col_names <- read_csv("edibnb-badnames.csv",
+                             col_names = c("id", "price", 
+                              "neighbourhood", "accommodates",
+                             "bathroom", "bedroom","bed",        "review_scores_rating",                                          "n_reviews", "url"))
+
+head(edibnb_col_names)
+```
+
+### Importing data with snake case variables
+
+```{r}
+library(tidyverse)
+edibnb_clean_names <- read_csv("edibnb-badnames.csv") %>%
+  janitor::clean_names()
+
+names(edibnb_clean_names)
+```
+
+## Import df-NA  - 2 ways
+```{r}
+read_csv("df-na.csv", 
+         na = c("", "NA", ".", "9999", "Not applicable"))
+
+read_csv("df-na.csv", col_types = list(col_double(), 
+                                            col_character(), 
+                                            col_character()))
+```
+
+
+## Read an XLSX file
+
+```{r}
+# either call library(readxl) or check readxl in packages on right window
+av_food <- read_excel("favourite-food.xlsx",
+                       na = c("N/A", "99999")) %>%
+  janitor::clean_names()
+fav_food
+```
+
+## Make age numeric
+
+Improving the quality of the current data frame
+
+```{r}
+fav_food <- fav_food %>%
+  mutate(
+    age = if_else(age == "five", "5", age),
+    age = as.numeric(age)
+    )
+glimpse(fav_food)
+
+```
+
+## Make ses factor using factor level
+
+This is helpful for metastorage. Instead of low, middle, high.
+The data will be stored as 1, 2, 3, respectively. Each character will be stored. So, for many observations, there will be 3x for low, 6x for middle, and 4x for high. Using 1, 2, or 3, we would see 1x for all observations.
+
+```{r}
+fav_food <- fav_food %>%
+  mutate(ses = fct_relevel(ses, "Low", "Middle", "High"))
+
+fav_food %>%
+  count(ses)
+```
+
+
+
+
+
+
+## Putting it all together
+```{r}
+fav_food <- read_excel("favourite-food.xlsx", na = c("N/A", "99999")) %>%
+  janitor::clean_names() %>%
+  mutate(
+    age = if_else(age == "five", "5", age), 
+    age = as.numeric(age),
+    ses = fct_relevel(ses, "Low", "Middle", "High")
+  )
+fav_food
+```
+
+## Out and back in
+
+We save the cleaned data.
+
+```{r}
+write_csv(fav_food, file = "fav-food-clean.csv")
+fav_food_clean <- read_csv("fav-food-clean.csv")
+
+head(fav_food_clean)
+```
+
+
+

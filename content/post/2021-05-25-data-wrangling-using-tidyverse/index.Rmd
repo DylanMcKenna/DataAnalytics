@@ -90,7 +90,7 @@ hotels %>%
 
 Use mutate to create a new variable
 
-These only stay on our computer. They do not change the existing hotels.csv file.
+These stay on our computer. They do not change the existing hotels.csv file.
 
 ```{r}
 little_ones <- hotels
@@ -106,5 +106,15 @@ little_ones %<>%
 
 ```
 
+## Summary
+
+```{r}
+
+summary <- hotels %>%
+  group_by(hotel) %>%
+    summarise(mean_adr = mean(adr))
+summary
+
+```
 
 

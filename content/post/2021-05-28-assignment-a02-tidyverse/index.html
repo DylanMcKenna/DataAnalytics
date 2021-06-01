@@ -1,0 +1,147 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: DylanMcKenna
+date: '2021-05-28'
+slug: assignment-a02-tidyverse
+categories:
+  - tidyverse
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="assignment-02-tidyverse" class="section level2">
+<h2>Assignment 02: TIDYVERSE</h2>
+</div>
+<div id="timely-submission-2-points" class="section level2">
+<h2>Timely Submission (2 points)</h2>
+<pre class="r"><code>batting &lt;- batting %&gt;%
+  mutate( GIDP = as.double(GIDP))
+
+head(batting)</code></pre>
+<pre><code>## # A tibble: 6 x 22
+##   playerID  yearID stint teamID lgID      G    AB     R     H  `2B`  `3B`    HR
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 abercda01   1871     1 TRO    &lt;NA&gt;      1     4     0     0     0     0     0
+## 2 addybo01    1871     1 RC1    &lt;NA&gt;     25   118    30    32     6     0     0
+## 3 allisar01   1871     1 CL1    &lt;NA&gt;     29   137    28    40     4     5     0
+## 4 allisdo01   1871     1 WS3    &lt;NA&gt;     27   133    28    44    10     2     2
+## 5 ansonca01   1871     1 RC1    &lt;NA&gt;     25   120    29    39    11     3     0
+## 6 armstbo01   1871     1 FW1    &lt;NA&gt;     12    49     9    11     2     1     0
+## # ... with 10 more variables: RBI &lt;dbl&gt;, SB &lt;dbl&gt;, CS &lt;dbl&gt;, BB &lt;dbl&gt;,
+## #   SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;lgl&gt;, GIDP &lt;dbl&gt;</code></pre>
+<pre class="r"><code>fielding &lt;- fielding %&gt;%
+  mutate( lgID = as.character(lgID))
+
+head(master)</code></pre>
+<pre><code>## # A tibble: 6 x 24
+##   playerID  birthYear birthMonth birthDay birthCountry birthState birthCity 
+##   &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
+## 1 aardsda01      1981         12       27 USA          CO         Denver    
+## 2 aaronha01      1934          2        5 USA          AL         Mobile    
+## 3 aaronto01      1939          8        5 USA          AL         Mobile    
+## 4 aasedo01       1954          9        8 USA          CA         Orange    
+## 5 abadan01       1972          8       25 USA          FL         Palm Beach
+## 6 abadfe01       1985         12       17 D.R.         La Romana  La Romana 
+## # ... with 17 more variables: deathYear &lt;dbl&gt;, deathMonth &lt;dbl&gt;,
+## #   deathDay &lt;dbl&gt;, deathCountry &lt;chr&gt;, deathState &lt;chr&gt;, deathCity &lt;chr&gt;,
+## #   nameFirst &lt;chr&gt;, nameLast &lt;chr&gt;, nameGiven &lt;chr&gt;, weight &lt;dbl&gt;,
+## #   height &lt;dbl&gt;, bats &lt;chr&gt;, throws &lt;chr&gt;, debut &lt;date&gt;, finalGame &lt;date&gt;,
+## #   retroID &lt;chr&gt;, bbrefID &lt;chr&gt;</code></pre>
+<pre class="r"><code>tail(fielding)</code></pre>
+<pre><code>## # A tibble: 6 x 18
+##   playerID yearID stint teamID lgID  POS       G GS    InnOuts    PO     A     E
+##   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 youngde~   2015     1 BAL    &lt;NA&gt;  OF       42 NA    NA         62     8     2
+## 2 younger~   2015     1 ATL    &lt;NA&gt;  OF       22 NA    NA         45     0     0
+## 3 younger~   2015     2 NYN    &lt;NA&gt;  OF        7 NA    NA          5     0     0
+## 4 zimmery~   2015     1 WAS    &lt;NA&gt;  OF        1 NA    NA          0     0     0
+## 5 zobribe~   2015     1 OAK    &lt;NA&gt;  OF       29 NA    NA         39     0     3
+## 6 zobribe~   2015     2 KCA    &lt;NA&gt;  OF       20 NA    NA         36     1     1
+## # ... with 6 more variables: DP &lt;dbl&gt;, PB &lt;dbl&gt;, WP &lt;lgl&gt;, SB &lt;lgl&gt;, CS &lt;lgl&gt;,
+## #   ZR &lt;lgl&gt;</code></pre>
+</div>
+<div id="at-least-two-functions-each-one-table-verb-and-two-table-verb-2-points" class="section level2">
+<h2>at least two functions each: one table verb and two table verb (2 points)</h2>
+<p>Combine master into batting and into fielding.</p>
+<pre class="r"><code># Join master list into the batting list to show the players name.
+batting_full &lt;- left_join(batting, master)</code></pre>
+<pre><code>## Joining, by = &quot;playerID&quot;</code></pre>
+<pre class="r"><code>player_data &lt;- batting_full %&gt;%
+  full_join(fielding, by = &quot;playerID&quot;)
+
+tail(batting_full)</code></pre>
+<pre><code>## # A tibble: 6 x 45
+##   playerID  yearID stint teamID lgID      G    AB     R     H  `2B`  `3B`    HR
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 zimmery01   2015     1 WAS    NL       95   346    43    86    25     1    16
+## 2 zitoba01    2015     1 OAK    AL        3     0     0     0     0     0     0
+## 3 zobribe01   2015     1 OAK    AL       67   235    39    63    20     2     6
+## 4 zobribe01   2015     2 KCA    AL       59   232    37    66    16     1     7
+## 5 zuninmi01   2015     1 SEA    AL      112   350    28    61    11     0    11
+## 6 zychto01    2015     1 SEA    AL       13     0     0     0     0     0     0
+## # ... with 33 more variables: RBI &lt;dbl&gt;, SB &lt;dbl&gt;, CS &lt;dbl&gt;, BB &lt;dbl&gt;,
+## #   SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;lgl&gt;, GIDP &lt;dbl&gt;,
+## #   birthYear &lt;dbl&gt;, birthMonth &lt;dbl&gt;, birthDay &lt;dbl&gt;, birthCountry &lt;chr&gt;,
+## #   birthState &lt;chr&gt;, birthCity &lt;chr&gt;, deathYear &lt;dbl&gt;, deathMonth &lt;dbl&gt;,
+## #   deathDay &lt;dbl&gt;, deathCountry &lt;chr&gt;, deathState &lt;chr&gt;, deathCity &lt;chr&gt;,
+## #   nameFirst &lt;chr&gt;, nameLast &lt;chr&gt;, nameGiven &lt;chr&gt;, weight &lt;dbl&gt;,
+## #   height &lt;dbl&gt;, bats &lt;chr&gt;, throws &lt;chr&gt;, debut &lt;date&gt;, finalGame &lt;date&gt;,
+## #   retroID &lt;chr&gt;, bbrefID &lt;chr&gt;</code></pre>
+<pre class="r"><code>tail(player_data)</code></pre>
+<pre><code>## # A tibble: 6 x 62
+##   playerID  yearID.x stint.x teamID.x lgID.x   G.x    AB     R     H  `2B`  `3B`
+##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 zobribe01     2015       2 KCA      AL        59   232    37    66    16     1
+## 2 zobribe01     2015       2 KCA      AL        59   232    37    66    16     1
+## 3 zuninmi01     2015       1 SEA      AL       112   350    28    61    11     0
+## 4 zuninmi01     2015       1 SEA      AL       112   350    28    61    11     0
+## 5 zuninmi01     2015       1 SEA      AL       112   350    28    61    11     0
+## 6 zychto01      2015       1 SEA      AL        13     0     0     0     0     0
+## # ... with 51 more variables: HR &lt;dbl&gt;, RBI &lt;dbl&gt;, SB.x &lt;dbl&gt;, CS.x &lt;dbl&gt;,
+## #   BB &lt;dbl&gt;, SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;lgl&gt;, GIDP &lt;dbl&gt;,
+## #   birthYear &lt;dbl&gt;, birthMonth &lt;dbl&gt;, birthDay &lt;dbl&gt;, birthCountry &lt;chr&gt;,
+## #   birthState &lt;chr&gt;, birthCity &lt;chr&gt;, deathYear &lt;dbl&gt;, deathMonth &lt;dbl&gt;,
+## #   deathDay &lt;dbl&gt;, deathCountry &lt;chr&gt;, deathState &lt;chr&gt;, deathCity &lt;chr&gt;,
+## #   nameFirst &lt;chr&gt;, nameLast &lt;chr&gt;, nameGiven &lt;chr&gt;, weight &lt;dbl&gt;,
+## #   height &lt;dbl&gt;, bats &lt;chr&gt;, throws &lt;chr&gt;, debut &lt;date&gt;, finalGame &lt;date&gt;,
+## #   retroID &lt;chr&gt;, bbrefID &lt;chr&gt;, yearID.y &lt;dbl&gt;, stint.y &lt;dbl&gt;,
+## #   teamID.y &lt;chr&gt;, lgID.y &lt;chr&gt;, POS &lt;chr&gt;, G.y &lt;dbl&gt;, GS &lt;lgl&gt;,
+## #   InnOuts &lt;lgl&gt;, PO &lt;dbl&gt;, A &lt;dbl&gt;, E &lt;dbl&gt;, DP &lt;dbl&gt;, PB &lt;dbl&gt;, WP &lt;lgl&gt;,
+## #   SB.y &lt;lgl&gt;, CS.y &lt;lgl&gt;, ZR &lt;lgl&gt;</code></pre>
+<pre class="r"><code>tail(player_data, 100)</code></pre>
+<pre><code>## # A tibble: 100 x 62
+##    playerID yearID.x stint.x teamID.x lgID.x   G.x    AB     R     H  `2B`  `3B`
+##    &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  2 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  3 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  4 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  5 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  6 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  7 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  8 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+##  9 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+## 10 zobribe~     2015       1 OAK      AL        67   235    39    63    20     2
+## # ... with 90 more rows, and 51 more variables: HR &lt;dbl&gt;, RBI &lt;dbl&gt;,
+## #   SB.x &lt;dbl&gt;, CS.x &lt;dbl&gt;, BB &lt;dbl&gt;, SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;,
+## #   SF &lt;lgl&gt;, GIDP &lt;dbl&gt;, birthYear &lt;dbl&gt;, birthMonth &lt;dbl&gt;, birthDay &lt;dbl&gt;,
+## #   birthCountry &lt;chr&gt;, birthState &lt;chr&gt;, birthCity &lt;chr&gt;, deathYear &lt;dbl&gt;,
+## #   deathMonth &lt;dbl&gt;, deathDay &lt;dbl&gt;, deathCountry &lt;chr&gt;, deathState &lt;chr&gt;,
+## #   deathCity &lt;chr&gt;, nameFirst &lt;chr&gt;, nameLast &lt;chr&gt;, nameGiven &lt;chr&gt;,
+## #   weight &lt;dbl&gt;, height &lt;dbl&gt;, bats &lt;chr&gt;, throws &lt;chr&gt;, debut &lt;date&gt;,
+## #   finalGame &lt;date&gt;, retroID &lt;chr&gt;, bbrefID &lt;chr&gt;, yearID.y &lt;dbl&gt;,
+## #   stint.y &lt;dbl&gt;, teamID.y &lt;chr&gt;, lgID.y &lt;chr&gt;, POS &lt;chr&gt;, G.y &lt;dbl&gt;,
+## #   GS &lt;lgl&gt;, InnOuts &lt;lgl&gt;, PO &lt;dbl&gt;, A &lt;dbl&gt;, E &lt;dbl&gt;, DP &lt;dbl&gt;, PB &lt;dbl&gt;,
+## #   WP &lt;lgl&gt;, SB.y &lt;lgl&gt;, CS.y &lt;lgl&gt;, ZR &lt;lgl&gt;</code></pre>
+</div>
+<div id="at-least-two-functions-each-of-grouping-and-vector-functions-2-points" class="section level2">
+<h2>at least two functions each of Grouping and Vector functions (2 points)</h2>
+</div>
+<div id="at-least-two-functions-each-of-pivoting-and-missing-values-tidyr.-2-points" class="section level2">
+<h2>at least two functions each of Pivoting and Missing Values (tidyr). (2 points)</h2>
+</div>
+<div id="at-narrative-discussing-what-you-find-interesting-along-with-any-issues-you-might-have-had-creating-this-blog-2-points" class="section level2">
+<h2>at narrative discussing what you find interesting along with any issues you might have had creating this blog (2 points)</h2>
+</div>

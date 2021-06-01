@@ -1,0 +1,69 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: DylanMcKenna
+date: '2021-05-28'
+slug: assignment-a02-tidyverse
+categories:
+  - tidyverse
+tags: []
+---
+
+
+## Assignment 02: TIDYVERSE
+
+
+
+## Timely Submission (2 points)
+
+
+```{r echo=FALSE, message=FALSE, error=FALSE, warning= FALSE}
+library(tidyverse)
+library(dplyr)
+library(convertr)
+
+master <- read_csv("Master.csv")
+
+batting <- read_csv("Batting.csv")
+
+fielding <- read_csv("Fielding.csv")
+
+  
+```
+
+```{r}
+
+batting <- batting %>%
+  mutate( GIDP = as.double(GIDP))
+
+head(batting)
+
+fielding <- fielding %>%
+  mutate( lgID = as.character(lgID))
+
+head(master)
+tail(fielding)
+
+```
+
+
+## at least two functions each: one table verb and two table verb  (2 points)
+
+Combine master into batting and into fielding.
+
+```{r}
+# Join master list into the batting list to show the players name.
+batting_full <- left_join(batting, master)
+player_data <- batting_full %>%
+  full_join(fielding, by = "playerID")
+
+tail(batting_full)
+tail(player_data)
+tail(player_data, 100)
+```
+
+
+## at least two functions each of Grouping and Vector functions (2 points)
+
+## at least two functions each of Pivoting and Missing Values (tidyr). (2 points)
+
+## at narrative discussing what you find interesting along with any issues you might have had creating this blog (2 points)
