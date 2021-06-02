@@ -69,6 +69,7 @@ ls(fielding_full)
 ```
 
 ## Change column names
+
 ```{r warning=FALSE}
 # Change the names of columns
 
@@ -147,7 +148,7 @@ batting_new_NL <- batting_full %>%
 ```
 
 
-## at least two functions each of Grouping and Vector functions (2 points)
+## Grouping
 Group by Year and by Team
 
 ```{r}
@@ -175,7 +176,9 @@ yearbattingNL <- batting_new_NL %>%
 
 ## Vector
 
-Top 10 players with most hits between 2000 and 2015
+Top 10 players with most hits between 2000 and 2015.
+
+
 ```{r}
 battingrange <- batting_new %>%
     select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
@@ -212,12 +215,12 @@ batting_games <- filter(batting_new, between( G , 121, 162)) %>%
 batting_games %>% 
   count(Team)
 
-head(batting_games, 10)
 
 ## ggplot using Teams and count for players that played full seasons, use color as year
 ggplot(batting_games, aes(y = Team)) +
-  geom_bar(width=1, position = position_dodge(width=1.5)) +
-  xlab("Number of Players")
+  geom_bar(width=1) +
+  xlab("Number of Players") +
+  theme_bw()
   
 ```
 
@@ -233,4 +236,3 @@ batting_games %>%
 
 
 
-## at narrative discussing what you find interesting along with any issues you might have had creating this blog (2 points)
