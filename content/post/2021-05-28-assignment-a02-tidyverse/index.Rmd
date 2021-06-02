@@ -12,8 +12,7 @@ tags: []
 ## Assignment 02: TIDYVERSE
 
 
-
-## Timely Submission (2 points)
+This assignment is to better understand Tidyverse.
 
 
 ```{r echo=FALSE, message=FALSE, error=FALSE, warning= FALSE}
@@ -31,48 +30,45 @@ master_name <- master %>%
   select(playerID, nameFirst, nameLast, bats, throws, birthCountry)
 ```
 
-```{r}
+## One Table Verbs and Two Table Verbs
+
+Changing variable type using mutate.
+
+```{r }
 
 batting <- batting %>%
   mutate( GIDP = as.double(GIDP),
       Avg. = H / AB)
 
-head(batting)
-
 fielding <- fielding %>%
   mutate( lgID = as.character(lgID))
 
-head(master_name, 10)
-head(fielding, 10)
 
 ```
 
 
-## at least two functions each: one table verb and two table verb  (2 points)
+
 
 Combine master into batting and into fielding.
 
-```{r}
+```{r warning=FALSE}
 # Join master list into the batting list to show the players name.
 batting_full <- left_join(batting, master_name, join = "playerID")
 
 # Join master list into the fielding list to show players name.
 fielding_full <- left_join(fielding, master_name, join = "playerID")
 
-#player_data <- batting_full %>%
-#  full_join(fielding, by = "playerID")
 
-#tail(batting_full, 10 )
-#tail(fielding_full, 10)
-
-ls(fielding_full)
 ```
 
-## Change column names
+
+
+
+Changing Column Names
+
 
 ```{r warning=FALSE}
 # Change the names of columns
-
 
 fielding_full <- fielding_full %>%
   rename( 
@@ -86,17 +82,14 @@ batting_full <- batting_full %>%
     Year = yearID, 
     Team = teamID,
     League = lgID
-    
-    )
+   )
 
 
 ```
 
+Creating a new variable called Avg. for batting average
+
 ```{r}
-
-
-
-
 
 # Create an Batting Average variable
 batting_full <- batting_full %>%
@@ -108,10 +101,6 @@ batting_full <- relocate(batting_full,  playerID, nameFirst, nameLast, bats, bir
 
 batting_full <- relocate(batting_full, Avg., .after = G)
 
-batting_full
-
-colnames(batting_full)
-colnames(fielding_full)
 
 ```
 
@@ -126,8 +115,10 @@ This is the only use for a 'Missing Values' action. The data is in a good format
 batting_new <- batting_full %>%
   filter(Year %in% (2000:2015))
 
-batting_new %>%
+batting_new <- batting_new %>%
   replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0))
+
+
 
 # Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
 fielding_new_AL <- fielding_full %>%
@@ -141,9 +132,6 @@ batting_new_AL <- batting_full %>%
 
 batting_new_NL <- batting_full %>%
   filter(Year %in% (2000:2015), League == "NL")
-
-
-
 
 ```
 
@@ -210,13 +198,8 @@ batting_games <- filter(batting_new, between( G , 121, 162)) %>%
   select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %>%
   arrange(desc(G))
 
-
-
-batting_games %>% 
-  count(Team)
-
-
 ## ggplot using Teams and count for players that played full seasons, use color as year
+
 ggplot(batting_games, aes(y = Team)) +
   geom_bar(width=1) +
   xlab("Number of Players") +
@@ -229,7 +212,7 @@ ggplot(batting_games, aes(y = Team)) +
 
 For this data, I did not find a useful way to pivot the data. The data is already organized in the way I would use it.
 
-```{r}
+```{r message=FALSE, echo=FALSE, message=FALSE}
 batting_games %>%
   pivot_wider(names_from = Team, values_from = c(AB, H))
 ```

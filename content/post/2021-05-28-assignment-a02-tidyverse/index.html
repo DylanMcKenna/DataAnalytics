@@ -13,61 +13,17 @@ tags: []
 
 <div id="assignment-02-tidyverse" class="section level2">
 <h2>Assignment 02: TIDYVERSE</h2>
+<p>This assignment is to better understand Tidyverse.</p>
 </div>
-<div id="timely-submission-2-points" class="section level2">
-<h2>Timely Submission (2 points)</h2>
+<div id="one-table-verbs-and-two-table-verbs" class="section level2">
+<h2>One Table Verbs and Two Table Verbs</h2>
+<p>Changing variable type using mutate.</p>
 <pre class="r"><code>batting &lt;- batting %&gt;%
   mutate( GIDP = as.double(GIDP),
       Avg. = H / AB)
 
-head(batting)</code></pre>
-<pre><code>## # A tibble: 6 x 23
-##   playerID  yearID stint teamID lgID      G    AB     R     H  `2B`  `3B`    HR
-##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 abercda01   1871     1 TRO    &lt;NA&gt;      1     4     0     0     0     0     0
-## 2 addybo01    1871     1 RC1    &lt;NA&gt;     25   118    30    32     6     0     0
-## 3 allisar01   1871     1 CL1    &lt;NA&gt;     29   137    28    40     4     5     0
-## 4 allisdo01   1871     1 WS3    &lt;NA&gt;     27   133    28    44    10     2     2
-## 5 ansonca01   1871     1 RC1    &lt;NA&gt;     25   120    29    39    11     3     0
-## 6 armstbo01   1871     1 FW1    &lt;NA&gt;     12    49     9    11     2     1     0
-## # ... with 11 more variables: RBI &lt;dbl&gt;, SB &lt;dbl&gt;, CS &lt;dbl&gt;, BB &lt;dbl&gt;,
-## #   SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;lgl&gt;, GIDP &lt;dbl&gt;, Avg. &lt;dbl&gt;</code></pre>
-<pre class="r"><code>fielding &lt;- fielding %&gt;%
-  mutate( lgID = as.character(lgID))
-
-head(master_name, 10)</code></pre>
-<pre><code>## # A tibble: 10 x 6
-##    playerID  nameFirst nameLast    bats  throws birthCountry
-##    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;       
-##  1 aardsda01 David     Aardsma     R     R      USA         
-##  2 aaronha01 Hank      Aaron       R     R      USA         
-##  3 aaronto01 Tommie    Aaron       R     R      USA         
-##  4 aasedo01  Don       Aase        R     R      USA         
-##  5 abadan01  Andy      Abad        L     L      USA         
-##  6 abadfe01  Fernando  Abad        L     L      D.R.        
-##  7 abadijo01 John      Abadie      R     R      USA         
-##  8 abbated01 Ed        Abbaticchio R     R      USA         
-##  9 abbeybe01 Bert      Abbey       R     R      USA         
-## 10 abbeych01 Charlie   Abbey       L     L      USA</code></pre>
-<pre class="r"><code>head(fielding, 10)</code></pre>
-<pre><code>## # A tibble: 10 x 18
-##    playerID  yearID stint teamID lgID  POS       G GS    InnOuts    PO     A
-##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-##  1 abercda01   1871     1 TRO    &lt;NA&gt;  SS        1 NA    NA          1     3
-##  2 addybo01    1871     1 RC1    &lt;NA&gt;  2B       22 NA    NA         67    72
-##  3 addybo01    1871     1 RC1    &lt;NA&gt;  SS        3 NA    NA          8    14
-##  4 allisar01   1871     1 CL1    &lt;NA&gt;  2B        2 NA    NA          1     4
-##  5 allisar01   1871     1 CL1    &lt;NA&gt;  OF       29 NA    NA         51     3
-##  6 allisdo01   1871     1 WS3    &lt;NA&gt;  C        27 NA    NA         68    15
-##  7 ansonca01   1871     1 RC1    &lt;NA&gt;  1B        1 NA    NA          7     0
-##  8 ansonca01   1871     1 RC1    &lt;NA&gt;  2B        2 NA    NA          3     4
-##  9 ansonca01   1871     1 RC1    &lt;NA&gt;  3B       20 NA    NA         38    52
-## 10 ansonca01   1871     1 RC1    &lt;NA&gt;  C         5 NA    NA         10     0
-## # ... with 7 more variables: E &lt;dbl&gt;, DP &lt;dbl&gt;, PB &lt;dbl&gt;, WP &lt;lgl&gt;, SB &lt;lgl&gt;,
-## #   CS &lt;lgl&gt;, ZR &lt;lgl&gt;</code></pre>
-</div>
-<div id="at-least-two-functions-each-one-table-verb-and-two-table-verb-2-points" class="section level2">
-<h2>at least two functions each: one table verb and two table verb (2 points)</h2>
+fielding &lt;- fielding %&gt;%
+  mutate( lgID = as.character(lgID))</code></pre>
 <p>Combine master into batting and into fielding.</p>
 <pre class="r"><code># Join master list into the batting list to show the players name.
 batting_full &lt;- left_join(batting, master_name, join = &quot;playerID&quot;)</code></pre>
@@ -75,23 +31,8 @@ batting_full &lt;- left_join(batting, master_name, join = &quot;playerID&quot;)<
 <pre class="r"><code># Join master list into the fielding list to show players name.
 fielding_full &lt;- left_join(fielding, master_name, join = &quot;playerID&quot;)</code></pre>
 <pre><code>## Joining, by = &quot;playerID&quot;</code></pre>
-<pre class="r"><code>#player_data &lt;- batting_full %&gt;%
-#  full_join(fielding, by = &quot;playerID&quot;)
-
-#tail(batting_full, 10 )
-#tail(fielding_full, 10)
-
-ls(fielding_full)</code></pre>
-<pre><code>##  [1] &quot;A&quot;            &quot;bats&quot;         &quot;birthCountry&quot; &quot;CS&quot;           &quot;DP&quot;          
-##  [6] &quot;E&quot;            &quot;G&quot;            &quot;GS&quot;           &quot;InnOuts&quot;      &quot;lgID&quot;        
-## [11] &quot;nameFirst&quot;    &quot;nameLast&quot;     &quot;PB&quot;           &quot;playerID&quot;     &quot;PO&quot;          
-## [16] &quot;POS&quot;          &quot;SB&quot;           &quot;stint&quot;        &quot;teamID&quot;       &quot;throws&quot;      
-## [21] &quot;WP&quot;           &quot;yearID&quot;       &quot;ZR&quot;</code></pre>
-</div>
-<div id="change-column-names" class="section level2">
-<h2>Change column names</h2>
+<p>Changing Column Names</p>
 <pre class="r"><code># Change the names of columns
-
 
 fielding_full &lt;- fielding_full %&gt;%
   rename( 
@@ -105,8 +46,8 @@ batting_full &lt;- batting_full %&gt;%
     Year = yearID, 
     Team = teamID,
     League = lgID
-    
-    )</code></pre>
+   )</code></pre>
+<p>Creating a new variable called Avg. for batting average</p>
 <pre class="r"><code># Create an Batting Average variable
 batting_full &lt;- batting_full %&gt;%
   mutate(Avg. = H / AB)
@@ -115,39 +56,7 @@ fielding_full &lt;- relocate(fielding_full, playerID, nameFirst, nameLast, bats,
 
 batting_full &lt;- relocate(batting_full,  playerID, nameFirst, nameLast, bats, birthCountry )
 
-batting_full &lt;- relocate(batting_full, Avg., .after = G)
-
-batting_full</code></pre>
-<pre><code>## # A tibble: 101,332 x 28
-##    playerID nameFirst nameLast bats  birthCountry  Year stint Team  League     G
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
-##  1 abercda~ Frank     Abercro~ &lt;NA&gt;  USA           1871     1 TRO   &lt;NA&gt;       1
-##  2 addybo01 Bob       Addy     L     CAN           1871     1 RC1   &lt;NA&gt;      25
-##  3 allisar~ Art       Allison  &lt;NA&gt;  USA           1871     1 CL1   &lt;NA&gt;      29
-##  4 allisdo~ Doug      Allison  R     USA           1871     1 WS3   &lt;NA&gt;      27
-##  5 ansonca~ Cap       Anson    R     USA           1871     1 RC1   &lt;NA&gt;      25
-##  6 armstbo~ Robert    Armstro~ &lt;NA&gt;  USA           1871     1 FW1   &lt;NA&gt;      12
-##  7 barkeal~ Al        Barker   &lt;NA&gt;  USA           1871     1 RC1   &lt;NA&gt;       1
-##  8 barnero~ Ross      Barnes   R     USA           1871     1 BS1   &lt;NA&gt;      31
-##  9 barrebi~ Bill      Barrett  &lt;NA&gt;  USA           1871     1 FW1   &lt;NA&gt;       1
-## 10 barrofr~ Frank     Barrows  &lt;NA&gt;  USA           1871     1 BS1   &lt;NA&gt;      18
-## # ... with 101,322 more rows, and 18 more variables: Avg. &lt;dbl&gt;, AB &lt;dbl&gt;,
-## #   R &lt;dbl&gt;, H &lt;dbl&gt;, 2B &lt;dbl&gt;, 3B &lt;dbl&gt;, HR &lt;dbl&gt;, RBI &lt;dbl&gt;, SB &lt;dbl&gt;,
-## #   CS &lt;dbl&gt;, BB &lt;dbl&gt;, SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;lgl&gt;,
-## #   GIDP &lt;dbl&gt;, throws &lt;chr&gt;</code></pre>
-<pre class="r"><code>colnames(batting_full)</code></pre>
-<pre><code>##  [1] &quot;playerID&quot;     &quot;nameFirst&quot;    &quot;nameLast&quot;     &quot;bats&quot;         &quot;birthCountry&quot;
-##  [6] &quot;Year&quot;         &quot;stint&quot;        &quot;Team&quot;         &quot;League&quot;       &quot;G&quot;           
-## [11] &quot;Avg.&quot;         &quot;AB&quot;           &quot;R&quot;            &quot;H&quot;            &quot;2B&quot;          
-## [16] &quot;3B&quot;           &quot;HR&quot;           &quot;RBI&quot;          &quot;SB&quot;           &quot;CS&quot;          
-## [21] &quot;BB&quot;           &quot;SO&quot;           &quot;IBB&quot;          &quot;HBP&quot;          &quot;SH&quot;          
-## [26] &quot;SF&quot;           &quot;GIDP&quot;         &quot;throws&quot;</code></pre>
-<pre class="r"><code>colnames(fielding_full)</code></pre>
-<pre><code>##  [1] &quot;playerID&quot;     &quot;nameFirst&quot;    &quot;nameLast&quot;     &quot;bats&quot;         &quot;birthCountry&quot;
-##  [6] &quot;Year&quot;         &quot;stint&quot;        &quot;Team&quot;         &quot;League&quot;       &quot;POS&quot;         
-## [11] &quot;G&quot;            &quot;GS&quot;           &quot;InnOuts&quot;      &quot;PO&quot;           &quot;A&quot;           
-## [16] &quot;E&quot;            &quot;DP&quot;           &quot;PB&quot;           &quot;WP&quot;           &quot;SB&quot;          
-## [21] &quot;CS&quot;           &quot;ZR&quot;           &quot;throws&quot;</code></pre>
+batting_full &lt;- relocate(batting_full, Avg., .after = G)</code></pre>
 </div>
 <div id="missing-values" class="section level2">
 <h2>Missing Values</h2>
@@ -156,26 +65,12 @@ batting_full</code></pre>
 <pre class="r"><code>batting_new &lt;- batting_full %&gt;%
   filter(Year %in% (2000:2015))
 
-batting_new %&gt;%
-  replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0))</code></pre>
-<pre><code>## # A tibble: 22,084 x 28
-##    playerID nameFirst nameLast bats  birthCountry  Year stint Team  League     G
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
-##  1 abbotje~ Jeff      Abbott   R     USA           2000     1 CHA   AL        80
-##  2 abbotku~ Kurt      Abbott   R     USA           2000     1 NYN   NL        79
-##  3 abbotpa~ Paul      Abbott   R     USA           2000     1 SEA   AL        35
-##  4 abreubo~ Bobby     Abreu    L     Venezuela     2000     1 PHI   NL       154
-##  5 aceveju~ Juan      Acevedo  R     Mexico        2000     1 MIL   NL        62
-##  6 adamste~ Terry     Adams    R     USA           2000     1 LAN   NL        66
-##  7 agbaybe~ Benny     Agbayani R     USA           2000     1 NYN   NL       119
-##  8 aguilri~ Rick      Aguilera R     USA           2000     1 CHN   NL        54
-##  9 alcanis~ Israel    Alcanta~ R     D.R.          2000     1 BOS   AL        21
-## 10 aldresc~ Scott     Aldred   L     USA           2000     1 PHI   NL        23
-## # ... with 22,074 more rows, and 18 more variables: Avg. &lt;dbl&gt;, AB &lt;dbl&gt;,
-## #   R &lt;dbl&gt;, H &lt;dbl&gt;, 2B &lt;dbl&gt;, 3B &lt;dbl&gt;, HR &lt;dbl&gt;, RBI &lt;dbl&gt;, SB &lt;dbl&gt;,
-## #   CS &lt;dbl&gt;, BB &lt;dbl&gt;, SO &lt;dbl&gt;, IBB &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;dbl&gt;,
-## #   GIDP &lt;dbl&gt;, throws &lt;chr&gt;</code></pre>
-<pre class="r"><code># Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
+batting_new &lt;- batting_new %&gt;%
+  replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0))
+
+
+
+# Only consider modern era baseball 2000 - 2015 and break into American and National Leagues
 fielding_new_AL &lt;- fielding_full %&gt;%
   filter(Year %in% (2000:2015), League == &quot;AL&quot;)
 
@@ -188,8 +83,8 @@ batting_new_AL &lt;- batting_full %&gt;%
 batting_new_NL &lt;- batting_full %&gt;%
   filter(Year %in% (2000:2015), League == &quot;NL&quot;)</code></pre>
 </div>
-<div id="at-least-two-functions-each-of-grouping-and-vector-functions-2-points" class="section level2">
-<h2>at least two functions each of Grouping and Vector functions (2 points)</h2>
+<div id="grouping" class="section level2">
+<h2>Grouping</h2>
 <p>Group by Year and by Team</p>
 <pre class="r"><code>#Group_by
 
@@ -212,7 +107,7 @@ yearbattingNL &lt;- batting_new_NL %&gt;%
 </div>
 <div id="vector" class="section level2">
 <h2>Vector</h2>
-<p>Top 10 players with most hits between 2000 and 2015</p>
+<p>Top 10 players with most hits between 2000 and 2015.</p>
 <pre class="r"><code>battingrange &lt;- batting_new %&gt;%
     select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %&gt;%
   arrange(desc(H))
@@ -236,39 +131,8 @@ ggplot(battingrange, aes(x = Name, y = H, color = Year, fill = Team)) +
   select(nameFirst, nameLast, Team, Year, G, AB, H, Avg., HR, BB, SO) %&gt;%
   arrange(desc(G))
 
+## ggplot using Teams and count for players that played full seasons, use color as year
 
-
-batting_games %&gt;% 
-  count(Team)</code></pre>
-<pre><code>## # A tibble: 33 x 2
-##    Team      n
-##    &lt;chr&gt; &lt;int&gt;
-##  1 ANA      35
-##  2 ARI      82
-##  3 ATL     100
-##  4 BAL      95
-##  5 BOS      97
-##  6 CHA     111
-##  7 CHN      86
-##  8 CIN      74
-##  9 CLE      84
-## 10 COL      87
-## # ... with 23 more rows</code></pre>
-<pre class="r"><code>head(batting_games, 10)</code></pre>
-<pre><code>## # A tibble: 10 x 11
-##    nameFirst nameLast Team   Year     G    AB     H  Avg.    HR    BB    SO
-##    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Jose      Cruz     TOR    2000   162   603   146 0.242    31    71   129
-##  2 Carlos    Delgado  TOR    2000   162   569   196 0.344    41   123   104
-##  3 Luis      Gonzalez ARI    2000   162   618   192 0.311    31    78    85
-##  4 Shawn     Green    LAN    2000   162   610   164 0.269    24    90   121
-##  5 Neifi     Perez    COL    2000   162   651   187 0.287    10    30    63
-##  6 Bobby     Abreu    PHI    2001   162   588   170 0.289    31   106   137
-##  7 Orlando   Cabrera  MON    2001   162   626   173 0.276    14    43    54
-##  8 Carlos    Delgado  TOR    2001   162   574   160 0.279    39   111   136
-##  9 Luis      Gonzalez ARI    2001   162   609   198 0.325    57   100    83
-## 10 Terrence  Long     OAK    2001   162   629   178 0.283    12    52   103</code></pre>
-<pre class="r"><code>## ggplot using Teams and count for players that played full seasons, use color as year
 ggplot(batting_games, aes(y = Team)) +
   geom_bar(width=1) +
   xlab(&quot;Number of Players&quot;) +
@@ -278,8 +142,6 @@ ggplot(batting_games, aes(y = Team)) +
 <div id="pivoting" class="section level2">
 <h2>Pivoting</h2>
 <p>For this data, I did not find a useful way to pivot the data. The data is already organized in the way I would use it.</p>
-<pre class="r"><code>batting_games %&gt;%
-  pivot_wider(names_from = Team, values_from = c(AB, H))</code></pre>
 <pre><code>## # A tibble: 2,796 x 74
 ##    nameFirst nameLast  Year     G  Avg.    HR    BB    SO AB_TOR AB_ARI AB_LAN
 ##    &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -307,7 +169,4 @@ ggplot(batting_games, aes(y = Team)) +
 ## #   H_SDN &lt;dbl&gt;, H_DET &lt;dbl&gt;, H_SFN &lt;dbl&gt;, H_ANA &lt;dbl&gt;, H_SLN &lt;dbl&gt;,
 ## #   H_NYN &lt;dbl&gt;, H_CHA &lt;dbl&gt;, H_MIN &lt;dbl&gt;, H_MIA &lt;dbl&gt;, H_BOS &lt;dbl&gt;,
 ## #   H_LAA &lt;dbl&gt;</code></pre>
-</div>
-<div id="at-narrative-discussing-what-you-find-interesting-along-with-any-issues-you-might-have-had-creating-this-blog-2-points" class="section level2">
-<h2>at narrative discussing what you find interesting along with any issues you might have had creating this blog (2 points)</h2>
 </div>
