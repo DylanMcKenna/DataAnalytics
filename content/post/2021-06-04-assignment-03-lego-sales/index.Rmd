@@ -7,29 +7,12 @@ categories: []
 tags: []
 ---
 
-#1.	What are the three most common first names of customers?
-
-#2.	What are the three most common themes of lego sets purchased?
-
-#3.	Among the most common theme of lego sets purchased, what is the most common subtheme?
-
-#4.	Create a new variable called age_group and group the ages into the following categories: “18 and under”, “19 - 25”, “26 - 35”, #“36 - 50”, “51 and over”. Be sure to save the updated data set so you can use the new variable in other questions.
-
-#5.	What is the probability a randomly selected customer
-#o	is in the 19 - 25 age group?
-#o	is in the 19 - 25 age group and purchased a Duplo theme set?
-#o	is in the 19 - 25 age group given they purchased a Duplo theme set?
-
-#6.	Which age group has purchased the largest number of lego sets? How many did they purchase?
-
-#7.	Which age group has spent the most money on legos? How much did they spend?
-
-#8.	Come up with a question you want to answer using this data, and write it down. Then, create a data visualization that answers #the question, and briefly explain how your visualization answers the question.
-
-#9.	Add one element to the plot from the previous exercise to change the look of the plot without changing the underlying data. #For example, you can change the theme, background color, add annotations, etc. State the change you’re making and display the #updated visualization. We encourage you to be creative!
+# This is Assignment 3 analyzing the lego_sales.csv file.
 
 
-```{r echo=FALSE}
+
+
+```{r echo=FALSE, message= FALSE, warning=FALSE}
 library(tidyverse)
 lego_sales <- read_csv("lego_sales.csv")
 
@@ -38,8 +21,6 @@ lego_sales <- read_csv("lego_sales.csv")
 lego_cleaned <- lego_sales %>%
   select(first_name:age, theme:us_price, quantity) %>%
   arrange(age, last_name)
-  
-lego_cleaned
 
 ```
 
@@ -65,14 +46,13 @@ ggplot(common_names, aes( x= first_name, y = count_names)) +
 ## Determine the Top 3 Themes
 
 As shown below, the top 3 themes are 1) Star Wars, 2) Nexo Knights, and 3) Mixel and Gear.
-```{r}
+```{r warning=FALSE}
 common_themes <- lego_cleaned %>%
   group_by(theme) %>%
   count(sort = TRUE, name = "count_themes") %>%
   arrange(desc(count_themes)) %>%
   head(10)
   
-common_themes
 
 ggplot(common_themes, aes( x= theme, y = count_themes)) +
   geom_col(stat = "Count")
@@ -119,7 +99,7 @@ lego_agegroup <- lego_cleaned  %>%
 ggplot(lego_agegroup, aes(x = age_group, y = probability )) +
   geom_col()
 
-lego_agegroup
+
 
 
 
@@ -132,7 +112,6 @@ lego_sets  <- lego_cleaned %>%
   count(age_group, sum(quantity)) %>%
   mutate( sets_purchased = n)
 
-lego_sets
 
 ggplot(lego_sets, aes( x = age_group, y = sets_purchased)) + 
   geom_col()
@@ -165,6 +144,8 @@ ggplot(lego_spending, aes(x = age_group, y = us_cost)) +
 
 How much does each age group spend on each theme?
 
+It is clear that Star Wars is the number one seller. The age range from 26-50 appears to be spending the most money on most themes and is most noticeable in the Star Wars theme.
+
 
 ```{r}
 
@@ -174,7 +155,6 @@ mutate(us_cost = us_price * quantity) %>%
   select(age_group, theme, us_cost)
   
 
-lego_themespending
 
 ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
   geom_col()

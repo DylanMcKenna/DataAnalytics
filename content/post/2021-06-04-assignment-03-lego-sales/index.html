@@ -1,0 +1,145 @@
+---
+title: Assignment 03 - Lego Sales
+author: DylanMcKenna
+date: '2021-06-04'
+slug: assignment-03-lego-sales
+categories: []
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="this-is-assignment-3-analyzing-the-lego_sales.csv-file." class="section level1">
+<h1>This is Assignment 3 analyzing the lego_sales.csv file.</h1>
+<div id="determine-the-3-most-common-names" class="section level2">
+<h2>Determine the 3 Most Common Names</h2>
+<p>As shown in the chart below, the top 3 names are Jackson, Jacob, and Joseph.</p>
+<pre class="r"><code>common_names &lt;- lego_cleaned %&gt;%
+  group_by(first_name) %&gt;%
+  count(sort = TRUE, name = &quot;count_names&quot;) %&gt;%
+  arrange(desc(count_names)) %&gt;%
+  head(10)
+  
+common_names</code></pre>
+<pre><code>## # A tibble: 10 x 2
+## # Groups:   first_name [10]
+##    first_name count_names
+##    &lt;chr&gt;            &lt;int&gt;
+##  1 Jackson             13
+##  2 Jacob               11
+##  3 Joseph              11
+##  4 Michael             10
+##  5 Audrey               8
+##  6 Connor               8
+##  7 Kaitlyn              8
+##  8 Lucas                8
+##  9 Amanda               7
+## 10 Joshua               7</code></pre>
+<pre class="r"><code>ggplot(common_names, aes( x= first_name, y = count_names)) +
+  geom_col(stat = &quot;Count&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: stat</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="determine-the-top-3-themes" class="section level2">
+<h2>Determine the Top 3 Themes</h2>
+<p>As shown below, the top 3 themes are 1) Star Wars, 2) Nexo Knights, and 3) Mixel and Gear.</p>
+<pre class="r"><code>common_themes &lt;- lego_cleaned %&gt;%
+  group_by(theme) %&gt;%
+  count(sort = TRUE, name = &quot;count_themes&quot;) %&gt;%
+  arrange(desc(count_themes)) %&gt;%
+  head(10)
+  
+
+ggplot(common_themes, aes( x= theme, y = count_themes)) +
+  geom_col(stat = &quot;Count&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="determine-the-most-common-subtheme-purchased-of-the-most-common-theme" class="section level2">
+<h2>Determine the Most Common Subtheme Purchased of the Most Common Theme</h2>
+<p>The most common theme is Star Wars.</p>
+<p>The most common subtheme in Star Wars is The Force Awakens.</p>
+<pre class="r"><code>common_subtheme &lt;- lego_cleaned %&gt;%
+  filter(theme == &quot;Star Wars&quot;) %&gt;%
+  group_by(subtheme) %&gt;%
+  count(sort = TRUE, name = &quot;count_subthemes&quot;) %&gt;%
+  arrange(desc(count_subthemes)) %&gt;%
+  head(10)
+
+ggplot(common_subtheme, aes(x = count_subthemes, y = subtheme)) +
+  geom_col()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="create-a-new-variable-of-age-categories" class="section level2">
+<h2>Create a New Variable of Age Categories</h2>
+<p>The probability of a customer’s age group is presented below.</p>
+<pre class="r"><code>lego_cleaned &lt;- lego_cleaned %&gt;%
+  mutate( age_group = case_when( age &lt;= 18 ~ &quot;18 and under&quot;,
+                                 between(age, 19, 25) ~ &quot;19 - 25&quot;,
+                                 between(age, 26, 35) ~ &quot;26 - 35&quot;,
+                                 between(age, 36, 50) ~ &quot;36 - 50&quot;,
+                                 age &gt;= 51 ~ &quot;51 and over&quot;)) %&gt;%
+select(age_group, age:subtheme, name:quantity, name)
+
+lego_agegroup &lt;- lego_cleaned  %&gt;% 
+  count( age_group) %&gt;%
+  mutate( probability = n / sum(n))
+
+ggplot(lego_agegroup, aes(x = age_group, y = probability )) +
+  geom_col()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="determine-the-age-group-that-has-purchased-the-largest-number-of-lego-sets" class="section level2">
+<h2>Determine the Age Group that has Purchased the Largest Number of Lego Sets</h2>
+<pre class="r"><code>lego_sets  &lt;- lego_cleaned %&gt;%
+  count(age_group, sum(quantity)) %&gt;%
+  mutate( sets_purchased = n)
+
+
+ggplot(lego_sets, aes( x = age_group, y = sets_purchased)) + 
+  geom_col()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="determine-the-age-group-that-has-spent-the-most-money-on-lego" class="section level2">
+<h2>Determine the Age Group that has Spent the Most Money on Lego</h2>
+<p>The age group that has spent the most money is the 36 - 50 age bracket.</p>
+<p>This age group spent $ 9,532.87.</p>
+<pre class="r"><code>lego_spending &lt;- lego_cleaned %&gt;%
+mutate(us_cost = us_price * quantity) %&gt;%
+  group_by(age_group) %&gt;%
+  summarise( us_cost = sum(us_cost)) 
+    
+
+
+
+ggplot(lego_spending, aes(x = age_group, y = us_cost)) +
+  geom_col()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="create-a-question" class="section level2">
+<h2>Create a Question</h2>
+<p>How much does each age group spend on each theme?</p>
+<p>It is clear that Star Wars is the number one seller. The age range from 26-50 appears to be spending the most money on most themes and is most noticeable in the Star Wars theme.</p>
+<pre class="r"><code>lego_themespending &lt;- lego_cleaned %&gt;%
+mutate(us_cost = us_price * quantity) %&gt;%
+  group_by(age_group, theme) %&gt;%
+  select(age_group, theme, us_cost)
+  
+
+
+ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+  geom_col()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="add-an-element-to-the-above-plot" class="section level2">
+<h2>Add an element to the above plot</h2>
+<p>The change I made to the above plot was to the chart labels. I added better looking names to the chart.</p>
+<pre class="r"><code>ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+  geom_col() +
+  labs(title = &quot;Spending on Themes by Age Group&quot;, fill = &quot;Age Group&quot; ) +
+  xlab(&quot;Cost in US Dollars ($)&quot;) +
+  ylab(&quot;Lego Theme&quot;) +
+  theme_bw()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+</div>

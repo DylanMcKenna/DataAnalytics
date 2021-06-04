@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<title>Assignment 03 - Lego Sales - Dylan McKenna - Fundamentals of Analytics</title>
+<meta property="og:title" content="Assignment 03 - Lego Sales - Dylan McKenna - Fundamentals of Analytics">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/DylanMcKenna">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">7 min read</span>
+    
+
+    <h1 class="article-title">Assignment 03 - Lego Sales</h1>
+
+    
+    <span class="article-date">2021-06-04</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/06/04/assignment-03-lego-sales/index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>#1. What are the three most common first names of customers?</p>
+<p>#2. What are the three most common themes of lego sets purchased?</p>
+<p>#3. Among the most common theme of lego sets purchased, what is the most common subtheme?</p>
+<p>#4. Create a new variable called age_group and group the ages into the following categories: “18 and under”, “19 - 25”, “26 - 35”, #“36 - 50”, “51 and over”. Be sure to save the updated data set so you can use the new variable in other questions.</p>
+<p>#5. What is the probability a randomly selected customer
+#o is in the 19 - 25 age group?
+#o is in the 19 - 25 age group and purchased a Duplo theme set?
+#o is in the 19 - 25 age group given they purchased a Duplo theme set?</p>
+<p>#6. Which age group has purchased the largest number of lego sets? How many did they purchase?</p>
+<p>#7. Which age group has spent the most money on legos? How much did they spend?</p>
+<p>#8. Come up with a question you want to answer using this data, and write it down. Then, create a data visualization that answers #the question, and briefly explain how your visualization answers the question.</p>
+<p>#9. Add one element to the plot from the previous exercise to change the look of the plot without changing the underlying data. #For example, you can change the theme, background color, add annotations, etc. State the change you’re making and display the #updated visualization. We encourage you to be creative!</p>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.1     v dplyr   1.0.6
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   first_name = col_character(),
+##   last_name = col_character(),
+##   age = col_double(),
+##   phone_number = col_character(),
+##   set_id = col_double(),
+##   number = col_character(),
+##   theme = col_character(),
+##   subtheme = col_character(),
+##   year = col_double(),
+##   name = col_character(),
+##   pieces = col_double(),
+##   us_price = col_double(),
+##   image_url = col_character(),
+##   quantity = col_double()
+## )</code></pre>
+<pre><code>## # A tibble: 620 x 10
+##    first_name last_name    age theme   subtheme   year name      pieces us_price
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Serena     Bartkowiak    16 Bionic~ Miscella~  2018 Kopaka a~    171    25.0 
+##  2 Serena     Bartkowiak    16 Star W~ Buildabl~  2018 Rey           84    20.0 
+##  3 Serena     Bartkowiak    16 Season~ Valentin~  2018 Valentin~    150     9.99
+##  4 Talise     Nieukirk      16 Mixels  Series 7   2018 Tiketz        62     4.99
+##  5 Natalia    Vonduyke      16 Gear    Key Chai~  2018 Airjitzu~     NA     5.99
+##  6 Natalia    Vonduyke      16 Duplo   &lt;NA&gt;       2018 Tow Truck     28    20.0 
+##  7 Natalia    Vonduyke      16 Nexo K~ Ultimate   2018 Ultimate~     82     9.99
+##  8 Natalia    Vonduyke      16 Star W~ The Forc~  2018 Resistan~    740    80.0 
+##  9 Steven     Washington    16 City    Fire       2018 Fire Car      53     3.99
+## 10 Steven     Washington    16 City    &lt;NA&gt;       2018 Sports C~     47     3.99
+## # ... with 610 more rows, and 1 more variable: quantity &lt;dbl&gt;</code></pre>
+<div id="determine-the-3-most-common-names" class="section level2">
+<h2>Determine the 3 Most Common Names</h2>
+<p>As shown in the chart below, the top 3 names are Jackson, Jacob, and Joseph.</p>
+<pre class="r"><code>common_names &lt;- lego_cleaned %&gt;%
+  group_by(first_name) %&gt;%
+  count(sort = TRUE, name = &quot;count_names&quot;) %&gt;%
+  arrange(desc(count_names)) %&gt;%
+  head(10)
+  
+common_names</code></pre>
+<pre><code>## # A tibble: 10 x 2
+## # Groups:   first_name [10]
+##    first_name count_names
+##    &lt;chr&gt;            &lt;int&gt;
+##  1 Jackson             13
+##  2 Jacob               11
+##  3 Joseph              11
+##  4 Michael             10
+##  5 Audrey               8
+##  6 Connor               8
+##  7 Kaitlyn              8
+##  8 Lucas                8
+##  9 Amanda               7
+## 10 Joshua               7</code></pre>
+<pre class="r"><code>ggplot(common_names, aes( x= first_name, y = count_names)) +
+  geom_col(stat = &quot;Count&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: stat</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="determine-the-top-3-themes" class="section level2">
+<h2>Determine the Top 3 Themes</h2>
+<p>As shown below, the top 3 themes are 1) Star Wars, 2) Nexo Knights, and 3) Mixel and Gear.</p>
+<pre class="r"><code>common_themes &lt;- lego_cleaned %&gt;%
+  group_by(theme) %&gt;%
+  count(sort = TRUE, name = &quot;count_themes&quot;) %&gt;%
+  arrange(desc(count_themes)) %&gt;%
+  head(10)
+  
+common_themes</code></pre>
+<pre><code>## # A tibble: 10 x 2
+## # Groups:   theme [10]
+##    theme        count_themes
+##    &lt;chr&gt;               &lt;int&gt;
+##  1 Star Wars              75
+##  2 Nexo Knights           64
+##  3 Gear                   55
+##  4 Mixels                 55
+##  5 City                   45
+##  6 Friends                42
+##  7 Ninjago                38
+##  8 Duplo                  35
+##  9 Bionicle               34
+## 10 Creator                25</code></pre>
+<pre class="r"><code>ggplot(common_themes, aes( x= theme, y = count_themes)) +
+  geom_col(stat = &quot;Count&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: stat</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="determine-the-most-common-subtheme-purchased-of-the-most-common-theme" class="section level2">
+<h2>Determine the Most Common Subtheme Purchased of the Most Common Theme</h2>
+<p>The most common theme is Star Wars.</p>
+<p>The most common subtheme in Star Wars is The Force Awakens.</p>
+<pre class="r"><code>common_subtheme &lt;- lego_cleaned %&gt;%
+  filter(theme == &quot;Star Wars&quot;) %&gt;%
+  group_by(subtheme) %&gt;%
+  count(sort = TRUE, name = &quot;count_subthemes&quot;) %&gt;%
+  arrange(desc(count_subthemes)) %&gt;%
+  head(10)
+
+ggplot(common_subtheme, aes(x = count_subthemes, y = subtheme)) +
+  geom_col()</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="create-a-new-variable-of-age-categories" class="section level2">
+<h2>Create a New Variable of Age Categories</h2>
+<p>The probability of a customer’s age group is presented below.</p>
+<pre class="r"><code>lego_cleaned &lt;- lego_cleaned %&gt;%
+  mutate( age_group = case_when( age &lt;= 18 ~ &quot;18 and under&quot;,
+                                 between(age, 19, 25) ~ &quot;19 - 25&quot;,
+                                 between(age, 26, 35) ~ &quot;26 - 35&quot;,
+                                 between(age, 36, 50) ~ &quot;36 - 50&quot;,
+                                 age &gt;= 51 ~ &quot;51 and over&quot;)) %&gt;%
+select(age_group, age:subtheme, name:quantity, name)
+
+lego_agegroup &lt;- lego_cleaned  %&gt;% 
+  count( age_group) %&gt;%
+  mutate( probability = n / sum(n))
+
+ggplot(lego_agegroup, aes(x = age_group, y = probability )) +
+  geom_col()</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>lego_agegroup</code></pre>
+<pre><code>## # A tibble: 5 x 3
+##   age_group        n probability
+##   &lt;chr&gt;        &lt;int&gt;       &lt;dbl&gt;
+## 1 18 and under    30      0.0484
+## 2 19 - 25        129      0.208 
+## 3 26 - 35        183      0.295 
+## 4 36 - 50        216      0.348 
+## 5 51 and over     62      0.1</code></pre>
+</div>
+<div id="determine-the-age-group-that-has-purchased-the-largest-number-of-lego-sets" class="section level2">
+<h2>Determine the Age Group that has Purchased the Largest Number of Lego Sets</h2>
+<pre class="r"><code>lego_sets  &lt;- lego_cleaned %&gt;%
+  count(age_group, sum(quantity)) %&gt;%
+  mutate( sets_purchased = n)
+
+lego_sets</code></pre>
+<pre><code>## # A tibble: 5 x 4
+##   age_group    `sum(quantity)`     n sets_purchased
+##   &lt;chr&gt;                  &lt;dbl&gt; &lt;int&gt;          &lt;int&gt;
+## 1 18 and under             891    30             30
+## 2 19 - 25                  891   129            129
+## 3 26 - 35                  891   183            183
+## 4 36 - 50                  891   216            216
+## 5 51 and over              891    62             62</code></pre>
+<pre class="r"><code>ggplot(lego_sets, aes( x = age_group, y = sets_purchased)) + 
+  geom_col()</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="determine-the-age-group-that-has-spent-the-most-money-on-lego" class="section level2">
+<h2>Determine the Age Group that has Spent the Most Money on Lego</h2>
+<p>The age group that has spent the most money is the 36 - 50 age bracket.</p>
+<p>This age group spent $ 9,532.87.</p>
+<pre class="r"><code>lego_spending &lt;- lego_cleaned %&gt;%
+mutate(us_cost = us_price * quantity) %&gt;%
+  group_by(age_group) %&gt;%
+  summarise( us_cost = sum(us_cost)) 
+    
+
+
+
+ggplot(lego_spending, aes(x = age_group, y = us_cost)) +
+  geom_col()</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="create-a-question" class="section level2">
+<h2>Create a Question</h2>
+<p>How much does each age group spend on each theme?</p>
+<pre class="r"><code>lego_themespending &lt;- lego_cleaned %&gt;%
+mutate(us_cost = us_price * quantity) %&gt;%
+  group_by(age_group, theme) %&gt;%
+  select(age_group, theme, us_cost)
+  
+
+lego_themespending</code></pre>
+<pre><code>## # A tibble: 620 x 3
+## # Groups:   age_group, theme [101]
+##    age_group    theme        us_cost
+##    &lt;chr&gt;        &lt;chr&gt;          &lt;dbl&gt;
+##  1 18 and under Bionicle       50.0 
+##  2 18 and under Star Wars      20.0 
+##  3 18 and under Seasonal        9.99
+##  4 18 and under Mixels          9.98
+##  5 18 and under Gear           12.0 
+##  6 18 and under Duplo          20.0 
+##  7 18 and under Nexo Knights    9.99
+##  8 18 and under Star Wars      80.0 
+##  9 18 and under City            3.99
+## 10 18 and under City           20.0 
+## # ... with 610 more rows</code></pre>
+<pre class="r"><code>ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+  geom_col()</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="add-an-element-to-the-above-plot" class="section level2">
+<h2>Add an element to the above plot</h2>
+<p>The change I made to the above plot was to the chart labels. I added better looking names to the chart.</p>
+<pre class="r"><code>ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+  geom_col() +
+  labs(title = &quot;Spending on Themes by Age Group&quot;, fill = &quot;Age Group&quot; ) +
+  xlab(&quot;Cost in US Dollars ($)&quot;) +
+  ylab(&quot;Lego Theme&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/2021/06/04/assignment-03-lego-sales/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

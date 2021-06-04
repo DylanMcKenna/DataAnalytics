@@ -13,7 +13,10 @@
       <pubDate>Fri, 28 May 2021 00:00:00 +0000</pubDate>
       
       <guid>/2021/05/28/assignment-a02-tidyverse/</guid>
-      <description>Assignment 02: TIDYVERSETimely Submission (2 points)batting &amp;lt;- batting %&amp;gt;%mutate( GIDP = as.double(GIDP),Avg. = H / AB)head(batting)## # A tibble: 6 x 23## playerID yearID stint teamID lgID G AB R H `2B` `3B` HR## &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;## 1 abercda01 1871 1 TRO &amp;lt;NA&amp;gt; 1 4 0 0 0 0 0## 2 addybo01 1871 1 RC1 &amp;lt;NA&amp;gt; 25 118 30 32 6 0 0## 3 allisar01 1871 1 CL1 &amp;lt;NA&amp;gt; 29 137 28 40 4 5 0## 4 allisdo01 1871 1 WS3 &amp;lt;NA&amp;gt; 27 133 28 44 10 2 2## 5 ansonca01 1871 1 RC1 &amp;lt;NA&amp;gt; 25 120 29 39 11 3 0## 6 armstbo01 1871 1 FW1 &amp;lt;NA&amp;gt; 12 49 9 11 2 1 0## # .</description>
+      <description>Assignment 02: TIDYVERSEThis assignment is to better understand Tidyverse.
+One Table Verbs and Two Table VerbsChanging variable type using mutate.
+batting &amp;lt;- batting %&amp;gt;%mutate( GIDP = as.double(GIDP),Avg. = H / AB)fielding &amp;lt;- fielding %&amp;gt;%mutate( lgID = as.character(lgID))Combine master into batting and into fielding.
+# Join master list into the batting list to show the players name.batting_full &amp;lt;- left_join(batting, master_name, join = &amp;quot;playerID&amp;quot;)## Joining, by = &amp;quot;playerID&amp;quot;# Join master list into the fielding list to show players name.</description>
     </item>
     
     <item>
