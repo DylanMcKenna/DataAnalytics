@@ -28,15 +28,14 @@ lego_cleaned <- lego_sales %>%
 
 As shown in the chart below, the top 3 names are Jackson, Jacob, and Joseph.
 
-```{r}
+```{r warning=FALSE}
 
 common_names <- lego_cleaned %>%
   group_by(first_name) %>%
   count(sort = TRUE, name = "count_names") %>%
   arrange(desc(count_names)) %>%
   head(10)
-  
-common_names
+
 
 ggplot(common_names, aes( x= first_name, y = count_names)) +
   geom_col(stat = "Count")
@@ -106,6 +105,8 @@ ggplot(lego_agegroup, aes(x = age_group, y = probability )) +
 ```
 
 ## Determine the Age Group that has Purchased the Largest Number of Lego Sets
+
+The age group 36 - 50 has purchased the most Lego sets.
 
 ```{r}
 lego_sets  <- lego_cleaned %>%

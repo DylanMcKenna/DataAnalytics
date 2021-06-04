@@ -38,7 +38,6 @@ common_names</code></pre>
 ## 10 Joshua               7</code></pre>
 <pre class="r"><code>ggplot(common_names, aes( x= first_name, y = count_names)) +
   geom_col(stat = &quot;Count&quot;)</code></pre>
-<pre><code>## Warning: Ignoring unknown parameters: stat</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="determine-the-top-3-themes" class="section level2">
@@ -91,6 +90,7 @@ ggplot(lego_agegroup, aes(x = age_group, y = probability )) +
 </div>
 <div id="determine-the-age-group-that-has-purchased-the-largest-number-of-lego-sets" class="section level2">
 <h2>Determine the Age Group that has Purchased the Largest Number of Lego Sets</h2>
+<p>The age group 36 - 50 has purchased the most Lego sets.</p>
 <pre class="r"><code>lego_sets  &lt;- lego_cleaned %&gt;%
   count(age_group, sum(quantity)) %&gt;%
   mutate( sets_purchased = n)
