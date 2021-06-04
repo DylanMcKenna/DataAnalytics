@@ -20,23 +20,9 @@ tags: []
   count(sort = TRUE, name = &quot;count_names&quot;) %&gt;%
   arrange(desc(count_names)) %&gt;%
   head(10)
-  
-common_names</code></pre>
-<pre><code>## # A tibble: 10 x 2
-## # Groups:   first_name [10]
-##    first_name count_names
-##    &lt;chr&gt;            &lt;int&gt;
-##  1 Jackson             13
-##  2 Jacob               11
-##  3 Joseph              11
-##  4 Michael             10
-##  5 Audrey               8
-##  6 Connor               8
-##  7 Kaitlyn              8
-##  8 Lucas                8
-##  9 Amanda               7
-## 10 Joshua               7</code></pre>
-<pre class="r"><code>ggplot(common_names, aes( x= first_name, y = count_names)) +
+
+
+ggplot(common_names, aes( x= first_name, y = count_names)) +
   geom_col(stat = &quot;Count&quot;)</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>

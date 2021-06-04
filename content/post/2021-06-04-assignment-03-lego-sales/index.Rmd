@@ -157,7 +157,7 @@ mutate(us_cost = us_price * quantity) %>%
   
 
 
-ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+ggplot(lego_themespending, aes(x = us_cost, y = reorder(theme, -us_cost, sum), fill = age_group)) + 
   geom_col()
 ```
 
@@ -167,7 +167,7 @@ The change I made to the above plot was to the chart labels. I added better look
 
 
 ```{r}
-ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+ggplot(lego_themespending, aes(x = us_cost, y = reorder(theme, -us_cost, sum), fill = age_group)) + 
   geom_col() +
   labs(title = "Spending on Themes by Age Group", fill = "Age Group" ) +
   xlab("Cost in US Dollars ($)") +
