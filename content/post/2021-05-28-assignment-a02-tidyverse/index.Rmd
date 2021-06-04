@@ -218,4 +218,11 @@ batting_games <- batting_games %>%
 ```
 
 
+I had a few issues cleaning the data.  When I was joining the data, I had to change a few variable types.  I enjoy analyzing baseball data and I will likely continue to look into the data that was used for this assignment.
+
+Another issue, was that this data was not very well suited for pivoting. There may be a useful way to involve pivoting; however, I did not find one.
+
+I used a few basic visuals since the focus of this assignment was more on changing/combining file types.
+
+
 
