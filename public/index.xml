@@ -14,7 +14,7 @@
       
       <guid>/2021/06/04/assignment-03-lego-sales/</guid>
       <description>This is Assignment 3 analyzing the lego_sales.csv file.Determine the 3 Most Common NamesAs shown in the chart below, the top 3 names are Jackson, Jacob, and Joseph.
-common_names &amp;lt;- lego_cleaned %&amp;gt;%group_by(first_name) %&amp;gt;%count(sort = TRUE, name = &amp;quot;count_names&amp;quot;) %&amp;gt;%arrange(desc(count_names)) %&amp;gt;%head(10)common_names## # A tibble: 10 x 2## # Groups: first_name [10]## first_name count_names## &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;## 1 Jackson 13## 2 Jacob 11## 3 Joseph 11## 4 Michael 10## 5 Audrey 8## 6 Connor 8## 7 Kaitlyn 8## 8 Lucas 8## 9 Amanda 7## 10 Joshua 7ggplot(common_names, aes( x= first_name, y = count_names)) +geom_col(stat = &amp;quot;Count&amp;quot;)## Warning: Ignoring unknown parameters: statDetermine the Top 3 ThemesAs shown below, the top 3 themes are 1) Star Wars, 2) Nexo Knights, and 3) Mixel and Gear.</description>
+common_names &amp;lt;- lego_cleaned %&amp;gt;%group_by(first_name) %&amp;gt;%count(sort = TRUE, name = &amp;quot;count_names&amp;quot;) %&amp;gt;%arrange(desc(count_names)) %&amp;gt;%head(10)ggplot(common_names, aes( x= first_name, y = count_names)) +geom_col(stat = &amp;quot;Count&amp;quot;)Determine the Top 3 ThemesAs shown below, the top 3 themes are 1) Star Wars, 2) Nexo Knights, and 3) Mixel and Gear.</description>
     </item>
     
     <item>

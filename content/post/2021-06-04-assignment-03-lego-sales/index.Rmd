@@ -1,6 +1,6 @@
 ---
-title: Assignment 03 - Lego Sales
-author: DylanMcKenna
+title: "Assignment 03 - Lego Sales"
+author: "DylanMcKenna"
 date: '2021-06-04'
 slug: assignment-03-lego-sales
 categories: []

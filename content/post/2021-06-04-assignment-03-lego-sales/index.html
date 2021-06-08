@@ -1,6 +1,6 @@
 ---
-title: Assignment 03 - Lego Sales
-author: DylanMcKenna
+title: "Assignment 03 - Lego Sales"
+author: "DylanMcKenna"
 date: '2021-06-04'
 slug: assignment-03-lego-sales
 categories: []
@@ -113,14 +113,14 @@ mutate(us_cost = us_price * quantity) %&gt;%
   
 
 
-ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+ggplot(lego_themespending, aes(x = us_cost, y = reorder(theme, -us_cost, sum), fill = age_group)) + 
   geom_col()</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="add-an-element-to-the-above-plot" class="section level2">
 <h2>Add an element to the above plot</h2>
 <p>The change I made to the above plot was to the chart labels. I added better looking names to the chart.</p>
-<pre class="r"><code>ggplot(lego_themespending, aes(x = us_cost , y = theme, fill = age_group)) + 
+<pre class="r"><code>ggplot(lego_themespending, aes(x = us_cost, y = reorder(theme, -us_cost, sum), fill = age_group)) + 
   geom_col() +
   labs(title = &quot;Spending on Themes by Age Group&quot;, fill = &quot;Age Group&quot; ) +
   xlab(&quot;Cost in US Dollars ($)&quot;) +
