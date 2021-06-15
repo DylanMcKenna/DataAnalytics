@@ -1,0 +1,14 @@
+name: DataAnalytics
+title: DataAnalytics
+username:
+account: dylanmckenna
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4243448
+bundleId: 4692303
+url: https://dylanmckenna.shinyapps.io/DataAnalytics/
+when: 1623160479.39927
+lastSyncTime: 1623160479.40027
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|.Rprofile|cat-lovers.csv|config.yaml|edibnb-badnames.csv|favourite-food.xlsx|hotels.csv|index.Rmd|layouts/shortcodes/blogdown/postref.html|netlify.toml|nobel.csv|R/build.R|R/build2.R|relig-income.xlsx|shiny practice.R|static/.gitkeep

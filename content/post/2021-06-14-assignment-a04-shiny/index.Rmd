@@ -1,0 +1,56 @@
+---
+title: Assignment A04 - Shiny
+author: ''
+date: '2021-06-14'
+slug: assignment-a04-shiny
+categories:
+  - shiny
+tags: []
+runtime: shiny
+output: html_document
+---
+
+# Assignment 4 - Shiny
+
+This assignment involves buidling interactive web apps. In this case, it is shiny
+
+
+```{r echo=FALSE}
+library(shiny)
+library(tidyverse)
+library(tidytext)
+library(glue)
+library(plotly)
+library(janitor)
+```
+
+
+```{r}
+
+ohs2019 <- read.csv("OHS_2019.csv", na.strings = c("","NA")) 
+
+# Clean Names
+ohs2019 <- ohs2019 %>%
+  clean_names()
+
+# Select desired variables
+ohs_useful <- ohs2019 %>%
+  select(field_visit_date, field_visit_type, case_type, naics_description, contravener_role, order_type, order_status, reg_name )
+
+
+```
+
+<iframe src="https://dylanmckenna.shinyapps.io/DataAnalytics/" height="800" width="100%" frameborder="no" ></iframe>
+
+
+```{r}
+
+ohs_useful %>%
+  count(contravener_role)
+ohs_useful %>%
+  count(order_type)
+ohs_useful %>%
+  count(reg_name)
+
+```
+
