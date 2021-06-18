@@ -1,0 +1,82 @@
+# load libraries
+library(shiny)
+library(shinydashboard)
+library(shinythemes)
+library(tidyverse)
+library(tidytext)
+library(glue)
+library(plotly)
+library(janitor)
+library(gghighlight)
+
+master <- read_csv("Master.csv")
+
+batting <- read_csv("Batting.csv")
+
+master_name <- master %>%
+  select(playerID, nameFirst, nameLast, bats, throws, birthCountry)
+
+batting <- batting %>%
+  mutate( GIDP = as.double(GIDP),
+          Avg. = H / AB)
+
+batting_full <- left_join(batting, master_name, join = "playerID")
+
+batting_full <- batting_full %>%
+  rename( 
+    Year = yearID, 
+    Team = teamID,
+    League = lgID
+  )
+
+batting_full <- batting_full %>%
+  mutate(Avg. = H / AB)
+
+batting_full <- relocate(batting_full,  playerID, nameFirst, nameLast, bats, birthCountry )
+
+batting_full <- relocate(batting_full, Avg., .after = G)
+
+batting_new <- batting_full %>%
+  filter(Year %in% (2000:2015))
+
+batting_new <- batting_new %>%
+  replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0)) %>%
+  select(-GIDP)
+
+
+
+
+ui <- fluidPage(
+  titlePanel("MLB - Homeruns for 2000 to 2015"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "Year",
+        label = "Select Season",
+        choices = c("2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011",
+                    "2012", "2013", "2014", "2015")
+      )),
+  mainPanel(plotlyOutput(outputId = "homerun_plot")
+  )))
+
+
+# Update Server with the Plot
+server <- function(input, output) {
+  output$homerun_plot <- renderPlotly({
+    chart <- batting_new %>%
+      filter(Year == input$Year) %>%
+      ggplot(aes(x = HR, y = Team)) +
+      geom_col() +
+      labs(
+        title = glue("Homeruns per Team during {input$Year} Season"),
+        x = "Homeruns", y = "Team"
+      ) +
+      theme_classic() +
+      gghighlight(max(sum(HR)))
+    
+    ggplotly(chart, tooltip = c("x", "y"))
+  })
+}
+
+
+shinyApp(ui, server)

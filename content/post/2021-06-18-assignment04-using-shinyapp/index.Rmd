@@ -1,0 +1,31 @@
+---
+title: Assignment 04 - Using ShinyApp
+author: ''
+date: '2021-06-18'
+slug: assignment04-using-shinyapp
+categories:
+  - shiny
+  - tidyverse
+  - plotly
+  - ggplot2
+tags: []
+runtime: shiny
+output: html_document
+---
+
+
+## Assignment 4 - Using ShinyApp
+
+This assignment involved creating an interactive post with ShinyApp.
+
+
+
+Click the link and select Batting.csv and Master.csv under Data Explorer.
+
+
+
+Netlify app link:
+
+
+<iframe src="https://dylanmckenna.shinyapps.io/ModernBaseball_Homeruns/" height="800" width="100%" frameborder="no" ></iframe>
+

@@ -15,13 +15,14 @@ output: html_document
 This assignment involves buidling interactive web apps. In this case, it is shiny
 
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 library(shiny)
 library(tidyverse)
 library(tidytext)
 library(glue)
 library(plotly)
 library(janitor)
+library(shinythemes)
 ```
 
 
