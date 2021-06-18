@@ -19,13 +19,11 @@ output: html_document
 This assignment involved creating an interactive post with ShinyApp.
 
 
+## Homeruns per Team
 
-Click the link and select Batting.csv and Master.csv under Data Explorer.
-
-
-
-Netlify app link:
-
+The following chart shows the amount of homeruns per team in each year.
 
 <iframe src="https://dylanmckenna.shinyapps.io/ModernBaseball_Homeruns/" height="800" width="100%" frameborder="no" ></iframe>
 
+
+The Top 5 Teams are highlighted.
