@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shiny on Dylan McKenna - Fundamentals of Analytics</title>
+    <link>/categories/shiny/</link>
+    <description>Recent content in shiny on Dylan McKenna - Fundamentals of Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/shiny/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment A04 - Shiny</title>
+      <link>/2021/06/14/assignment-a04-shiny/</link>
+      <pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/14/assignment-a04-shiny/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
