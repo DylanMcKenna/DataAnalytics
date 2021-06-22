@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plotly on Dylan McKenna - Fundamentals of Analytics</title>
+    <link>/categories/plotly/</link>
+    <description>Recent content in plotly on Dylan McKenna - Fundamentals of Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/plotly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment 04 - Using ShinyApp</title>
+      <link>/2021/06/18/assignment04-using-shinyapp/</link>
+      <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/18/assignment04-using-shinyapp/</guid>
+      <description>Assignment 4 - Using ShinyAppThis assignment involved creating an interactive post with ShinyApp.
+Homeruns per TeamThe following chart shows the amount of homeruns per team in each year.
+The Top 5 Teams are highlighted.
+</description>
+    </item>
+    
+  </channel>
+</rss>
