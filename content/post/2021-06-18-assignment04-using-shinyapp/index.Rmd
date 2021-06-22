@@ -26,6 +26,7 @@ library(ggplot2)
 
 The following chart shows the amount of homeruns per team in each year.
 
+The Top 5 Teams are highlighted.
+
 <iframe src="https://dylanmckenna.shinyapps.io/ModernBaseball_Homeruns/" height="800" width="100%" frameborder="no" ></iframe>
 
-The Top 5 Teams are highlighted.
