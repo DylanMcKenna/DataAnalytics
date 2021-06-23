@@ -9,8 +9,6 @@ library(plotly)
 library(janitor)
 library(gghighlight)
 
-
-
 master <- read.csv("Master.csv")
 
 batting <- read.csv("Batting.csv")
@@ -61,12 +59,12 @@ ui <- fluidPage(
         choices = c("2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011",
                     "2012", "2013", "2014", "2015")
       )),
-  mainPanel(plotlyOutput(outputId = "homerun_plot"))),
+    mainPanel(plotlyOutput(outputId = "homerun_plot"))),
   
   downloadButton("downloadData","Download Data",
                  icon = icon("arrow-circle-down"))
- 
-  )
+)
+
 
 # Update Server with the Plot
 server <- function(input, output) {
@@ -81,23 +79,24 @@ server <- function(input, output) {
       ) +
       theme_classic() +
       gghighlight(max(HR_count)) +
-      geom_text(size = 3, aes(color= Team, label = HR_count ),
+      geom_text(size = 3, aes(color= Team, label = HR_count),
                 nudge_x = 10,
                 vjust = -0.4)
     
-  output$downloadData <- downloadHandler(
+    output$downloadData <- downloadHandler(
       filename = function() {
         paste(Sys.Date(),"Batting", sep="_")
       },
       content = function(file) {
         write.csv(batting_full, file)
       }
-     )
+      
+    )
     
-   ggplotly(chart, tooltip = c("x", "y"))
+    
+    ggplotly(chart, tooltip = c("x", "y"))
   })
 }
-
 
 
 shinyApp(ui, server)
