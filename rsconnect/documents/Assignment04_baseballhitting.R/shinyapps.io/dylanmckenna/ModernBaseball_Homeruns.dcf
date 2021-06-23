@@ -5,10 +5,10 @@ account: dylanmckenna
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4290103
-bundleId: 4732344
+bundleId: 4747973
 url: https://dylanmckenna.shinyapps.io/ModernBaseball_Homeruns/
-when: 1624050484.1397
-lastSyncTime: 1624050484.1397
+when: 1624460400.79461
+lastSyncTime: 1624460400.79461
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .RData|.Rprofile|Assignment04_shiny.R|Assignment04_shiny_version2.R|cat-lovers.csv|config.yaml|covid-speeches-words.rds|dynamictrials.R|edibnb-badnames.csv|favourite-food.xlsx|hotels.csv|index.Rmd|layouts/shortcodes/blogdown/postref.html|MBA6693SM21_01.png|netlify.toml|nobel.csv|OHS_2019.csv|R/build.R|R/build2.R|relig-income.xlsx|shiny practice.R|shiny_practice_musthavenospaces.R|static/.gitkeep|content|public|themes
+ignoredFiles: .RData|.Rprofile|Assignment04_shiny.R|Assignment04_shiny_version2.R|cat-lovers.csv|config.yaml|covid-speeches-words.rds|dynamictrials.R|edibnb-badnames.csv|favourite-food.xlsx|hotels.csv|index.Rmd|layouts/shortcodes/blogdown/postref.html|MBA6693SM21_01.png|netlify.toml|nobel.csv|OHS_2019.csv|R/build.R|R/build2.R|relig-income.xlsx|shiny practice.R|shiny_practice_musthavenospaces.R|static/.gitkeep
