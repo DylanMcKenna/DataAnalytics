@@ -17,9 +17,6 @@ output: html_document
 ## Assignment 4 - Using ShinyApp
 
 This assignment involved creating an interactive post with ShinyApp.
-```{r echo=FALSE}
-library(ggplot2)
-```
 
 
 ## Homeruns per Team

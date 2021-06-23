@@ -43,6 +43,9 @@ batting_new <- batting_new %>%
   replace_na( list(HR = 0, RBI= 0, SB = 0, CS = 0,  BB = 0,  SO = 0, IBB = 0, HBP  = 0, SH = 0, SF  = 0, GIDP = 0)) %>%
   select(-GIDP)
 
+batting_new <- batting_new %>%
+  group_by(Team, Year) %>%
+  summarise(HR_count = sum(HR))
 
 
 
@@ -65,14 +68,19 @@ server <- function(input, output) {
   output$homerun_plot <- renderPlotly({
     chart <- batting_new %>%
       filter(Year == input$Year) %>%
-      ggplot(aes(x = HR, y = Team)) +
-      geom_col() +
+      ggplot(aes(x = HR_count, y = Team, color = Team)) +
+      geom_col(width = 0.5, position = "dodge") +
       labs(
         title = glue("Homeruns per Team during {input$Year} Season"),
         x = "Homeruns", y = "Team"
       ) +
       theme_classic() +
-      gghighlight(max(sum(HR)))
+      gghighlight(max(HR_count)) +
+      geom_text(size = 3, aes(color= Team, label = HR_count, ),
+                #position = position_dodge(1),
+                nudge_x = 10,
+                vjust = -0.4)
+      
     
     ggplotly(chart, tooltip = c("x", "y"))
   })
