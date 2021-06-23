@@ -9,9 +9,9 @@ library(plotly)
 library(janitor)
 library(gghighlight)
 
-master <- read_csv("Master.csv")
+master <- read.csv("Master.csv")
 
-batting <- read_csv("Batting.csv")
+batting <- read.csv("Batting.csv")
 
 master_name <- master %>%
   select(playerID, nameFirst, nameLast, bats, throws, birthCountry)
@@ -83,7 +83,7 @@ server <- function(input, output) {
                 nudge_x = 10,
                 vjust = -0.4)
     
-    output$downloadData <- downloadHandler(
+  output$downloadData <- downloadHandler(
       filename = function() {
         paste(Sys.Date(),"Batting", sep="_")
       },
@@ -100,3 +100,4 @@ server <- function(input, output) {
 
 
 shinyApp(ui, server)
+
