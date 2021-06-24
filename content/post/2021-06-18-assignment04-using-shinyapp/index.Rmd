@@ -20,6 +20,9 @@ This assignment involved creating an interactive post with ShinyApp.
 
 <a href="https://dylanmckenna.shinyapps.io/ModernBaseball_Homeruns/">Click Here for ShinyApp!</a>
 
+You can download the dataset below.
+
+
 ## Homeruns per Team
 
 The following chart shows the amount of homeruns (HR) per team in each year.
