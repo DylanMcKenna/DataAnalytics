@@ -31,7 +31,6 @@ The Top 5 Teams are highlighted.
 
 <iframe src="https://dylanmckenna.shinyapps.io/ModernBaseball_Homeruns/" height="800" width="100%" frameborder="no" ></iframe>
 
-
 An interesting observation is that the HR leaders in early 2000's were much higher than the years afterward. One possible reason for the decrease of HR's could be that steroid testing began during the 2003 season. 
 
 
