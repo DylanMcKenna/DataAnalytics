@@ -35,7 +35,8 @@ crime_post <- read.csv("crime_recent_V1.csv")
 
 crime_post <- crime_post %>%
   filter(year == "2020") %>%
-  mutate(date_day = as.Date(date_day, format = "%Y-%m-%d"))
+  mutate(date_day = as.Date(date_day, format = "%Y-%m-%d"),
+         month = month(date_day, label = TRUE, abbr = TRUE))
 
 #write.csv(crime_post, "crime_recent_V1.csv", row.names = FALSE)
 ```
@@ -129,4 +130,34 @@ ggplot(crime_year, aes(x= date_day, y = count_day) ) +
 
 ```
 
+## Q4 - Which month had the most crime in 2020?
 
+```{r echo=FALSE}
+
+crime_month <- crime_post %>%
+  group_by(month) %>%
+  arrange(month) %>%
+  count(month) %>%
+  mutate(month_count = n)
+         
+head(crime_month, 12)
+
+ggplot(crime_month, aes(x = month, y = month_count)
+                            ) +
+  #geom_text_repel() +
+  geom_col(width = 0.5, position = position_dodge(1), aes(fill = month), show.legend = FALSE ) +
+      theme_classic() +
+     # geom_text_repel(size = 3,
+      #                #hjust = -1,
+                #nudge_x = 0,
+                #vjust =  0,
+                #                ) +
+      labs(
+        title = ("Frequency of Crime Reports per Month for 2020"),
+        x = "Month", y = "Number of Crime Reports",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present")
+        #fill = "Primary Type of Crime") 
+
+
+
+```
