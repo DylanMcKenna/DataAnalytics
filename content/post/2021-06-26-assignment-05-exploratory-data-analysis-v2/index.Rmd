@@ -34,9 +34,10 @@ The dataset used for this assignment was the City of Chicago Crime Statistics da
 crime_post <- read.csv("crime_recent_V1.csv")
 
 crime_post <- crime_post %>%
-  filter(year == "2020")
+  filter(year == "2020") %>%
+  mutate(date_day = as.Date(date_day, format = "%Y-%m-%d"))
 
-write.csv(crime_post, "crime_recent_V1.csv", row.names = FALSE)
+#write.csv(crime_post, "crime_recent_V1.csv", row.names = FALSE)
 ```
 
 ### Q1 - What are the most common types of crimes?
@@ -54,7 +55,7 @@ ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
   geom_text(size = 3, aes(color = primary_type, 
                               label = primary_count),
                 nudge_x = -2000,
-                vjust = 1.4,
+                vjust = 1.5,
                                 ) +
   labs(
         title = ("Frequency of Crime Reports for 2020"),
@@ -81,17 +82,18 @@ crime_secondary <- crime_secondary %>%
   
 
 ggplot(crime_secondary, aes(x = description_count, y = description, fill = primary_type, 
-                            label = description_count)
-                            ) +
+                            #label = description_count)
+                            )) +
   #geom_text_repel() +
-  geom_col(width = 0.5, position = position_dodge(0.7)) +
+  geom_col(width = 0.5, position = position_dodge(1)) +
       theme_classic() +
-      geom_text(size = 3,
-                nudge_x = 3000,
-                vjust = 0.2,
-                                ) +
+     # geom_text_repel(size = 3,
+      #                #hjust = -1,
+                #nudge_x = 0,
+                #vjust =  0,
+                #                ) +
       labs(
-        title = ("Frequency of Crime Reports over 2019 and 2020"),
+        title = ("Frequency of Crime Reports for 2020"),
         x = "Number of Reports", y = "Type of Crime",
         caption = "Data Source: City of Chicago - Crimes 2001 to Present") 
 
@@ -100,6 +102,21 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
 ## Q3 - When is are more crimes reported during the year?
 
 ```{r echo=FALSE}
+
+crime_year <- crime_post %>%
+  count(date_day) %>% 
+  mutate(count_day = n,
+         month = month(date_day)) #%>%
+  #months(crime_post, month)
+          
+
+ggplot(crime_year, aes(x= date_day, y = count_day) ) +
+  geom_line(aes(color = month)) +
+  labs(
+        title = ("Trend of Crime Reports for 2020"),
+        x = "Date", y = "Frequency of Crime Reports",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present") +
+  theme_classic()
 
 
 ```
