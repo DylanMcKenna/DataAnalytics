@@ -141,7 +141,6 @@ crime_month <- crime_post %>%
   mutate(month_count = n)
          
 
-
 ggplot(crime_month, aes(x = month, y = month_count)
                             ) +
   #geom_text_repel() +
