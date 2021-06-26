@@ -59,8 +59,9 @@ ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
                                 ) +
   labs(
         title = ("Frequency of Crime Reports for 2020"),
-        x = "Number of Reports", y = "Type of Crime",
-        caption = "Data Source: City of Chicago - Crimes 2001 to Present") 
+        x = "Number of Reports", y = "Primary Type of Crime",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present",
+        color = "Top 5 Types of Crime") 
 ```
 
 
@@ -94,12 +95,13 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
                 #                ) +
       labs(
         title = ("Frequency of Crime Reports for 2020"),
-        x = "Number of Reports", y = "Type of Crime",
-        caption = "Data Source: City of Chicago - Crimes 2001 to Present") 
+        x = "Number of Reports", y = "Secondary Type of Crime",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present",
+        fill = "Primary Type of Crime") 
 
 ```
 
-## Q3 - When is are more crimes reported during the year?
+## Q3 - When are more crimes reported during the year?
 
 ```{r echo=FALSE}
 
