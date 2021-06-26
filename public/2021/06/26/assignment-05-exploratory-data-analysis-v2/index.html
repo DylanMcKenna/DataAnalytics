@@ -22,11 +22,6 @@
 
 
 
-
-<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
-
-
-
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -62,7 +57,7 @@
 
   <article class="article">
     
-    <span class="article-duration">2 min read</span>
+    <span class="article-duration">1 min read</span>
     
 
     <h1 class="article-title">Assignment 05 - Exploratory Data Analysis - V2</h1>
@@ -76,66 +71,22 @@
 <script src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/header-attrs/header-attrs.js"></script>
 
 
-<div id="assignmnet-5---exploratory-data-analysis" class="section level2">
-<h2>Assignmnet 5 - Exploratory Data Analysis</h2>
-</div>
-<div id="assignment-5---exploratory-data-analysis" class="section level1">
-<h1>Assignment 5 - Exploratory Data Analysis</h1>
+<div id="assignmnet-5---exploratory-data-analysis" class="section level1">
+<h1>Assignmnet 5 - Exploratory Data Analysis</h1>
+<p>This is the submission for Assignment 5 - EDA.</p>
+<div id="dataset-city-of-chicago---crime---2001-to-present" class="section level2">
+<h2>Dataset: City of Chicago - Crime - 2001 to Present</h2>
 <p>Describe data more</p>
-<p>The dataset used for this assignnment was the City of Chicago Crime Statistics data. To reduce the file size, the data is reflective of the year 2019 and the year 2020. This data is taken from the Chicago Police Departments publicly available data.</p>
+<p>The dataset used for this assignment was the City of Chicago Crime Statistics data. To reduce the file size, the data is reflective of the year 2019 and the year 2020. This data is taken from the Chicago Police Departments publicly available data.</p>
 <div id="q1" class="section level3">
 <h3>Q1</h3>
 <p>What are the most common types of crimes?</p>
-<pre class="r"><code>crime_primary &lt;- crime_post %&gt;%
-  count(primary_type) %&gt;%
-  mutate(primary_count = n) %&gt;%
-  select(-n)
-
-ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
-  geom_col(width = 0.5, position = &quot;dodge&quot;) +
-  theme_classic() +
-  gghighlight(max(primary_count)) +
-  geom_text(size = 3, aes(color = primary_type, 
-                              label = primary_count),
-                nudge_x = 4000,
-                vjust = 0.2,
-                                ) +
-  labs(
-        title = (&quot;Frequency of Crime Reports over 2019 and 2020&quot;),
-        x = &quot;Number of Reports&quot;, y = &quot;Type of Crime&quot;,
-        caption = &quot;Data Source: City of Chicago - Crimes 2001 to Present&quot;) </code></pre>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="q2" class="section level3">
 <h3>Q2</h3>
-<pre class="r"><code>crime_secondary &lt;- crime_post %&gt;%
-  filter(primary_type %in% c(&quot;BATTERY&quot;, &quot;THEFT&quot;, &quot;ASSAULT&quot;, &quot;CRIMINAL DAMAGE&quot;, &quot;DECEPTIVE PRACTICE&quot;)) %&gt;%
-  count(primary_type, description) %&gt;%
- mutate(description_count = n) %&gt;%
-#  select(-n) %&gt;%
-  arrange(desc(n)) #%&gt;%
-  
-
-  
-crime_secondary &lt;- crime_secondary %&gt;%
-  slice(1:10)
-  
-
-ggplot(crime_secondary, aes(x = description_count, y = description, fill = primary_type, 
-                            label = description_count)
-                            ) +
-  #geom_text_repel() +
-  geom_col(width = 0.5, position = position_dodge(0.7)) +
-      theme_classic() +
-      geom_text(size = 3,
-                nudge_x = 3000,
-                vjust = 0.2,
-                                ) +
-      labs(
-        title = (&quot;Frequency of Crime Reports over 2019 and 2020&quot;),
-        x = &quot;Number of Reports&quot;, y = &quot;Type of Crime&quot;,
-        caption = &quot;Data Source: City of Chicago - Crimes 2001 to Present&quot;) </code></pre>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
 </div>
 </div>
 
@@ -160,18 +111,6 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
 
     </div>
     
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
     
 

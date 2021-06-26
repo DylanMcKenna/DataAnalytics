@@ -39,8 +39,7 @@ crime_post <- crime_post %>%
 write.csv(crime_post, "crime_recent_V1.csv", row.names = FALSE)
 ```
 
-### Q1
-What are the most common types of crimes?
+### Q1 - What are the most common types of crimes?
 
 ```{r echo=FALSE}
 crime_primary <- crime_post %>%
@@ -64,7 +63,7 @@ ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
 ```
 
 
-### Q2
+### Q2 - What are the most frequent subtypes of the top 5 crime types?
 
 ```{r echo=FALSE}
 
@@ -97,4 +96,12 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
         caption = "Data Source: City of Chicago - Crimes 2001 to Present") 
 
 ```
+
+## Q3 - When is are more crimes reported during the year?
+
+```{r echo=FALSE}
+
+
+```
+
 
