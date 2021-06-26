@@ -191,7 +191,7 @@ ggplot(crime_rate, aes(x= date_day, y = rate, fill = month ))+
 
 Which crimes have the highest arrest rate?
 
-```{r}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 
 crime_arrest <- crime_post %>%
   group_by(primary_type) %>%
@@ -202,7 +202,6 @@ crime_arrest <- crime_post %>%
   summarise(arrest_rate = (arrest_count/sum(arrest_count)*100),
             arrest = arrest)
 
-head(crime_arrest)
 
 ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
   geom_col(color = "black", position = position_stack(reverse = TRUE)) +
