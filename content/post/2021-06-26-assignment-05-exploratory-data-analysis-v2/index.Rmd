@@ -179,11 +179,53 @@ ggplot(crime_rate, aes(x= date_day, y = rate, fill = month ))+
   labs(
         title = ("Daily Crime Rate for 2020"),
         x = "Date", y = "Frequency of Crime Reports",
-        caption = "Data Source: City of Chicago - Crimes 2001 to Present"
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present",
+        fill = "Month"
         ) +
   theme_classic() +
   scale_fill_brewer(palette = "Paired")
   #scale_colour_viridis_b()
+
+```
+
+
+Which crimes have the highest arrest rate?
+
+```{r}
+
+crime_arrest <- crime_post %>%
+  group_by(primary_type) %>%
+  count(primary_type, arrest) %>%
+  mutate(arrest_count = n,
+         arrest = case_when(arrest == "1" ~ "Arrest Made",
+                            arrest == "0" ~ "No Arrest")) %>%
+  summarise(arrest_rate = (arrest_count/sum(arrest_count)*100),
+            arrest = arrest)
+
+head(crime_arrest)
+
+ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
+  geom_col(color = "black", position = position_stack(reverse = TRUE)) +
+  gghighlight() +
+  labs(
+        title = ("Daily Crime Rate for 2020"),
+        x = "Percentage", y = "Primary Crime",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present",
+        fill = "Arrest Status"
+        ) +
+  theme_classic() + 
+  scale_fill_brewer(palette = "Set1")
+  #scale_colour_viridis_b()
+
+```
+
+
+
+
+Which wards are the best and worst to live in, based on crime rate?
+
+```{r}
+
 
 ```
 
