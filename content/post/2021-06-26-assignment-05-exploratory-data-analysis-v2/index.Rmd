@@ -147,6 +147,7 @@ ggplot(crime_month, aes(x = month, y = month_count)
   #geom_text_repel() +
   geom_col(width = 0.5, position = position_dodge(1), aes(fill = month), show.legend = FALSE ) +
       theme_classic() +
+  gghighlight(max(month_count)) +
      # geom_text_repel(size = 3,
       #                #hjust = -1,
                 #nudge_x = 0,
@@ -161,3 +162,32 @@ ggplot(crime_month, aes(x = month, y = month_count)
 
 
 ```
+
+
+Daily Crime Rate
+
+```{r echo=FALSE}
+
+crime_rate <- crime_post %>%
+  count(date_day, month) %>% 
+  mutate(count_rate = n, rate = (count_rate/(sum(count_rate))) * 100)
+        
+
+#crime_year <- crime_year %>%
+  
+head(crime_rate)
+
+ggplot(crime_rate, aes(x= date_day, y = rate, fill = month ))+
+  geom_col() + #aes(fill = month), show.legend = TRUE) +
+  gghighlight() +
+  labs(
+        title = ("Trend of Crime Reports for 2020"),
+        x = "Date", y = "Frequency of Crime Reports",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present"
+        ) +
+  theme_classic() +
+  scale_fill_brewer(palette = "Paired")
+  #scale_colour_viridis_b()
+
+```
+
