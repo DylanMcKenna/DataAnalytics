@@ -22,6 +22,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -57,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">1 min read</span>
+    <span class="article-duration">2 min read</span>
     
 
     <h1 class="article-title">Assignment 05 - Exploratory Data Analysis - V2</h1>
@@ -90,6 +95,47 @@
 <h2>Q3 - When are more crimes reported during the year?</h2>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
+<div id="q4---which-month-had-the-most-crime-in-2020" class="section level2">
+<h2>Q4 - Which month had the most crime in 2020?</h2>
+<p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Daily Crime Rate</p>
+<p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Which crimes have the highest arrest rate?</p>
+<pre class="r"><code>crime_arrest &lt;- crime_post %&gt;%
+  group_by(primary_type) %&gt;%
+  count(primary_type, arrest) %&gt;%
+  mutate(arrest_count = n,
+         arrest = case_when(arrest == &quot;1&quot; ~ &quot;Arrest Made&quot;,
+                            arrest == &quot;0&quot; ~ &quot;No Arrest&quot;)) %&gt;%
+  summarise(arrest_rate = (arrest_count/sum(arrest_count)*100),
+            arrest = arrest)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;primary_type&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>head(crime_arrest)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   primary_type [3]
+##   primary_type arrest_rate arrest     
+##   &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;      
+## 1 ARSON              93.5  No Arrest  
+## 2 ARSON               6.51 Arrest Made
+## 3 ASSAULT            87.3  No Arrest  
+## 4 ASSAULT            12.7  Arrest Made
+## 5 BATTERY            83.5  No Arrest  
+## 6 BATTERY            16.5  Arrest Made</code></pre>
+<pre class="r"><code>ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
+  geom_col(color = &quot;black&quot;, position = position_stack(reverse = TRUE)) +
+  gghighlight() +
+  labs(
+        title = (&quot;Daily Crime Rate for 2020&quot;),
+        x = &quot;Percentage&quot;, y = &quot;Primary Crime&quot;,
+        caption = &quot;Data Source: City of Chicago - Crimes 2001 to Present&quot;,
+        fill = &quot;Arrest Status&quot;
+        ) +
+  theme_classic() + 
+  scale_fill_brewer(palette = &quot;Set1&quot;)</code></pre>
+<p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>  #scale_colour_viridis_b()</code></pre>
+<p>Which wards are the best and worst to live in, based on crime rate?</p>
+</div>
 </div>
 
     </div>
@@ -113,6 +159,18 @@
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 
