@@ -38,39 +38,7 @@ tags: []
 <p>Daily Crime Rate</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Which crimes have the highest arrest rate?</p>
-<pre class="r"><code>crime_arrest &lt;- crime_post %&gt;%
-  group_by(primary_type) %&gt;%
-  count(primary_type, arrest) %&gt;%
-  mutate(arrest_count = n,
-         arrest = case_when(arrest == &quot;1&quot; ~ &quot;Arrest Made&quot;,
-                            arrest == &quot;0&quot; ~ &quot;No Arrest&quot;)) %&gt;%
-  summarise(arrest_rate = (arrest_count/sum(arrest_count)*100),
-            arrest = arrest)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;primary_type&#39;. You can override using the `.groups` argument.</code></pre>
-<pre class="r"><code>head(crime_arrest)</code></pre>
-<pre><code>## # A tibble: 6 x 3
-## # Groups:   primary_type [3]
-##   primary_type arrest_rate arrest     
-##   &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;      
-## 1 ARSON              93.5  No Arrest  
-## 2 ARSON               6.51 Arrest Made
-## 3 ASSAULT            87.3  No Arrest  
-## 4 ASSAULT            12.7  Arrest Made
-## 5 BATTERY            83.5  No Arrest  
-## 6 BATTERY            16.5  Arrest Made</code></pre>
-<pre class="r"><code>ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
-  geom_col(color = &quot;black&quot;, position = position_stack(reverse = TRUE)) +
-  gghighlight() +
-  labs(
-        title = (&quot;Probability of Arrest by Crime Type&quot;),
-        x = &quot;Percentage&quot;, y = &quot;Primary Crime&quot;,
-        caption = &quot;Data Source: City of Chicago - Crimes 2001 to Present&quot;,
-        fill = &quot;Arrest Status&quot;
-        ) +
-  theme_classic() + 
-  scale_fill_brewer(palette = &quot;Set1&quot;)</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>  #scale_colour_viridis_b()</code></pre>
 <p>Which wards are the best and worst to live in, based on crime rate?</p>
 </div>
 </div>
