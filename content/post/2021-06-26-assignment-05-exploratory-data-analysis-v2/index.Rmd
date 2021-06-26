@@ -1,0 +1,98 @@
+---
+title: Assignment 05 - Exploratory Data Analysis - V2
+author: DylanMcKenna
+date: '2021-06-26'
+slug: assignment-05-exploratory-data-analysis-v2
+categories:
+  - ggplot2
+  - tidyverse
+  - shiny
+tags: []
+---
+
+## Assignmnet 5 - Exploratory Data Analysis
+
+
+Describe data more
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(shiny)
+library(lubridate)
+library(gghighlight)
+library(janitor)
+library(gghighlight)
+library(ggrepel)
+```
+
+The dataset used for this assignnment was the City of Chicago Crime Statistics data. To reduce the file size, the data is reflective of the year 2019 and the year 2020.  This data is taken from the Chicago Police Departments publicly available data. 
+
+
+```{r echo=FALSE, message=FALSE}
+crime_post <- read.csv("crime_recent_V1.csv")
+
+crime_post <- crime_post %>%
+  filter(year == "2020")
+
+write.csv(crime_post, "crime_recent_V1.csv", row.names = FALSE)
+```
+
+### Q1
+What are the most common types of crimes?
+
+```{r}
+crime_primary <- crime_post %>%
+  count(primary_type) %>%
+  mutate(primary_count = n) %>%
+  select(-n)
+
+ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
+  geom_col(width = 0.5, position = "dodge") +
+  theme_classic() +
+  gghighlight(max(primary_count)) +
+  geom_text(size = 3, aes(color = primary_type, 
+                              label = primary_count),
+                nudge_x = 4000,
+                vjust = 0.2,
+                                ) +
+  labs(
+        title = ("Frequency of Crime Reports over 2019 and 2020"),
+        x = "Number of Reports", y = "Type of Crime",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present") 
+```
+
+
+### Q2
+
+```{r}
+
+crime_secondary <- crime_post %>%
+  filter(primary_type %in% c("BATTERY", "THEFT", "ASSAULT", "CRIMINAL DAMAGE", "DECEPTIVE PRACTICE")) %>%
+  count(primary_type, description) %>%
+ mutate(description_count = n) %>%
+#  select(-n) %>%
+  arrange(desc(n)) #%>%
+  
+
+  
+crime_secondary <- crime_secondary %>%
+  slice(1:10)
+  
+
+ggplot(crime_secondary, aes(x = description_count, y = description, fill = primary_type, 
+                            label = description_count)
+                            ) +
+  #geom_text_repel() +
+  geom_col(width = 0.5, position = position_dodge(0.7)) +
+      theme_classic() +
+      geom_text(size = 3,
+                nudge_x = 3000,
+                vjust = 0.2,
+                                ) +
+      labs(
+        title = ("Frequency of Crime Reports over 2019 and 2020"),
+        x = "Number of Reports", y = "Type of Crime",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present") 
+
+```
+

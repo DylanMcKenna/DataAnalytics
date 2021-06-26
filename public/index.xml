@@ -6,7 +6,18 @@
     <description>Recent content on Dylan McKenna - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment 05 - Exploratory Data Analysis - V2</title>
+      <link>/2021/06/26/assignment-05-exploratory-data-analysis-v2/</link>
+      <pubDate>Sat, 26 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/26/assignment-05-exploratory-data-analysis-v2/</guid>
+      <description>Assignmnet 5 - Exploratory Data AnalysisAssignment 5 - Exploratory Data AnalysisDescribe data more
+The dataset used for this assignnment was the City of Chicago Crime Statistics data. To reduce the file size, the data is reflective of the year 2019 and the year 2020. This data is taken from the Chicago Police Departments publicly available data.
+Q1What are the most common types of crimes?</description>
+    </item>
+    
     <item>
       <title>Assignment 04 - Using ShinyApp</title>
       <link>/2021/06/18/assignment04-using-shinyapp/</link>
