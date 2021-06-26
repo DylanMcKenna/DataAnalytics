@@ -106,17 +106,23 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
 crime_year <- crime_post %>%
   count(date_day) %>% 
   mutate(count_day = n,
-         month = month(date_day)) #%>%
-  #months(crime_post, month)
-          
+         month = month(date_day))
+         #month = (month), 
+         #mutate(month = month.abb[crime_year$month])) 
+
+#crime_year <- crime_year %>%
+  
+
 
 ggplot(crime_year, aes(x= date_day, y = count_day) ) +
-  geom_line(aes(color = month)) +
+  geom_line(aes(color = month), show.legend = FALSE) +
   labs(
         title = ("Trend of Crime Reports for 2020"),
         x = "Date", y = "Frequency of Crime Reports",
-        caption = "Data Source: City of Chicago - Crimes 2001 to Present") +
-  theme_classic()
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present"
+        ) +
+  theme_classic() +
+  scale_colour_viridis_b()
 
 
 ```
