@@ -42,7 +42,7 @@ write.csv(crime_post, "crime_recent_V1.csv", row.names = FALSE)
 ### Q1
 What are the most common types of crimes?
 
-```{r}
+```{r echo=FALSE}
 crime_primary <- crime_post %>%
   count(primary_type) %>%
   mutate(primary_count = n) %>%
@@ -66,7 +66,7 @@ ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
 
 ### Q2
 
-```{r}
+```{r echo=FALSE}
 
 crime_secondary <- crime_post %>%
   filter(primary_type %in% c("BATTERY", "THEFT", "ASSAULT", "CRIMINAL DAMAGE", "DECEPTIVE PRACTICE")) %>%
