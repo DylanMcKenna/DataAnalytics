@@ -140,7 +140,7 @@ crime_month <- crime_post %>%
   count(month) %>%
   mutate(month_count = n)
          
-head(crime_month, 12)
+
 
 ggplot(crime_month, aes(x = month, y = month_count)
                             ) +
