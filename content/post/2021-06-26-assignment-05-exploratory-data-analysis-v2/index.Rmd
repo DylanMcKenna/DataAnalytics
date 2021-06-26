@@ -208,7 +208,7 @@ ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
   gghighlight() +
   labs(
         title = ("Probability of Arrest by Crime Type"),
-        x = "Percentage", y = "Primary Crime",
+        x = "Percentage", y = "Type of Primary Crime",
         caption = "Data Source: City of Chicago - Crimes 2001 to Present",
         fill = "Arrest Status"
         ) +
@@ -221,10 +221,51 @@ ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
 
 
 
-Which wards are the best and worst to live in, based on crime rate?
+Which are the best and worst wards to live in, based on crime rate?
 
-```{r}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+crime_ward_c <- crime_post %>%
+  group_by(ward) %>%
+  count(ward, arrest) %>%
+  mutate(ward_count_c = n,
+         arrest = case_when(arrest == "1" ~ "Arrest Made",
+                            arrest == "0" ~ "No Arrest"))
+
+ggplot(crime_ward_c, aes(x= ward, y = ward_count_c, fill = arrest ))+
+  geom_col(color = "black", position = position_stack(reverse = TRUE)) +
+  #gghighlight(min(ward_count_c)) +
+  labs(
+        title = ("Number of Crime Reports by Ward"),
+        x = "Ward Number", y = "Number of Crime Reports",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present",
+        fill = "Arrest Status"
+        ) +
+  theme_classic()  
+  #scale_fill_brewer(palette = "Set1")
 
 
+
+crime_ward <- crime_post %>%
+  group_by(ward) %>%
+  count(ward, arrest) %>%
+  mutate(ward_count = n,
+         arrest = case_when(arrest == "1" ~ "Arrest Made",
+                            arrest == "0" ~ "No Arrest")) %>%
+  summarise(ward_rate = (ward_count/sum(ward_count)*100),
+            arrest = arrest)
+
+
+ggplot(crime_ward, aes(x= ward, y = ward_rate, fill = arrest ))+
+  geom_col(color = "black", position = position_stack(reverse = TRUE)) +
+  gghighlight(max(arrest)) +
+  labs(
+        title = ("Probability of Arrest by Ward"),
+        x = "Ward Number", y = "Probability of Making Arrest (%)",
+        caption = "Data Source: City of Chicago - Crimes 2001 to Present",
+        fill = "Arrest Status"
+        ) +
+  theme_classic()  
+  #scale_fill_brewer(palette = "Set1")
 ```
 
