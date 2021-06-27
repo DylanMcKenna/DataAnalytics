@@ -308,3 +308,11 @@ ggplot(crime_ward, aes(x= ward, y = ward_rate, fill = arrest ))+
   #scale_fill_brewer(palette = "Set1")
 ```
 
+## Experience Completing this Assignment
+
+I had a few issues with a file being too large. It took a while to find the commit where the issue occurred. I would get stuck on small pieces to each chart or altering the data to reduce the file size. 
+
+I reduced the file size in another folder to eliminate any possibility the parent file would fall into a commit. 
+
+I learned that even if you feel comfortable with certain processes, a small change to what you want to do can take a longer time than expected to figure it out.
+
