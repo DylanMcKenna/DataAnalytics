@@ -234,7 +234,7 @@ crime_ward_c <- crime_post %>%
    summarise(ward_rate_c = (ward_count_c/sum(ward_count_c)*100),
              ward = ward)
 
-head(crime_ward_c)
+#head(crime_ward_c)
 
 ggplot(crime_ward_c, aes(x= ward, y = ward_rate_c, fill = ward))+
   geom_col(color = "black", position = position_dodge(0.5)) +
