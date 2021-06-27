@@ -44,7 +44,7 @@ weather <- weather %>%
          max_wind_5_spd_mph = WSF5,
          snowfall_in = SNOW,
          snowdepth_in = SNWD,
-         precip_in = PRCP) 
+         precip_in = PRCP)
   
 
 ```
@@ -56,7 +56,7 @@ weather <- weather %>%
   mutate(min_temp_c = fahrenheit.to.celsius(min_temp_f, round = 2),
          max_temp_c = fahrenheit.to.celsius(max_temp_f, round = 2),
          avg_temp_c = fahrenheit.to.celsius(avg_temp_f, round = 2)) %>%
-  select(-c(min_temp_f, max_temp_f, avg_temp_f))
+  select(-c(min_temp_f, max_temp_f, avg_temp_f)) 
 
 
 
@@ -67,17 +67,23 @@ weather <- weather %>%
 # cumulative snowfall by station
 
 # NOT REALLY USEFUL
+
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 weather_group_temp_max <- weather %>%
   group_by(station) %>%
   count(station, max_temp_c, latitude, longitude) %>%
   summarise(max_temp_c = max(max_temp_c),
             latitude = max(latitude),
             longitude = max(longitude)) %>%
-  na.omit()
-
-
+  na.omit() %>%
+  arrange(desc(max_temp_c)) %>%
+  #remove the outlier that is greather than 125 degrees. possible forest fire
+  slice(-c(1))
 ```
-
 
 
 
@@ -91,21 +97,19 @@ line_maxtemp_latitude <- linear_reg() %>%
 
 chart_maxtemp_latitude <- ggplot(data = weather_group_temp_max, 
             aes(x = latitude, y = max_temp_c)) +
-  geom_point(color = "#999999", alpha = 0.5) +
+  geom_point(color = "#3399FF", alpha = 0.5) +
   #gghighlight(max(max_temp_c))+
   labs(
     title = "Latitude and Maximum Temperature Trend",
     x = "Latitude",
     y = "Maximum Temperature Observed (Celsius)"
     ) +
-  coord_cartesian(xlim = c(0, 80), ylim = c(0, 150)) +
-  theme(plot.subtitle = element_text(colour = "#E48957", face = "bold", size = rel(1.5)))
+  coord_cartesian(xlim = c(0, 75), ylim = c(0, 75)) #+
+  #theme(plot.subtitle = element_text(colour = "#E48957", face = "bold", size = rel(1.5)))
 
 chart_maxtemp_latitude <- chart_maxtemp_latitude +
   geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE) +
-  theme_bw() +
-  geom_text(data = subset(weather_group_temp_max, max_temp_c > 100),
-            aes(max_temp_c, label = station))
+  theme_bw() 
 
 chart_maxtemp_latitude
 ```
