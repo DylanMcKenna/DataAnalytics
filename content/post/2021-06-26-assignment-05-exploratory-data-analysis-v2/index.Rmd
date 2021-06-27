@@ -226,23 +226,27 @@ Which are the best and worst wards to live in, based on crime rate?
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
 crime_ward_c <- crime_post %>%
-  group_by(ward) %>%
-  count(ward, arrest) %>%
-  mutate(ward_count_c = n,
-         arrest = case_when(arrest == "1" ~ "Arrest Made",
-                            arrest == "0" ~ "No Arrest"))
+  #group_by(ward) %>%
+  count(ward) %>%
+  mutate(ward_count_c = n) %>%
+         #arrest = case_when(arrest == "1" ~ "Arrest Made",
+         #                   arrest == "0" ~ "No Arrest")) %>%
+   summarise(ward_rate_c = (ward_count_c/sum(ward_count_c)*100),
+             ward = ward)
 
-ggplot(crime_ward_c, aes(x= ward, y = ward_count_c, fill = arrest ))+
-  geom_col(color = "black", position = position_stack(reverse = TRUE)) +
-  #gghighlight(min(ward_count_c)) +
+head(crime_ward_c)
+
+ggplot(crime_ward_c, aes(x= ward, y = ward_rate_c, fill = ward))+
+  geom_col(color = "black", position = position_dodge(0.5)) +
+  #gghighlight(max(ward_count_c), min(ward_count_c)) +
   labs(
         title = ("Number of Crime Reports by Ward"),
         x = "Ward Number", y = "Number of Crime Reports",
         caption = "Data Source: City of Chicago - Crimes 2001 to Present",
         fill = "Arrest Status"
         ) +
-  theme_classic()  
-  #scale_fill_brewer(palette = "Set1")
+  theme_classic() +
+  scale_fill_viridis_b()
 
 
 
@@ -265,7 +269,7 @@ ggplot(crime_ward, aes(x= ward, y = ward_rate, fill = arrest ))+
         caption = "Data Source: City of Chicago - Crimes 2001 to Present",
         fill = "Arrest Status"
         ) +
-  theme_classic()  
+  theme_classic()   
   #scale_fill_brewer(palette = "Set1")
 ```
 
