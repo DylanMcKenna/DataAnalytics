@@ -19,16 +19,17 @@ library(gghighlight)
 library(janitor)
 library(gghighlight)
 library(ggrepel)
+library(weathermetrics)
 
-# read in data
-weather <- read.csv("weather.csv")
 ```
 
 
 ## Description of Dataset
 
 
-```{r}
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+# read in data
+weather <- read.csv("weather.csv")
 
 weather <- weather %>%
   rename(min_temp_f = TMIN,
@@ -39,9 +40,22 @@ weather <- weather %>%
          max_wind_5_spd_mph = WSF5,
          snowfall_in = SNOW,
          snowdepth_in = SNWD,
-         precip_in = PRCP,
-         )
+         precip_in = PRCP) 
+  
 
+```
+
+```{r echo=FALSE}
+# conver fahrenheit to celsius for temperature variables
+weather <- weather %>%
+  mutate(min_temp_c = fahrenheit.to.celsius(min_temp_f, round = 2),
+         max_temp_c = fahrenheit.to.celsius(max_temp_f, round = 2),
+         avg_temp_c = fahrenheit.to.celsius(avg_temp_f, round = 2)) %>%
+  select(-c(min_temp_f, max_temp_f, avg_temp_f))
 str(weather)
+```
+
+```{r}
+
 ```
 
