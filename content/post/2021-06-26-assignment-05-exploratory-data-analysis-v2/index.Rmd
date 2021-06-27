@@ -214,7 +214,7 @@ ggplot(crime_month, aes(x = month, y = month_count)
 
 
 
-Which crimes have the highest arrest rate?
+## Which crimes have the highest arrest rate?
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -245,7 +245,7 @@ ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
 
 The chart above shows that for most crimes, an arrest is very probable or unlikely. The arrest rate is either high or low for most crimes. Most of the crimes have a low arrest rate, less than 25%.
 
-
+The highest arrest rates are Concealed/Carry License Violation, Gambling, Liquor Law Violation, Narcotics, Prostitution, and Public Indecency. 
 
 ## Which are the best and worst wards to live in, based on crime rate?
 
