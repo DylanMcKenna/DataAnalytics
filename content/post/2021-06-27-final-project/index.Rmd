@@ -1,0 +1,47 @@
+---
+title: Final Project
+author: DylanMcKenna
+date: '2021-06-27'
+slug: final-project
+categories:
+  - ggplot2
+  - shiny
+  - tidyverse
+tags: []
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(shiny)
+library(lubridate)
+library(gghighlight)
+library(janitor)
+library(gghighlight)
+library(ggrepel)
+
+# read in data
+weather <- read.csv("weather.csv")
+```
+
+
+## Description of Dataset
+
+
+```{r}
+
+weather <- weather %>%
+  rename(min_temp_f = TMIN,
+         max_temp_f = TMAX,
+         avg_temp_f = TAVG,
+         avg_day_wind_mph = AWND,
+         max_wind_5_dir_deg = WDF5,
+         max_wind_5_spd_mph = WSF5,
+         snowfall_in = SNOW,
+         snowdepth_in = SNWD,
+         precip_in = PRCP,
+         )
+
+str(weather)
+```
+
