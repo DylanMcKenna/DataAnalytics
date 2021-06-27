@@ -49,6 +49,7 @@ weather <- weather %>%
 
 ```
 
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 # convert fahrenheit to celsius for temperature variables
 weather <- weather %>%
@@ -57,12 +58,31 @@ weather <- weather %>%
          avg_temp_c = fahrenheit.to.celsius(avg_temp_f, round = 2)) %>%
   select(-c(min_temp_f, max_temp_f, avg_temp_f))
 
-str(weather)
+
+
+# convert date to Date
+weather <- weather %>%
+  mutate(date = ymd(date))
+
+# cumulative snowfall by station
+
+# NOT REALLY USEFUL
+weather_group_temp_max <- weather %>%
+  group_by(station) %>%
+  count(station, max_temp_c, latitude, longitude) %>%
+  summarise(max_temp_c = max(max_temp_c),
+            latitude = max(latitude),
+            longitude = max(longitude)) %>%
+  na.omit()
+
+
 ```
 
 
 
-```{r}
+
+```{r echo=FALSE}
+
 # Fit a line to the date
 line_maxtemp_latitude <- linear_reg() %>%
   set_engine("lm") %>%
