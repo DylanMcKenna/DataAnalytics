@@ -120,11 +120,6 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
 
 Based on the chart below, crime reports are at their lowest during the spring and during the late fall. For 2020, crime reports spiked during late May. This may be related to the COVID lockdowns, as the spike is significantly higher than every other day.  COVID may also be the cause of the decreased crime rate during the early spring. There is also a spike at the start of the year. This new year spike may be related to New Year’s celebrations. 
 
-The months with the most crime reports are January, February, July, August, and October.
-
-Looking at the Daily Crime Rate, there are three noticeable spikes: early January, late May, and early-mid August.
-
-An interesting observation is that, approaching the holidays, crime reports are begin to decrease, and late December, the crime rate decreases rapidly for a brief period.
 
 
 ```{r echo=FALSE}
@@ -153,7 +148,11 @@ ggplot(crime_year, aes(x= date_day, y = count_day) ) +
 
 ```
 
-Daily Crime Rate
+### Daily Crime Rate
+
+Looking at the Daily Crime Rate, there are three noticeable spikes: early January, late May, and early-mid August.
+
+An interesting observation is that, approaching the holidays, crime reports are begin to decrease, and late December, the crime rate decreases rapidly for a brief period.
 
 ```{r echo=FALSE}
 
