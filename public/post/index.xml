@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Dylan McKenna - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Final Project</title>
+      <link>/2021/06/27/final-project/</link>
+      <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/27/final-project/</guid>
+      <description>Description of Dataset## &amp;#39;data.frame&amp;#39;: 416937 obs. of 16 variables:## $ X : int 1 2 3 4 5 6 7 8 9 10 ...## $ station : chr &amp;quot;GUAM INTL AP&amp;quot; &amp;quot;ROOSEVELT ROADS&amp;quot; &amp;quot;ROOSEVELT ROADS&amp;quot; &amp;quot;SAN JUAN L M MARIN AP&amp;quot; ...## $ state : chr &amp;quot;GU&amp;quot; &amp;quot;PR&amp;quot; &amp;quot;PR&amp;quot; &amp;quot;PR&amp;quot; ...## $ latitude : num 13.5 18.3 18.3 18.4 18.4 ...## $ longitude : num 144.</description>
+    </item>
+    
     <item>
       <title>Assignment 05 - Exploratory Data Analysis - V2</title>
       <link>/2021/06/26/assignment-05-exploratory-data-analysis-v2/</link>

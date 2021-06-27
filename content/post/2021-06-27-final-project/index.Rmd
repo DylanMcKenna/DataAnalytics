@@ -45,7 +45,7 @@ weather <- weather %>%
 
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 # conver fahrenheit to celsius for temperature variables
 weather <- weather %>%
   mutate(min_temp_c = fahrenheit.to.celsius(min_temp_f, round = 2),
