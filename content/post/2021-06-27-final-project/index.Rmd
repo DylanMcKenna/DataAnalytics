@@ -31,6 +31,7 @@ library(tidymodels)
 ## Description of Dataset
 
 
+ 
 ```{r echo=FALSE, warning=FALSE, error=FALSE}
 # read in data
 weather <- read.csv("weather.csv")
@@ -86,6 +87,9 @@ weather_group_temp_max <- weather %>%
 ```
 
 
+## How does the temperature change with latitude? 
+
+Maximum temperature and latitude
 
 ```{r echo=FALSE}
 
@@ -113,4 +117,5 @@ chart_maxtemp_latitude <- chart_maxtemp_latitude +
 
 chart_maxtemp_latitude
 ```
+
 
