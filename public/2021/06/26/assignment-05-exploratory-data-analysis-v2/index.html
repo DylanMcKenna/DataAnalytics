@@ -22,11 +22,6 @@
 
 
 
-
-<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
-
-
-
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -62,7 +57,7 @@
 
   <article class="article">
     
-    <span class="article-duration">2 min read</span>
+    <span class="article-duration">3 min read</span>
     
 
     <h1 class="article-title">Assignment 05 - Exploratory Data Analysis - V2</h1>
@@ -84,57 +79,46 @@
 <p>The dataset used for this assignment was the City of Chicago Crime Statistics data. To reduce the file size, the data is reflective of the year 2019 and the year 2020. This data is taken from the Chicago Police Departments publicly available data.</p>
 <div id="q1---what-are-the-most-common-types-of-crimes" class="section level3">
 <h3>Q1 - What are the most common types of crimes?</h3>
+<p>The top 5 most common types of reported crime are:
+1) Battery – 41472 reports in 2020
+2) Theft – 41186 reports in 2020
+3) Criminal Damage – 24857 reports in 2020
+4) Assault – 18243 reports in 2020
+5) Deceptive Practice – 17670 reports in 2020</p>
+<p>These are the primary types of crime. For each type of crime there is an associated specific description of the crime to further breakdown the data.</p>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="q2---what-are-the-most-frequent-subtypes-of-the-top-5-crime-types" class="section level3">
 <h3>Q2 - What are the most frequent subtypes of the top 5 crime types?</h3>
+<p>The next chart shows the 10 most common descriptions of the top 5 most common crime types.</p>
+<p>Domestic Battery is the most common description of all types. Theft under $500 is the second most common. There is only one occurrence of Deceptive Practice within the top 5 main types of crime.</p>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 </div>
 <div id="q3---when-are-more-crimes-reported-during-the-year" class="section level2">
 <h2>Q3 - When are more crimes reported during the year?</h2>
+<p>Based on the chart below, crime reports are at their lowest during the spring and during the late fall. For 2020, crime reports spiked during late May. This may be related to the COVID lockdowns, as the spike is significantly higher than every other day. COVID may also be the cause of the decreased crime rate during the early spring. There is also a spike at the start of the year. This new year spike may be related to New Year’s celebrations.</p>
+<p>The months with the most crime reports are January, February, July, August, and October.</p>
+<p>Looking at the Daily Crime Rate, there are three noticeable spikes: early January, late May, and early-mid August.</p>
+<p>An interesting observation is that, approaching the holidays, crime reports are begin to decrease, and late December, the crime rate decreases rapidly for a brief period.</p>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Daily Crime Rate</p>
+<p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="q4---which-month-had-the-most-crime-in-2020" class="section level2">
 <h2>Q4 - Which month had the most crime in 2020?</h2>
-<p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Daily Crime Rate</p>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Which crimes have the highest arrest rate?</p>
-<pre class="r"><code>crime_arrest &lt;- crime_post %&gt;%
-  group_by(primary_type) %&gt;%
-  count(primary_type, arrest) %&gt;%
-  mutate(arrest_count = n,
-         arrest = case_when(arrest == &quot;1&quot; ~ &quot;Arrest Made&quot;,
-                            arrest == &quot;0&quot; ~ &quot;No Arrest&quot;)) %&gt;%
-  summarise(arrest_rate = (arrest_count/sum(arrest_count)*100),
-            arrest = arrest)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;primary_type&#39;. You can override using the `.groups` argument.</code></pre>
-<pre class="r"><code>head(crime_arrest)</code></pre>
-<pre><code>## # A tibble: 6 x 3
-## # Groups:   primary_type [3]
-##   primary_type arrest_rate arrest     
-##   &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;      
-## 1 ARSON              93.5  No Arrest  
-## 2 ARSON               6.51 Arrest Made
-## 3 ASSAULT            87.3  No Arrest  
-## 4 ASSAULT            12.7  Arrest Made
-## 5 BATTERY            83.5  No Arrest  
-## 6 BATTERY            16.5  Arrest Made</code></pre>
-<pre class="r"><code>ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
-  geom_col(color = &quot;black&quot;, position = position_stack(reverse = TRUE)) +
-  gghighlight() +
-  labs(
-        title = (&quot;Daily Crime Rate for 2020&quot;),
-        x = &quot;Percentage&quot;, y = &quot;Primary Crime&quot;,
-        caption = &quot;Data Source: City of Chicago - Crimes 2001 to Present&quot;,
-        fill = &quot;Arrest Status&quot;
-        ) +
-  theme_classic() + 
-  scale_fill_brewer(palette = &quot;Set1&quot;)</code></pre>
 <p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>  #scale_colour_viridis_b()</code></pre>
-<p>Which wards are the best and worst to live in, based on crime rate?</p>
+<p>The chart above shows that for most crimes, an arrest is very probable or unlikely. The arrest rate is either high or low for most crimes. Most of the crimes have a low arrest rate, less than 25%.</p>
+</div>
+<div id="which-are-the-best-and-worst-wards-to-live-in-based-on-crime-rate" class="section level2">
+<h2>Which are the best and worst wards to live in, based on crime rate?</h2>
+<p>The two charts below are Number of Crimes by Ward and Probabilities of Arrest by Ward. The wards with the most crime reports are Ward 28, Ward 27, and Ward 24. However, these wards also have high arrests.</p>
+<p>Ward 37 is one of the best wards to live in based on crime reports. This ward has a low number of crimes reported but a higher probability of an arrest being made.</p>
+<p>Ward 27 is likely the worst ward to live in based on crime reports. This ward has the second highest number of crimes being reported with a slightly lower than expected probability of an arrest being made.</p>
+<p>These best/worst ward assumptions are based on the final 2 visuals. There is a trend in the shape of both charts. The higher the number of reported crimes, the higher the probability of an arrest being made. The two wards, 37 and 27, this trend is inverted. For Ward 37, it is inverted in a positive way. For Ward 27, it is slightly inverted in a negative way.</p>
+<p><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /><img src="/2021/06/26/assignment-05-exploratory-data-analysis-v2/index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 </div>
 </div>
 
@@ -160,19 +144,10 @@
     </div>
     
 
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
-
     
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
   </body>
