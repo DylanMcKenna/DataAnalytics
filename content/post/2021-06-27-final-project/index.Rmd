@@ -8,6 +8,8 @@ categories:
   - shiny
   - tidyverse
 tags: []
+leafletmap: true
+
 ---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -20,6 +22,7 @@ library(janitor)
 library(gghighlight)
 library(ggrepel)
 library(weathermetrics)
+library(leaflet)
 
 ```
 
@@ -45,17 +48,24 @@ weather <- weather %>%
 
 ```
 
-```{r echo=FALSE, warning=FALSE}
-# conver fahrenheit to celsius for temperature variables
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# convert fahrenheit to celsius for temperature variables
 weather <- weather %>%
   mutate(min_temp_c = fahrenheit.to.celsius(min_temp_f, round = 2),
          max_temp_c = fahrenheit.to.celsius(max_temp_f, round = 2),
          avg_temp_c = fahrenheit.to.celsius(avg_temp_f, round = 2)) %>%
   select(-c(min_temp_f, max_temp_f, avg_temp_f))
-str(weather)
+
 ```
 
 ```{r}
+# building a map
 
+weather_mapping <- weather %>%
+  leaflet() %>%
+  #addProviderTiles(providers$Stamen.Toner)
+  addTiles() %>%
+  addMarkers()
+#weather_mapping
 ```
 
