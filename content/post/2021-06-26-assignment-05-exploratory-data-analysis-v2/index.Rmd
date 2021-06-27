@@ -44,6 +44,7 @@ crime_post <- crime_post %>%
 ### Q1 - What are the most common types of crimes?
 
 The top 5 most common types of reported crime are:
+
 1)	Battery – 41472 reports in 2020
 2)	Theft – 41186 reports in 2020
 3)	Criminal Damage – 24857 reports in 2020
