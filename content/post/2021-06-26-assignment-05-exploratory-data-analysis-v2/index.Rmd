@@ -43,6 +43,15 @@ crime_post <- crime_post %>%
 
 ### Q1 - What are the most common types of crimes?
 
+The top 5 most common types of reported crime are:
+1)	Battery – 41472 reports in 2020
+2)	Theft – 41186 reports in 2020
+3)	Criminal Damage – 24857 reports in 2020
+4)	Assault – 18243 reports in 2020
+5)	Deceptive Practice – 17670 reports in 2020
+
+These are the primary types of crime. For each type of crime there is an associated specific description of the crime to further breakdown the data.
+
 ```{r echo=FALSE}
 crime_primary <- crime_post %>%
   count(primary_type) %>%
@@ -67,6 +76,11 @@ ggplot(crime_primary, aes(x = primary_count, y = primary_type)) +
 
 
 ### Q2 - What are the most frequent subtypes of the top 5 crime types?
+
+The next chart shows the 10 most common descriptions of the top 5 most common crime types.
+
+Domestic Battery is the most common description of all types. Theft under $500 is the second most common.  There is only one occurrence of Deceptive Practice within the top 5 main types of crime. 
+
 
 ```{r echo=FALSE}
 
@@ -103,6 +117,15 @@ ggplot(crime_secondary, aes(x = description_count, y = description, fill = prima
 ```
 
 ## Q3 - When are more crimes reported during the year?
+
+Based on the chart below, crime reports are at their lowest during the spring and during the late fall. For 2020, crime reports spiked during late May. This may be related to the COVID lockdowns, as the spike is significantly higher than every other day.  COVID may also be the cause of the decreased crime rate during the early spring. There is also a spike at the start of the year. This new year spike may be related to New Year’s celebrations. 
+
+The months with the most crime reports are January, February, July, August, and October.
+
+Looking at the Daily Crime Rate, there are three noticeable spikes: early January, late May, and early-mid August.
+
+An interesting observation is that, approaching the holidays, crime reports are begin to decrease, and late December, the crime rate decreases rapidly for a brief period.
+
 
 ```{r echo=FALSE}
 
@@ -220,10 +243,20 @@ ggplot(crime_arrest, aes(x= arrest_rate, y = primary_type, fill = arrest ))+
 
 ```
 
+The chart above shows that for most crimes, an arrest is very probable or unlikely. The arrest rate is either high or low for most crimes. Most of the crimes have a low arrest rate, less than 25%.
 
 
 
-Which are the best and worst wards to live in, based on crime rate?
+## Which are the best and worst wards to live in, based on crime rate?
+
+The two charts below are Number of Crimes by Ward and Probabilities of Arrest by Ward. The wards with the most crime reports are Ward 28, Ward 27, and Ward 24. However, these wards also have high arrests. 
+
+Ward 37 is one of the best wards to live in based on crime reports.  This ward has a low number of crimes reported but a higher probability of an arrest being made. 
+
+Ward 27 is likely the worst ward to live in based on crime reports. This ward has the second highest number of crimes being reported with a slightly lower than expected probability of an arrest being made. 
+
+These best/worst ward assumptions are based on the final 2 visuals. There is a trend in the shape of both charts. The higher the number of reported crimes, the higher the probability of an arrest being made. The two wards, 37 and 27, this trend is inverted. For Ward 37, it is inverted in a positive way. For Ward 27, it is slightly inverted in a negative way.
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
