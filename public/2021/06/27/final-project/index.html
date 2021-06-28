@@ -57,7 +57,7 @@
 
   <article class="article">
     
-    <span class="article-duration">2 min read</span>
+    <span class="article-duration">4 min read</span>
     
 
     <h1 class="article-title">Final Project</h1>
@@ -74,41 +74,60 @@
 <div id="description-of-dataset" class="section level2">
 <h2>Description of Dataset</h2>
 <p>The dataset used for this project is the Daily Weather in the U.S., 2017. The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project.</p>
-</div>
-<div id="how-does-the-temperature-change-with-latitude" class="section level2">
-<h2>How does the temperature change with latitude?</h2>
+<div id="how-does-the-temperature-change-with-latitude" class="section level3">
+<h3>How does the temperature change with latitude?</h3>
 <p>It is common sense to expect the temperature to decrease moving farther from the equator. The assumption is that there is an inverse relationship between latitude and temperature. As the latitude increases, the temperature will decrease.</p>
-<div id="maximum-temperature-and-latitude" class="section level3">
-<h3>Maximum Temperature and Latitude</h3>
-<p>The change in the maximum observed temperature related to the latitude fits the following model, where <span class="math inline">\(\beta_0\)</span> is 44.79679 and <span class="math inline">\(\beta_1\)</span> is -0.30451. Statistically, both values are significant to a level of confidence greater than 99.99%.</p>
+</div>
+<div id="how-does-the-maximum-observed-temperature-change-in-relation-to-latitude" class="section level3">
+<h3>How does the maximum observed temperature change in relation to latitude?</h3>
+<p>The change in the maximum observed temperature related to the latitude fits the following model, where <span class="math inline">\(\beta_0\)</span> is 44.796 and <span class="math inline">\(\beta_1\)</span> is -0.304. Statistically, both values are significant to a level of confidence greater than 99.99%.</p>
 <p><span class="math display">\[\hat{y}_{i} = \beta_0 + \beta_1~x_{i}\]</span>
 In this case, the maximum temperature decreases at a rate of 0.30451 for every increase in degree of latitude.</p>
 <p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="average-temperature-and-latitude" class="section level3">
-<h3>Average Temperature and Latitude</h3>
+<div id="how-does-average-daily-temperature-change-in-relation-to-latitude" class="section level3">
+<h3>How does average daily temperature change in relation to latitude?</h3>
 <p>Since we know the maximum temperature decreases with an increase in latitude, we assume the average temperature also decreases with an increase in latitude. In the chart below, the average temperature does not appear to change with a change in latitude.</p>
-<p>The change in the average observed temperature related to the latitude fits the following model, where <span class="math inline">\(\beta_0\)</span> is 20.81364083 and <span class="math inline">\(\beta_1\)</span> is -0.00041804, basically zero. Statistically, both values are significant to a level of confidence of 90%.</p>
+<p>The change in the average observed temperature related to the latitude fits the following model, where <span class="math inline">\(\beta_0\)</span> is 20.813 and <span class="math inline">\(\beta_1\)</span> is -0.00041, basically zero. Statistically, both values are significant to a level of confidence of 90%.</p>
 <p>For this chart, the data should be analyzed for any outliers that may be affecting the results.</p>
 <p><span class="math display">\[\hat{y}_{i} = \beta_0 + \beta_1~x_{i}\]</span>
 In this case, the average temperature does not really change with a change in degree of latitude.</p>
 <p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>What about elevation?</p>
 </div>
-</div>
-<div id="how-does-elevation-affect-the-average-temperature" class="section level2">
-<h2>How does elevation affect the average temperature?</h2>
-<p>From the chart below,</p>
+<div id="how-does-elevation-affect-the-average-temperature" class="section level3">
+<h3>How does elevation affect the average temperature?</h3>
+<p>The chart below represents the relationship between average daily temperature and elevation. In the chart, it is noticeable that as the elevation increases, the average daily temperature decreases.</p>
+<p>The change in the average daily temperature related to elevation fits the following model, where <span class="math inline">\(\beta_0\)</span> is 26.348 and <span class="math inline">\(\beta_1\)</span> is -0.00273. Statistically, both values are significant to a level of confidence greater than 99.99%.</p>
+<p><span class="math display">\[\hat{y}_{i} = \beta_0 + \beta_1~x_{i}\]</span>
+In this case, the average daily temperature decreases at a rate of 0.00273 for every foot of increase in elevation.</p>
+<p>This can be quite a change. For example, a 1000 foot increase in elevation would drop the average daily temperature by 2.73 degrees Celsius.</p>
 <p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div id="precipitation-by-elevation" class="section level3">
-<h3>Precipitation by Elevation</h3>
+</div>
+<div id="what-is-the-relationship-between-elevation-and-precipitation" class="section level3">
+<h3>What is the relationship between elevation and precipitation?</h3>
+<p>From looking at the chart, many stations located at or near sea-level have a greater chance at observing a large precipitation event.</p>
+<p>The chart below represents the relationship between maximum observed precipitation and elevation. In the chart, it is noticeable that as the elevation increases, the maximum observed precipitation decreases.</p>
+<p>The change in the average daily temperature related to elevation fits the following model, where <span class="math inline">\(\beta_0\)</span> is 2.723 and <span class="math inline">\(\beta_1\)</span> is -0.000448. Statistically, both values are significant to a level of confidence greater than 99.99%.</p>
+<p><span class="math display">\[\hat{y}_{i} = \beta_0 + \beta_1~x_{i}\]</span>
+In this case, the maximum observed precipitation decreases at a rate of 0.000448 inches for every foot of increase in elevation.</p>
+<p>This can be quite a change. For example, a 1000 foot increase in elevation would drop the maximum observed precipitation by 0.4 inches.</p>
 <p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="precipitation-by-latitude" class="section level3">
-<h3>Precipitation by Latitude</h3>
+<div id="is-there-more-precipitation-with-an-increase-in-latitude" class="section level3">
+<h3>Is there more precipitation with an increase in latitude?</h3>
+<p>According to the chart below, no, as latitude increases, the amount of precipitation decreases.</p>
+<p>The change in the average daily temperature related to elevation fits the following model, where <span class="math inline">\(\beta_0\)</span> is 6.448 and <span class="math inline">\(\beta_1\)</span> is -0.1027. Statistically, both values are significant to a level of confidence greater than 99.99%.</p>
+<p><span class="math display">\[\hat{y}_{i} = \beta_0 + \beta_1~x_{i}\]</span>
+In this case, the maximum observed precipitation decreases at a rate of 0.1027 inches for every increase in degree of latitude.</p>
 <p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="maximum-5-second-windspeed-by-latitude" class="section level3">
-<h3>Maximum 5 second Windspeed by Latitude</h3>
+<div id="does-maximum-windspeed-change-with-increasing-latitude" class="section level3">
+<h3>Does maximum windspeed change with increasing latitude?</h3>
+<p>According to the chart below, yes, as latitude increases, the maximum windspeed decreases.</p>
+<p>The change in the maximum windspeed related to elevation fits the following model, where <span class="math inline">\(\beta_0\)</span> is 64.2639 and <span class="math inline">\(\beta_1\)</span> is -0.1481. Statistically, both values are significant to a level of confidence greater than 90%.</p>
+<p><span class="math display">\[\hat{y}_{i} = \beta_0 + \beta_1~x_{i}\]</span>
+In this case, the maximum observed windspeed decreases at a rate of 0.1481 inches for every increase in degree of latitude.</p>
 <p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>

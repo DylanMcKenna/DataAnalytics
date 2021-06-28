@@ -14,7 +14,7 @@
       
       <guid>/2021/06/27/final-project/</guid>
       <description>Description of DatasetThe dataset used for this project is the Daily Weather in the U.S., 2017. The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project.
-How does the temperature change with latitude?It is common sense to expect the temperature to decrease moving farther from the equator.</description>
+How does the temperature change with latitude?It is common sense to expect the temperature to decrease moving farther from the equator. The assumption is that there is an inverse relationship between latitude and temperature.</description>
     </item>
     
     <item>
