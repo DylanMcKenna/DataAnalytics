@@ -93,7 +93,16 @@ weather_group_temp_max <- weather %>%
 
 ## How does the temperature change with latitude? 
 
-Maximum temperature and latitude
+It is common sense to expect the temperature to decrease moving farther from the equator. The assumption is that there is an inverse relationship between latitude and temperature. As the latitude increases, the temperature will decrease.
+
+### Maximum Temperature and Latitude
+
+
+The change in the maximum observed temperature related to the latitude fits the following model, where $\beta_0$ is 44.79679 and $\beta_1$ is -0.30451.  Statistically, both values are significant to a level of confidence greater than 99.99%.
+
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+In this case, the maximum temperature decreases at a rate of 0.30451 for every increase in degree of latitude.
 
 ```{r echo=FALSE}
 
@@ -123,7 +132,17 @@ chart_maxtemp_latitude
 ```
 
 
-Average Temp by Latitude
+### Average Temperature and Latitude
+
+Since we know the maximum temperature decreases with an increase in latitude, we assume the average temperature also decreases with an increase in latitude. In the chart below, the average temperature does not appear to change with a change in latitude. 
+
+The change in the average observed temperature related to the latitude fits the following model, where $\beta_0$ is 20.81364083 and $\beta_1$ is -0.00041804, basically zero.  Statistically, both values are significant to a level of confidence of 90%. 
+ 
+ For this chart, the data should be analyzed for any outliers that may be affecting the results.
+
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+In this case, the average temperature does not really change with a change in degree of latitude.
 
 
 ```{r echo=FALSE}
@@ -157,7 +176,10 @@ chart_avgtemp_latitude <- ggplot(data = weather_group_temp_avg,
 chart_avgtemp_latitude
 ```
 
-Average Temp by Elevation
+## How does elevation affect the average temperature?
+
+From the chart below, 
+
 
 ```{r echo=FALSE}
 weather_group_temp_elevation <- weather %>%
@@ -191,7 +213,7 @@ chart_avgtemp_elevation
 ```
 
 
-Precipitation by Elevation
+### Precipitation by Elevation
 
 ```{r echo=FALSE}
 weather_group_precip_elevation <- weather %>%
@@ -204,7 +226,7 @@ weather_group_precip_elevation <- weather %>%
   #remove the outlier that is greather than 125 degrees. possible forest fire
   #slice(-c(1))
 
-line_avgtemp_elevation <- linear_reg() %>%
+line_precip_elevation <- linear_reg() %>%
   set_engine("lm") %>%
   fit(precip_in ~ elevation  , data = weather_group_precip_elevation) %>%
   tidy()
@@ -224,7 +246,7 @@ chart_precip_elevation <- ggplot(data = weather_group_precip_elevation,
 chart_precip_elevation
 ```
 
-Precipitation by Latitude
+### Precipitation by Latitude
 
 ```{r echo=FALSE}
 weather_group_precip_latitude <- weather %>%
@@ -237,7 +259,7 @@ weather_group_precip_latitude <- weather %>%
   #remove the outlier that is greather than 125 degrees. possible forest fire
   #slice(-c(1))
 
-line_avgtemp_elevation <- linear_reg() %>%
+line_precip_latitude <- linear_reg() %>%
   set_engine("lm") %>%
   fit(precip_in ~ latitude  , data = weather_group_precip_latitude) %>%
   tidy()
@@ -259,7 +281,7 @@ chart_precip_latitude
 ```
 
 
-Maximum 5 second Windspeed by Latitude
+### Maximum 5 second Windspeed by Latitude
 
 ```{r echo=FALSE}
 weather_group_wind_latitude <- weather %>%
