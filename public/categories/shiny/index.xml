@@ -13,13 +13,8 @@
       <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>/2021/06/27/final-project/</guid>
-      <description>Description of DatasetHow does the temperature change with latitude?Maximum temperature and latitude
-Average Temp by Latitude
-Average Temp by Elevation
-Precipitation by Elevation
-Precipitation by Latitude
-Maximum 5 second Windspeed by Latitude
-</description>
+      <description>Description of DatasetThe dataset used for this project is the Daily Weather in the U.S., 2017. The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project.
+# read in dataweather &amp;lt;- read.csv(&amp;quot;weather.csv&amp;quot;)# rename variablesweather &amp;lt;- weather %&amp;gt;%rename(min_temp_f = TMIN,max_temp_f = TMAX,avg_temp_f = TAVG,avg_day_wind_mph = AWND,max_wind_5_dir_deg = WDF5,max_wind_5_spd_mph = WSF5,snowfall_in = SNOW,snowdepth_in = SNWD,precip_in = PRCP)station_count &amp;lt;- weather %&amp;gt;%group_by(station) %&amp;gt;%count()#str(station_count)How does the temperature change with latitude?</description>
     </item>
     
     <item>

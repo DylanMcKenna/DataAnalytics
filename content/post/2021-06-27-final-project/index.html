@@ -18,6 +18,27 @@ output:
 
 <div id="description-of-dataset" class="section level2">
 <h2>Description of Dataset</h2>
+<p>The dataset used for this project is the Daily Weather in the U.S., 2017. The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project.</p>
+<pre class="r"><code># read in data
+weather &lt;- read.csv(&quot;weather.csv&quot;)
+
+# rename variables
+weather &lt;- weather %&gt;%
+  rename(min_temp_f = TMIN,
+         max_temp_f = TMAX,
+         avg_temp_f = TAVG,
+         avg_day_wind_mph = AWND,
+         max_wind_5_dir_deg = WDF5,
+         max_wind_5_spd_mph = WSF5,
+         snowfall_in = SNOW,
+         snowdepth_in = SNWD,
+         precip_in = PRCP)
+  
+station_count &lt;- weather %&gt;%
+  group_by(station) %&gt;%
+  count()
+
+#str(station_count)</code></pre>
 </div>
 <div id="how-does-the-temperature-change-with-latitude" class="section level2">
 <h2>How does the temperature change with latitude?</h2>

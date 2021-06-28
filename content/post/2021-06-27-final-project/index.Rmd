@@ -31,9 +31,9 @@ library(tidymodels)
 
 ## Description of Dataset
 
-
+The dataset used for this project is the Daily Weather in the U.S., 2017.  The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project. 
  
-```{r echo=FALSE, warning=FALSE, error=FALSE}
+```{r warning=FALSE, error=FALSE}
 # read in data
 weather <- read.csv("weather.csv")
 
@@ -49,6 +49,11 @@ weather <- weather %>%
          snowdepth_in = SNWD,
          precip_in = PRCP)
   
+station_count <- weather %>%
+  group_by(station) %>%
+  count()
+
+#str(station_count)
 
 ```
 
