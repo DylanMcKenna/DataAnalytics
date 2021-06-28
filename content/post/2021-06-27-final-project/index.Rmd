@@ -118,15 +118,16 @@ chart_maxtemp_latitude <- chart_maxtemp_latitude +
 chart_maxtemp_latitude
 ```
 
+
 Average Temp by Latitude
+
 
 ```{r echo=FALSE}
 weather_group_temp_avg <- weather %>%
   group_by(station) %>%
-  count(station, avg_temp_c, elevation) %>%
+  count(station, avg_temp_c, latitude) %>%
   summarise(avg_temp_c = mean(avg_temp_c),
-            latitude = max(latitude),
-            longitude = max(longitude)) %>%
+            latitude = max(latitude)) %>%
   na.omit() #%>%
   #arrange(desc(max_temp_c)) %>%
   #remove the outlier that is greather than 125 degrees. possible forest fire
