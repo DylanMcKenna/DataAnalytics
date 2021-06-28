@@ -34,6 +34,7 @@ library(knitr)
 ## Description of Dataset
 
 The dataset used for this project is the Daily Weather in the U.S., 2017.  The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project. 
+
  
 ```{r echo=FALSE, warning=FALSE, message=FALSE, }
 # read in data
@@ -55,7 +56,6 @@ station_count <- weather %>%
   group_by(station) %>%
   count()
 
-#str(station_count)
 
 ```
 
@@ -91,14 +91,13 @@ weather_group_temp_max <- weather %>%
 ```
 
 
-## How does the temperature change with latitude? 
+### How does the temperature change with latitude? 
 
 It is common sense to expect the temperature to decrease moving farther from the equator. The assumption is that there is an inverse relationship between latitude and temperature. As the latitude increases, the temperature will decrease.
 
-### Maximum Temperature and Latitude
+### How does the maximum observed temperature change in relation to latitude?
 
-
-The change in the maximum observed temperature related to the latitude fits the following model, where $\beta_0$ is 44.79679 and $\beta_1$ is -0.30451.  Statistically, both values are significant to a level of confidence greater than 99.99%.
+The change in the maximum observed temperature related to the latitude fits the following model, where $\beta_0$ is 44.796 and $\beta_1$ is -0.304.  Statistically, both values are significant to a level of confidence greater than 99.99%.
 
 
 $$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
@@ -132,13 +131,13 @@ chart_maxtemp_latitude
 ```
 
 
-### Average Temperature and Latitude
+### How does average daily temperature change in relation to latitude?
 
 Since we know the maximum temperature decreases with an increase in latitude, we assume the average temperature also decreases with an increase in latitude. In the chart below, the average temperature does not appear to change with a change in latitude. 
 
-The change in the average observed temperature related to the latitude fits the following model, where $\beta_0$ is 20.81364083 and $\beta_1$ is -0.00041804, basically zero.  Statistically, both values are significant to a level of confidence of 90%. 
+The change in the average observed temperature related to the latitude fits the following model, where $\beta_0$ is 20.813 and $\beta_1$ is -0.00041, basically zero.  Statistically, both values are significant to a level of confidence of 90%. 
  
- For this chart, the data should be analyzed for any outliers that may be affecting the results.
+For this chart, the data should be analyzed for any outliers that may be affecting the results.
 
 
 $$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
@@ -151,10 +150,8 @@ weather_group_temp_avg <- weather %>%
   count(station, avg_temp_c, latitude) %>%
   summarise(avg_temp_c = max(avg_temp_c),
             latitude = max(latitude)) %>%
-  na.omit() #%>%
-  #arrange(desc(max_temp_c)) %>%
-  #remove the outlier that is greather than 125 degrees. possible forest fire
-  #slice(-c(1))
+  na.omit() 
+  
 
 line_avgtemp_latitude <- linear_reg() %>%
   set_engine("lm") %>%
@@ -176,10 +173,18 @@ chart_avgtemp_latitude <- ggplot(data = weather_group_temp_avg,
 chart_avgtemp_latitude
 ```
 
-## How does elevation affect the average temperature?
+What about elevation?
+### How does elevation affect the average temperature?
 
-From the chart below, 
+The chart below represents the relationship between average daily temperature and elevation. In the chart, it is noticeable that as the elevation increases, the average daily temperature decreases.
 
+The change in the average daily temperature related to elevation fits the following model, where $\beta_0$ is 26.348 and $\beta_1$ is -0.00273.   Statistically, both values are significant to a level of confidence greater than 99.99%.
+
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+In this case, the average daily temperature decreases at a rate of 0.00273 for every foot of increase in elevation. 
+
+This can be quite a change. For example, a 1000 foot increase in elevation would drop the average daily temperature by 2.73 degrees Celsius.
 
 ```{r echo=FALSE}
 weather_group_temp_elevation <- weather %>%
@@ -187,10 +192,7 @@ weather_group_temp_elevation <- weather %>%
   count(station, avg_temp_c, elevation) %>%
   summarise(avg_temp_c = max(avg_temp_c),
             elevation = max(elevation)) %>%
-  na.omit() #%>%
-  #arrange(desc(max_temp_c)) %>%
-  #remove the outlier that is greather than 125 degrees. possible forest fire
-  #slice(-c(1))
+  na.omit() 
 
 line_avgtemp_elevation <- linear_reg() %>%
   set_engine("lm") %>%
@@ -213,7 +215,20 @@ chart_avgtemp_elevation
 ```
 
 
-### Precipitation by Elevation
+### What is the relationship between elevation and precipitation?
+
+From looking at the chart, many stations located at or near sea-level have a greater chance at observing a large precipitation event.
+
+The chart below represents the relationship between maximum observed precipitation and elevation. In the chart, it is noticeable that as the elevation increases, the maximum observed precipitation decreases.
+
+The change in the average daily temperature related to elevation fits the following model, where $\beta_0$ is 2.723 and $\beta_1$ is -0.000448. Statistically, both values are significant to a level of confidence greater than 99.99%.
+
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+In this case, the maximum observed precipitation decreases at a rate of 0.000448 inches for every foot of increase in elevation. 
+
+This can be quite a change. For example, a 1000 foot increase in elevation would drop the maximum observed precipitation by 0.4 inches.
+
 
 ```{r echo=FALSE}
 weather_group_precip_elevation <- weather %>%
@@ -246,7 +261,15 @@ chart_precip_elevation <- ggplot(data = weather_group_precip_elevation,
 chart_precip_elevation
 ```
 
-### Precipitation by Latitude
+### Is there more precipitation with an increase in latitude?
+According to the chart below, no, as latitude increases, the amount of precipitation decreases.
+
+The change in the average daily temperature related to elevation fits the following model, where $\beta_0$ is 6.448 and $\beta_1$ is -0.1027. Statistically, both values are significant to a level of confidence greater than 99.99%.
+
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+In this case, the maximum observed precipitation decreases at a rate of 0.1027 inches for every increase in degree of latitude.
+
 
 ```{r echo=FALSE}
 weather_group_precip_latitude <- weather %>%
@@ -281,7 +304,15 @@ chart_precip_latitude
 ```
 
 
-### Maximum 5 second Windspeed by Latitude
+### Does maximum windspeed change with increasing latitude?
+
+According to the chart below, yes, as latitude increases, the maximum windspeed decreases.
+
+The change in the maximum windspeed related to elevation fits the following model, where $\beta_0$ is 64.2639 and $\beta_1$ is -0.1481. Statistically, both values are significant to a level of confidence greater than 90%.
+
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+In this case, the maximum observed windspeed decreases at a rate of 0.1481 inches for every increase in degree of latitude.
 
 ```{r echo=FALSE}
 weather_group_wind_latitude <- weather %>%
