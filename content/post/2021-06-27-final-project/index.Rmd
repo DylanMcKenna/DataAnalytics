@@ -138,7 +138,7 @@ line_avgtemp_latitude <- linear_reg() %>%
   fit(avg_temp_c ~latitude  , data = weather_group_temp_avg) %>%
   tidy()
 
-chart_avgtemp_latitude <- ggplot(data = weather_group_temp_max, 
+chart_avgtemp_latitude <- ggplot(data = weather_group_temp_avg, 
             aes(x = latitude, y = max_temp_c)) +
   geom_point(color = "#3399FF", alpha = 0.5) +
   geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE) +
@@ -184,6 +184,109 @@ chart_avgtemp_elevation <- ggplot(data = weather_group_temp_elevation,
   theme_bw() 
 
 chart_avgtemp_elevation
+```
+
+
+Precipitation by Elevation
+
+```{r echo=FALSE}
+weather_group_precip_elevation <- weather %>%
+  group_by(station) %>%
+  count(station, precip_in, elevation) %>%
+  summarise(precip_in = max(precip_in),
+            elevation = max(elevation)) %>%
+  na.omit() #%>%
+  #arrange(desc(max_temp_c)) %>%
+  #remove the outlier that is greather than 125 degrees. possible forest fire
+  #slice(-c(1))
+
+line_avgtemp_elevation <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(precip_in ~ elevation  , data = weather_group_precip_elevation) %>%
+  tidy()
+
+chart_precip_elevation <- ggplot(data = weather_group_precip_elevation, 
+            aes(x = elevation, y = precip_in)) +
+  geom_point(color = "#3399FF", alpha = 0.5) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE) +
+  labs(
+    title = "Elevation and Maximum Precipitation Trend",
+    x = "Elevation",
+    y = "Maximum Observed Precipiation (Inches)"
+    ) +
+  coord_cartesian(xlim = c(0, 3500), ylim = c(0, 20)) +
+  theme_bw() 
+
+chart_precip_elevation
+```
+
+Precipitation by Latitude
+
+```{r echo=FALSE}
+weather_group_precip_latitude <- weather %>%
+  group_by(station) %>%
+  count(station, precip_in, latitude) %>%
+  summarise(precip_in = max(precip_in),
+            latitude = max(latitude)) %>%
+  na.omit() #%>%
+  #arrange(desc(max_temp_c)) %>%
+  #remove the outlier that is greather than 125 degrees. possible forest fire
+  #slice(-c(1))
+
+line_avgtemp_elevation <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(precip_in ~ latitude  , data = weather_group_precip_latitude) %>%
+  tidy()
+
+chart_precip_latitude <- ggplot(data = weather_group_precip_latitude, 
+            aes(x = latitude, y = precip_in)) +
+  geom_point(color = "#3399FF", alpha = 0.5) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE, 
+              ) +
+  labs(
+    title = "Latitude and Maximum Precipitation Trend",
+    x = "Latitude",
+    y = "Maximum Observed Precipiation (Inches)"
+    ) +
+  coord_cartesian(xlim = c(0, 75), ylim = c(0, 20)) +
+  theme_bw() 
+
+chart_precip_latitude
+```
+
+
+Maximum 5 second Windspeed by Latitude
+
+```{r echo=FALSE}
+weather_group_wind_latitude <- weather %>%
+  group_by(station) %>%
+  count(station, max_wind_5_spd_mph, latitude) %>%
+  summarise(max_wind_5_spd_mph = max(max_wind_5_spd_mph),
+            latitude = max(latitude)) %>%
+  na.omit() #%>%
+  #arrange(desc(max_temp_c)) %>%
+  #remove the outlier that is greather than 125 degrees. possible forest fire
+  #slice(-c(1))
+
+line_wind_latitude <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(max_wind_5_spd_mph ~ latitude  , data = weather_group_wind_latitude) %>%
+  tidy()
+
+chart_wind_latitude <- ggplot(data = weather_group_wind_latitude, 
+            aes(x = latitude, y = max_wind_5_spd_mph)) +
+  geom_point(color = "#3399FF", alpha = 0.5) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE, 
+              ) +
+  labs(
+    title = "Latitude and Maximum 5-second Wind Speed Trend",
+    x = "Latitude",
+    y = "Maximum 5-second Wind Speed Observed (mph)"
+    ) +
+  coord_cartesian(xlim = c(0, 75), ylim = c(0, 150)) +
+  theme_bw() 
+
+chart_wind_latitude
 ```
 
 
