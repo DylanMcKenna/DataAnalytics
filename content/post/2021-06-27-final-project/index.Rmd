@@ -11,9 +11,10 @@ tags: []
 output:
   html_document:
     code_folding: hide
+    
 ---
 
-```{r echo = FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(shiny)
@@ -25,6 +26,7 @@ library(ggrepel)
 library(weathermetrics)
 library(leaflet)
 library(tidymodels)
+library(knitr)
 
 ```
 
@@ -33,7 +35,7 @@ library(tidymodels)
 
 The dataset used for this project is the Daily Weather in the U.S., 2017.  The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project. 
  
-```{r warning=FALSE, error=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE, }
 # read in data
 weather <- read.csv("weather.csv")
 

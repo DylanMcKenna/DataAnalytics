@@ -22,11 +22,6 @@
 
 
 
-
-<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
-
-
-
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -79,41 +74,21 @@
 <div id="description-of-dataset" class="section level2">
 <h2>Description of Dataset</h2>
 <p>The dataset used for this project is the Daily Weather in the U.S., 2017. The data is collected by 1589 stations throughout the United States and Canada. The collected data consists of 15 variables; however, only 8 variables were used for this project.</p>
-<pre class="r"><code># read in data
-weather &lt;- read.csv(&quot;weather.csv&quot;)
-
-# rename variables
-weather &lt;- weather %&gt;%
-  rename(min_temp_f = TMIN,
-         max_temp_f = TMAX,
-         avg_temp_f = TAVG,
-         avg_day_wind_mph = AWND,
-         max_wind_5_dir_deg = WDF5,
-         max_wind_5_spd_mph = WSF5,
-         snowfall_in = SNOW,
-         snowdepth_in = SNWD,
-         precip_in = PRCP)
-  
-station_count &lt;- weather %&gt;%
-  group_by(station) %&gt;%
-  count()
-
-#str(station_count)</code></pre>
 </div>
 <div id="how-does-the-temperature-change-with-latitude" class="section level2">
 <h2>How does the temperature change with latitude?</h2>
 <p>Maximum temperature and latitude</p>
-<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Average Temp by Latitude</p>
-<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Average Temp by Elevation</p>
-<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Precipitation by Elevation</p>
-<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Precipitation by Latitude</p>
-<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Maximum 5 second Windspeed by Latitude</p>
-<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/2021/06/27/final-project/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 
     </div>
@@ -137,18 +112,6 @@ station_count &lt;- weather %&gt;%
 
     </div>
     
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
     
 
