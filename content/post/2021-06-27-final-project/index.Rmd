@@ -8,8 +8,9 @@ categories:
   - shiny
   - tidyverse
 tags: []
-leafletmap: true
-
+output:
+  html_document:
+    code_folding: hide
 ---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -36,6 +37,7 @@ library(tidymodels)
 # read in data
 weather <- read.csv("weather.csv")
 
+# rename variables
 weather <- weather %>%
   rename(min_temp_f = TMIN,
          max_temp_f = TMAX,
@@ -64,11 +66,6 @@ weather <- weather %>%
 # convert date to Date
 weather <- weather %>%
   mutate(date = ymd(date))
-
-# cumulative snowfall by station
-
-# NOT REALLY USEFUL
-
 
 
 ```
