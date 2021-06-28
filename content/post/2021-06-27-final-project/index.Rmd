@@ -13,7 +13,7 @@ output:
     code_folding: hide
 ---
 
-```{r}
+```{r echo = FALSE}
 library(tidyverse)
 library(ggplot2)
 library(shiny)
