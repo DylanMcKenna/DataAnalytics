@@ -126,7 +126,7 @@ Average Temp by Latitude
 weather_group_temp_avg <- weather %>%
   group_by(station) %>%
   count(station, avg_temp_c, latitude) %>%
-  summarise(avg_temp_c = mean(avg_temp_c),
+  summarise(avg_temp_c = max(avg_temp_c),
             latitude = max(latitude)) %>%
   na.omit() #%>%
   #arrange(desc(max_temp_c)) %>%
@@ -139,7 +139,7 @@ line_avgtemp_latitude <- linear_reg() %>%
   tidy()
 
 chart_avgtemp_latitude <- ggplot(data = weather_group_temp_avg, 
-            aes(x = latitude, y = max_temp_c)) +
+            aes(x = latitude, y = avg_temp_c)) +
   geom_point(color = "#3399FF", alpha = 0.5) +
   geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE) +
   labs(
