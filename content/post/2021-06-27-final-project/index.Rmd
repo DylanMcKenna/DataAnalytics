@@ -176,6 +176,7 @@ chart_avgtemp_latitude
 
 What about elevation?
 
+
 ### How does elevation affect the average temperature?
 
 The chart below represents the relationship between average daily temperature and elevation. In the chart, it is noticeable that as the elevation increases, the average daily temperature decreases.
