@@ -22,4 +22,34 @@ leafletmap: true
 <h2>How does the temperature change with latitude?</h2>
 <p>Maximum temperature and latitude</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>weather_group_temp_avg &lt;- weather %&gt;%
+  group_by(station) %&gt;%
+  count(station, avg_temp_c, latitude, longitude) %&gt;%
+  summarise(avg_temp_c = mean(avg_temp_c),
+            latitude = max(latitude),
+            longitude = max(longitude)) %&gt;%
+  na.omit() #%&gt;%
+  #arrange(desc(max_temp_c)) %&gt;%
+  #remove the outlier that is greather than 125 degrees. possible forest fire
+  #slice(-c(1))
+
+line_avgtemp_latitude &lt;- linear_reg() %&gt;%
+  set_engine(&quot;lm&quot;) %&gt;%
+  fit(avg_temp_c ~latitude  , data = weather_group_temp_avg) %&gt;%
+  tidy()
+
+chart_avgtemp_latitude &lt;- ggplot(data = weather_group_temp_max, 
+            aes(x = latitude, y = max_temp_c)) +
+  geom_point(color = &quot;#3399FF&quot;, alpha = 0.5) +
+  geom_smooth(formula = y ~ x, method = &quot;lm&quot;, color = &quot;#FF0000&quot;, fullrange = TRUE, se = FALSE) +
+  labs(
+    title = &quot;Latitude and Average Temperature Trend&quot;,
+    x = &quot;Latitude&quot;,
+    y = &quot;Average Temperature Observed (Celsius)&quot;
+    ) +
+  coord_cartesian(xlim = c(0, 75), ylim = c(0, 75)) +
+  theme_bw() 
+
+chart_avgtemp_latitude</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>

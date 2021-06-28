@@ -119,3 +119,35 @@ chart_maxtemp_latitude
 ```
 
 
+```{r}
+weather_group_temp_avg <- weather %>%
+  group_by(station) %>%
+  count(station, avg_temp_c, latitude, longitude) %>%
+  summarise(avg_temp_c = mean(avg_temp_c),
+            latitude = max(latitude),
+            longitude = max(longitude)) %>%
+  na.omit() #%>%
+  #arrange(desc(max_temp_c)) %>%
+  #remove the outlier that is greather than 125 degrees. possible forest fire
+  #slice(-c(1))
+
+line_avgtemp_latitude <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_temp_c ~latitude  , data = weather_group_temp_avg) %>%
+  tidy()
+
+chart_avgtemp_latitude <- ggplot(data = weather_group_temp_max, 
+            aes(x = latitude, y = max_temp_c)) +
+  geom_point(color = "#3399FF", alpha = 0.5) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "#FF0000", fullrange = TRUE, se = FALSE) +
+  labs(
+    title = "Latitude and Average Temperature Trend",
+    x = "Latitude",
+    y = "Average Temperature Observed (Celsius)"
+    ) +
+  coord_cartesian(xlim = c(0, 75), ylim = c(0, 75)) +
+  theme_bw() 
+
+chart_avgtemp_latitude
+```
+
